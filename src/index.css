@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom Cyber Glow Effects */
+.neon-border-cyan {
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.neon-border-pink {
+  border: 1px solid rgba(236, 72, 153, 0.45);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.25), inset 0 0 15px rgba(236, 72, 153, 0.1);
+}
+
+.neon-border-purple {
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25), inset 0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+.cyber-gradient-card {
+  background: linear-gradient(135deg, rgba(20, 25, 45, 0.85) 0%, rgba(10, 13, 24, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.cyber-card-glow {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.8), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.8));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.cyber-card-glow:hover::before {
+  opacity: 1;
+}
+
+/* Floor reflection effect */
+.mirror-reflection {
+  transform: scaleY(-1);
+  opacity: 0.18;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+  filter: blur(1px);
+}
+
+/* Circuit grid background */
+.circuit-bg {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 0% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+html.light .circuit-bg {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 100% 50%, rgba(168, 85, 247, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 0% 70%, rgba(236, 72, 153, 0.05) 0%, transparent 40%),
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* Gradient text */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-neon {
+  background: linear-gradient(135deg, #ffffff 10%, #e0e7ff 40%, #00f0ff 70%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05070E;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 1px solid #94a3b8;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =========================================================================
+   HERO TEXT ATTRACTIVE OUTLINE & CONTRAST (LIGHT & DARK MODES)
+   Ultra-crisp letter contour outline without any hazy background or video washout
+   ========================================================================= */
+
+/* Main Hero Headline Outline */
+.hero-headline-outline {
+  color: #0f172a !important;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.95);
+  text-shadow: 
+    -1px -1px 0 rgba(255, 255, 255, 0.9),
+     1px -1px 0 rgba(255, 255, 255, 0.9),
+    -1px  1px 0 rgba(255, 255, 255, 0.9),
+     1px  1px 0 rgba(255, 255, 255, 0.9),
+     0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.dark .hero-headline-outline,
+html.dark .hero-headline-outline {
+  color: #ffffff !important;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.4px rgba(0, 0, 0, 0.95);
+  text-shadow: 
+    -1px -1px 0 rgba(0, 0, 0, 0.95),
+     1px -1px 0 rgba(0, 0, 0, 0.95),
+    -1px  1px 0 rgba(0, 0, 0, 0.95),
+     1px  1px 0 rgba(0, 0, 0, 0.95),
+     0 2px 10px rgba(0, 0, 0, 0.95),
+     0 4px 16px rgba(0, 0, 0, 0.75);
+}
+
+/* Hero Subtitle Text Outline */
+.hero-subtitle-outline {
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.85);
+  text-shadow: 
+    -0.5px -0.5px 0 rgba(255, 255, 255, 0.8),
+     0.5px -0.5px 0 rgba(255, 255, 255, 0.8),
+    -0.5px  0.5px 0 rgba(255, 255, 255, 0.8),
+     0.5px  0.5px 0 rgba(255, 255, 255, 0.8),
+     0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dark .hero-subtitle-outline,
+html.dark .hero-subtitle-outline {
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.9);
+  text-shadow: 
+    -0.5px -0.5px 0 rgba(0, 0, 0, 0.9),
+     0.5px -0.5px 0 rgba(0, 0, 0, 0.9),
+    -0.5px  0.5px 0 rgba(0, 0, 0, 0.9),
+     0.5px  0.5px 0 rgba(0, 0, 0, 0.9),
+     0 2px 6px rgba(0, 0, 0, 0.85);
+}

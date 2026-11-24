@@ -1,0 +1,337 @@
+import React, { useState } from 'react';
+import { 
+  Users, 
+  UserCheck, 
+  Target, 
+  TrendingUp, 
+  ArrowRight, 
+  CheckCircle2, 
+  X,
+  Briefcase,
+  ShieldCheck,
+  Building2,
+  ChevronRight
+} from 'lucide-react';
+
+export default function StaffingSection({ onKnowMore }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleConnectWithTeam = () => {
+    setModalOpen(false);
+    if (onKnowMore) {
+      onKnowMore();
+    } else {
+      const el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section 
+      id="staffing" 
+      className="relative py-20 sm:py-28 bg-white/70 dark:bg-[#070b18]/70 backdrop-blur-[2px] border-t border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200 overflow-hidden"
+    >
+      {/* Background ambient glowing mesh */}
+      <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-blue-600/5 dark:bg-blue-600/10 blur-[140px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-purple-600/5 dark:bg-purple-600/10 blur-[140px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* =========================================================================
+            1. PHOTO COLLAGE (ABOVE THE CONTENTS AS REQUESTED)
+           ========================================================================= */}
+        <div className="mb-14 sm:mb-20">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
+            
+            {/* Primary Large Image: Conference Room with "White Collar Staffing Solutions" screen */}
+            <div className="lg:col-span-7 group relative rounded-3xl overflow-hidden shadow-xl shadow-slate-200/60 dark:shadow-[0_0_35px_rgba(0,0,0,0.8)] border border-slate-200 dark:border-purple-500/30 bg-slate-100 dark:bg-slate-900 min-h-[300px] sm:min-h-[420px] flex items-center justify-center">
+              <img 
+                src="/assets/white-collar-1.jpg" 
+                alt="White Collar Staffing Solutions Presentation & Team" 
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
+              />
+              
+              {/* Subtle glass gradient vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none"></div>
+
+              {/* Bottom Floating Badge on Main Photo */}
+              <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-3 text-white">
+                <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-xs font-semibold shadow-lg">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Active Corporate Placements</span>
+                </div>
+                <div className="text-[11px] font-mono uppercase tracking-wider text-slate-300 font-bold hidden sm:block">
+                  TALENTIC 360.AI STAFFING
+                </div>
+              </div>
+            </div>
+
+            {/* Supporting Stacked Images (2 & 3) */}
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 sm:gap-6">
+              
+              {/* Top Supporting Image: Handshake / Agreement */}
+              <div className="group relative rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-[0_0_25px_rgba(0,0,0,0.6)] border border-slate-200 dark:border-purple-500/30 bg-slate-100 dark:bg-slate-900 min-h-[190px] sm:min-h-[200px]">
+                <img 
+                  src="/assets/white-collar-2.jpg" 
+                  alt="Executive Partnership & Trusted Recruitment Handshake" 
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                  <span className="text-xs font-bold tracking-wide drop-shadow-md">
+                    Verified Executive Placements
+                  </span>
+                  <span className="p-1 rounded-lg bg-blue-600/80 backdrop-blur-sm">
+                    <UserCheck className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom Supporting Image: Executive Boardroom Meeting */}
+              <div className="group relative rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-[0_0_25px_rgba(0,0,0,0.6)] border border-slate-200 dark:border-purple-500/30 bg-slate-100 dark:bg-slate-900 min-h-[190px] sm:min-h-[200px]">
+                <img 
+                  src="/assets/white-collar-3.jpg" 
+                  alt="Boardroom Talent Strategy & High-Performing Teams" 
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                  <span className="text-xs font-bold tracking-wide drop-shadow-md">
+                    High-Performing Team Building
+                  </span>
+                  <span className="p-1 rounded-lg bg-purple-600/80 backdrop-blur-sm">
+                    <Users className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* =========================================================================
+            2. SECTION CONTENT (UNDER THE COLLAGE AS REQUESTED)
+           ========================================================================= */}
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          
+          {/* Main Heading: White Collar Staffing Solutions */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white">
+            White Collar{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]">
+              Staffing Solutions
+            </span>
+          </h2>
+
+          {/* Subheading: Building Stronger Teams with the Right Talent */}
+          <h3 className="text-xl sm:text-2xl font-bold font-display text-slate-800 dark:text-slate-200">
+            Building Stronger Teams with the Right Talent
+          </h3>
+
+          {/* Paragraph 1 */}
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed text-justify sm:text-center">
+            At <strong className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#5945e7] to-[#783cec]">TALENTIC 360.AI</strong>, we provide comprehensive White Collar Staffing Solutions designed to help businesses find, recruit, and retain skilled professionals. We connect organizations with talented individuals who bring the right expertise, experience, and potential to drive business growth.
+          </p>
+
+          {/* Paragraph 2 */}
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed text-justify sm:text-center">
+            From entry-level professionals to experienced specialists and senior executives, our recruitment solutions cover diverse industries and functional domains. We focus on understanding your business needs and delivering the right talent to build efficient, productive, and high-performing teams.
+          </p>
+
+          {/* Punchline Motto Banner */}
+          <div className="pt-2">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-red-500/10 dark:from-blue-950/40 dark:via-purple-950/40 dark:to-red-950/30 border border-purple-500/30 dark:border-purple-500/40 shadow-sm">
+              <span className="font-display font-extrabold text-base sm:text-xl text-slate-900 dark:text-white tracking-tight">
+                The Right Talent. The Right Fit. The Right Future.
+              </span>
+            </div>
+          </div>
+
+          {/* 3 Value Pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                <Target className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Talent</h4>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Pre-vetted specialists & senior domain executives</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                <UserCheck className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Fit</h4>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Cultural, technical & enterprise alignment</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Future</h4>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Sustainable retention & strategic workforce growth</p>
+              </div>
+            </div>
+          </div>
+
+          {/* =========================================================================
+              3. BUTTON OF 'KNOW MORE' UNDER THE CONTENT (AS REQUESTED)
+             ========================================================================= */}
+          <div className="pt-6 flex justify-center">
+            <button
+              onClick={handleOpenModal}
+              className="group px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
+            >
+              <span>Know More</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* =========================================================================
+          DETAILED 'KNOW MORE' STAFFING MODAL
+         ========================================================================= */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+          
+          {/* Backdrop click to close */}
+          <div className="absolute inset-0" onClick={handleCloseModal}></div>
+
+          {/* Modal Container */}
+          <div className="relative w-full max-w-3xl rounded-3xl bg-white dark:bg-[#090e24] border border-slate-200 dark:border-purple-500/40 shadow-2xl dark:shadow-[0_0_50px_rgba(120,60,236,0.3)] p-6 sm:p-8 overflow-hidden z-10 max-h-[90vh] overflow-y-auto">
+            
+            {/* Top Brand Gradient Line */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]"></div>
+
+            {/* Close Button */}
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-5 right-5 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Header */}
+            <div className="pr-10 mb-6 text-left">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 inline-block mb-2">
+                Executive & Professional Recruitment
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                White Collar Staffing Solutions
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm mt-1.5">
+                Strategic workforce acquisition engineered for MNCs, Corporates, and fast-growing organizations.
+              </p>
+            </div>
+
+            {/* Highlights Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-left">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2 mb-1.5 text-blue-600 dark:text-blue-400 font-bold text-sm">
+                  <Briefcase className="w-4 h-4" />
+                  <span>Executive & Leadership Hiring</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Targeted headhunting for C-suite, directors, and critical strategic leaders who drive immediate organizational growth.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 font-bold text-sm">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Domain Specialists & Lateral Hiring</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Sourcing niche talent across AI engineering, data telemetry, finance, healthcare, and advanced manufacturing.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2 mb-1.5 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
+                  <Building2 className="w-4 h-4" />
+                  <span>End-to-End RPO & Pipeline</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Full lifecycle recruitment process management from initial screening to onboarding and culture adaptation.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2 mb-1.5 text-rose-600 dark:text-rose-400 font-bold text-sm">
+                  <Users className="w-4 h-4" />
+                  <span>Retention & Performance Alignment</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Mindful evaluation methodology ensuring 95%+ first-year retention and cultural synergy.
+                </p>
+              </div>
+            </div>
+
+            {/* Core Capabilities */}
+            <div className="mb-6 p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-500/30 text-left">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-2">
+                Industries We Cover
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  'IT & Software Engineering',
+                  'Banking & Financial Services',
+                  'Advanced Manufacturing',
+                  'Healthcare & Biotechnology',
+                  'Supply Chain & Operations',
+                  'Corporate Governance & Legal'
+                ].map((ind, i) => (
+                  <span key={i} className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-indigo-500" />
+                    {ind}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-800">
+              <button
+                onClick={handleCloseModal}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
+              >
+                Close
+              </button>
+              <button
+                onClick={handleConnectWithTeam}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Connect with Staffing Team</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+    </section>
+  );
+}
+
