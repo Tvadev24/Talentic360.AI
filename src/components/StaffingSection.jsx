@@ -47,28 +47,24 @@ export default function StaffingSection({ onKnowMore }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* =========================================================================
-                LEFT SIDE: THE CONTENT (Title, Text, Motto, Pillars & Know More Button)
+                LEFT SIDE: THE CONTENT (Title, Text, Pillars & Know More Button)
                ========================================================================= */}
-            <div className="lg:col-span-7 xl:col-span-7 space-y-5 text-left">
+            <div className="lg:col-span-7 xl:col-span-7 space-y-6 text-left">
               
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-100 text-purple-700 dark:bg-purple-950/70 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">
-                <Briefcase className="w-3.5 h-3.5" />
-                <span>Specialized Recruitment & Talent Acquisition</span>
-              </div>
-
               {/* Main Heading: White Collar Staffing Solutions */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white leading-tight">
-                White Collar{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]">
-                  Staffing Solutions
-                </span>
-              </h2>
+              <div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white leading-tight">
+                  White Collar{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]">
+                    Staffing Solutions
+                  </span>
+                </h2>
 
-              {/* Subheading: Building Stronger Teams with the Right Talent */}
-              <h3 className="text-lg sm:text-xl font-bold font-display text-slate-800 dark:text-slate-200">
-                Building Stronger Teams with the Right Talent
-              </h3>
+                {/* Subheading: Building Stronger Teams with the Right Talent */}
+                <h3 className="text-lg sm:text-xl font-bold font-display text-slate-800 dark:text-slate-200 mt-2">
+                  Building Stronger Teams with the Right Talent
+                </h3>
+              </div>
 
               {/* Paragraph 1 */}
               <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
@@ -80,16 +76,9 @@ export default function StaffingSection({ onKnowMore }) {
                 From entry-level professionals to experienced specialists and senior executives, our recruitment solutions cover diverse industries and functional domains. We focus on understanding your business needs and delivering the right talent to build efficient, productive, and high-performing teams.
               </p>
 
-              {/* Punchline Motto Banner */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-red-500/10 dark:from-blue-950/40 dark:via-purple-950/40 dark:to-red-950/30 border border-purple-500/30 dark:border-purple-500/40 shadow-sm">
-                <span className="font-display font-extrabold text-sm sm:text-base text-slate-900 dark:text-white tracking-tight block">
-                  The Right Talent. The Right Fit. The Right Future.
-                </span>
-              </div>
-
               {/* 3 Value Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
+                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                     <Target className="w-4 h-4" />
                   </div>
@@ -99,7 +88,7 @@ export default function StaffingSection({ onKnowMore }) {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
+                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
                     <UserCheck className="w-4 h-4" />
                   </div>
@@ -109,7 +98,7 @@ export default function StaffingSection({ onKnowMore }) {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
+                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
                   <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
                     <TrendingUp className="w-4 h-4" />
                   </div>
@@ -143,32 +132,8 @@ export default function StaffingSection({ onKnowMore }) {
                 <img 
                   src="/assets/white-collar-1.jpg" 
                   alt="White Collar Staffing Solutions - Building Stronger Teams with the Right Talent" 
-                  className="w-full h-full min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
+                  className="w-full h-full min-h-[340px] sm:min-h-[440px] lg:min-h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none block"
                 />
-                
-                {/* Subtle glass gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent pointer-events-none"></div>
-
-                {/* Top Badge: Pre-vetted Talent */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-xs font-semibold text-white shadow-lg">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>Active Corporate Placements</span>
-                </div>
-
-                {/* Bottom Floating Glass Card on Picture */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-white/15 text-white shadow-xl flex items-center justify-between gap-3">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-purple-300 font-bold block">
-                      Talentic 360.AI Staffing
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-white block mt-0.5">
-                      Executive & Professional Recruitment
-                    </span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#2c60ea] to-[#783cec] text-white shrink-0 shadow-md">
-                    <UserCheck className="w-4 h-4" />
-                  </div>
-                </div>
 
               </div>
 
