@@ -47,83 +47,7 @@ export default function StaffingSection({ onKnowMore }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* =========================================================================
-                LEFT SIDE: THE PICTURE (Conference Room & White Collar Staffing Team)
-               ========================================================================= */}
-            <div className="lg:col-span-5 xl:col-span-5 h-full flex flex-col justify-center">
-              <div className="group relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 dark:shadow-[0_0_40px_rgba(168,85,247,0.25)] border border-slate-200 dark:border-purple-500/40 bg-slate-100 dark:bg-slate-900 transition-all duration-500 hover:scale-[1.01]">
-                
-                {/* Main Picture */}
-                <img 
-                  src="/assets/white-collar-1.jpg" 
-                  alt="White Collar Staffing Solutions - Building Stronger Teams with the Right Talent" 
-                  className="w-full h-full min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
-                />
-                
-                {/* Subtle glass gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent pointer-events-none"></div>
-
-                {/* Top Badge: Pre-vetted Talent */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-xs font-semibold text-white shadow-lg">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>Active Corporate Placements</span>
-                </div>
-
-                {/* Bottom Floating Glass Card on Picture */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-white/15 text-white shadow-xl flex items-center justify-between gap-3">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-purple-300 font-bold block">
-                      Talentic 360.AI Staffing
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-white block mt-0.5">
-                      Executive & Professional Recruitment
-                    </span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#2c60ea] to-[#783cec] text-white shrink-0 shadow-md">
-                    <UserCheck className="w-4 h-4" />
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Supporting Verified Thumbnails Strip */}
-              <div className="grid grid-cols-2 gap-3 mt-4">
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
-                  <img 
-                    src="/assets/white-collar-2.jpg" 
-                    alt="Trusted Executive Partnership Handshake" 
-                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
-                  />
-                  <div className="min-w-0">
-                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
-                      Executive Hiring
-                    </span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
-                      Vetted Specialists
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
-                  <img 
-                    src="/assets/white-collar-3.jpg" 
-                    alt="Boardroom Strategy Meeting" 
-                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
-                  />
-                  <div className="min-w-0">
-                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
-                      Leadership Teams
-                    </span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
-                      Enterprise Fit
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* =========================================================================
-                RIGHT SIDE: THE CONTENT (Title, Text, Motto, Pillars & Know More Button)
+                LEFT SIDE: THE CONTENT (Title, Text, Motto, Pillars & Know More Button)
                ========================================================================= */}
             <div className="lg:col-span-7 xl:col-span-7 space-y-5 text-left">
               
@@ -205,6 +129,82 @@ export default function StaffingSection({ onKnowMore }) {
                   <span>Know More</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
+              </div>
+
+            </div>
+
+            {/* =========================================================================
+                RIGHT SIDE: THE PICTURES (Conference Room & Supporting Thumbnails)
+               ========================================================================= */}
+            <div className="lg:col-span-5 xl:col-span-5 h-full flex flex-col justify-center">
+              <div className="group relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 dark:shadow-[0_0_40px_rgba(168,85,247,0.25)] border border-slate-200 dark:border-purple-500/40 bg-slate-100 dark:bg-slate-900 transition-all duration-500 hover:scale-[1.01]">
+                
+                {/* Main Picture */}
+                <img 
+                  src="/assets/white-collar-1.jpg" 
+                  alt="White Collar Staffing Solutions - Building Stronger Teams with the Right Talent" 
+                  className="w-full h-full min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
+                />
+                
+                {/* Subtle glass gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent pointer-events-none"></div>
+
+                {/* Top Badge: Pre-vetted Talent */}
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-xs font-semibold text-white shadow-lg">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Active Corporate Placements</span>
+                </div>
+
+                {/* Bottom Floating Glass Card on Picture */}
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-white/15 text-white shadow-xl flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-purple-300 font-bold block">
+                      Talentic 360.AI Staffing
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-white block mt-0.5">
+                      Executive & Professional Recruitment
+                    </span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#2c60ea] to-[#783cec] text-white shrink-0 shadow-md">
+                    <UserCheck className="w-4 h-4" />
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Supporting Verified Thumbnails Strip */}
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
+                  <img 
+                    src="/assets/white-collar-2.jpg" 
+                    alt="Trusted Executive Partnership Handshake" 
+                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
+                  />
+                  <div className="min-w-0">
+                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
+                      Executive Hiring
+                    </span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
+                      Vetted Specialists
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
+                  <img 
+                    src="/assets/white-collar-3.jpg" 
+                    alt="Boardroom Strategy Meeting" 
+                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
+                  />
+                  <div className="min-w-0">
+                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
+                      Leadership Teams
+                    </span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
+                      Enterprise Fit
+                    </span>
+                  </div>
+                </div>
               </div>
 
             </div>
