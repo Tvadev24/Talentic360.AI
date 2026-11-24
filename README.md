@@ -135,3 +135,4 @@ The optimized production bundle will be generated in the `dist/` directory.
 Copyright © 2026 **TALENTIC 360.AI LLP**. All rights reserved.  
 Registration No: `AAETG6500DE20231`  
 Office No. 303 & 314, Pride Purple Square, Kalewadi Phata, Wakad, Pune, Maharashtra 411057.
+

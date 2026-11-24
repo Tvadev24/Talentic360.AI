@@ -54,23 +54,22 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-white/70 dark:bg-[#050713]/70 backdrop-blur-[2px] transition-colors duration-200 overflow-hidden">
+    <section id="contact" className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200">
       
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-10 w-96 h-96 bg-cyan-600/10 dark:bg-cyan-600/15 blur-[130px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-600/10 dark:bg-purple-600/15 blur-[130px] rounded-full pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-4">
-            Get in <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">Touch</span>
-          </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-            Ready to transform your career or workforce? Contact us today to discuss how we can help you achieve your goals.
-          </p>
-        </div>
+        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
+        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-4">
+              Get in <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">Touch</span>
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              Ready to transform your career or workforce? Contact us today to discuss how we can help you achieve your goals.
+            </p>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
@@ -299,6 +298,9 @@ export default function ContactSection() {
             </div>
           </div>
 
+        </div>
+
+        {/* End of section-box */}
         </div>
 
       </div>

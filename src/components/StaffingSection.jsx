@@ -37,18 +37,17 @@ export default function StaffingSection({ onKnowMore }) {
   return (
     <section 
       id="staffing" 
-      className="relative py-20 sm:py-28 bg-white/70 dark:bg-[#070b18]/70 backdrop-blur-[2px] border-t border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200 overflow-hidden"
+      className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200"
     >
-      {/* Background ambient glowing mesh */}
-      <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-blue-600/5 dark:bg-blue-600/10 blur-[140px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-purple-600/5 dark:bg-purple-600/10 blur-[140px] rounded-full pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* =========================================================================
-            1. PHOTO COLLAGE (ABOVE THE CONTENTS AS REQUESTED)
-           ========================================================================= */}
-        <div className="mb-14 sm:mb-20">
+        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
+        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
+          
+          {/* =========================================================================
+              1. PHOTO COLLAGE (ABOVE THE CONTENTS AS REQUESTED)
+             ========================================================================= */}
+          <div className="mb-12 sm:mb-16">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
             
@@ -203,6 +202,9 @@ export default function StaffingSection({ onKnowMore }) {
             </button>
           </div>
 
+        </div>
+
+        {/* End of section-box */}
         </div>
 
       </div>

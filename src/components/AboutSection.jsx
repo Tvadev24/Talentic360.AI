@@ -115,109 +115,110 @@ export default function AboutSection({ onExplorePrograms }) {
   };
 
   return (
-    <section id="about" className="relative py-24 bg-slate-50/70 dark:bg-[#05070e]/70 backdrop-blur-[2px] overflow-hidden transition-colors duration-200">
+    <section id="about" className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200">
       {/* Navigation Anchor for 'Who we are' */}
       <div id="who-we-are" className="absolute -top-24 pointer-events-none"></div>
 
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-cyan-600/10 dark:bg-cyan-600/15 blur-[130px] rounded-full pointer-events-none"></div>
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-purple-600/10 dark:bg-purple-600/15 blur-[130px] rounded-full pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-6">
-            About <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">TALENTIC 360.AI LLP</span>
-          </h2>
-          <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-            {siteData.about.summary}
-          </p>
-        </div>
-
-        {/* Unique Positioning Box (Matching screenshot media_1795520732716_deae6744.jpg) */}
-        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 mb-16 overflow-hidden bg-white dark:bg-gradient-to-br dark:from-[#0d1326]/95 dark:via-[#090d1c]/95 dark:to-[#050711]/98 border border-slate-200 dark:border-cyan-500/30 shadow-xl shadow-slate-200/60 dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] backdrop-blur-xl">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-cyan-400/10 to-purple-600/10 blur-3xl pointer-events-none"></div>
+        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
+        <div className="section-box section-box-cyan p-6 sm:p-10 lg:p-12">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column: Unique Positioning Text */}
-            <div className="lg:col-span-7 space-y-5 text-left">
-              <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-cyan-100 dark:to-purple-200">
-                {siteData.about.positioning.headline}
-              </h3>
-              
-              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-                {siteData.about.positioning.paragraph1}
-              </p>
-
-              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-                {siteData.about.positioning.paragraph2}
-              </p>
-
-              <div className="pt-2 flex flex-wrap gap-2.5">
-                {['MNCs & Corporates', 'Mindful Strategy', 'Large Manufacturers', 'Proven Impact'].map((tag, idx) => (
-                  <span key={idx} className="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-300 flex items-center gap-1.5 shadow-sm">
-                    <CheckCircle className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Column: Neural Network Processing AI Model Canvas */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <NeuralNetworkCanvas />
-              <div className="text-center mt-3">
-                <p className="text-xs sm:text-sm text-cyan-600 dark:text-cyan-400 font-mono font-bold tracking-wider">
-                  Neural Network Processing AI Model
-                </p>
-              </div>
-            </div>
-
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-6">
+              About <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">TALENTIC 360.AI LLP</span>
+            </h2>
+            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              {siteData.about.summary}
+            </p>
           </div>
-        </div>
 
-        {/* 4 Pillars Grid (Mindful Strategy, Market Leadership, Proven Results, Expert Team) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {siteData.about.pillars.map((pillar, idx) => {
-            const Icon = iconMap[pillar.icon] || Cpu;
+          {/* Unique Positioning Box (Matching screenshot media_1795520732716_deae6744.jpg) */}
+          <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 mb-14 overflow-hidden bg-white/90 dark:bg-gradient-to-br dark:from-[#0d1326]/95 dark:via-[#090d1c]/95 dark:to-[#050711]/98 border border-slate-200/90 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] backdrop-blur-xl">
+            <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-cyan-400/10 to-purple-600/10 blur-3xl pointer-events-none"></div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Column: Unique Positioning Text */}
+              <div className="lg:col-span-7 space-y-5 text-left">
+                <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-cyan-100 dark:to-purple-200">
+                  {siteData.about.positioning.headline}
+                </h3>
+                
+                <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+                  {siteData.about.positioning.paragraph1}
+                </p>
 
-            const iconColors = {
-              cyan: 'text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/70 border-cyan-300 dark:border-cyan-500/40',
-              purple: 'text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/70 border-purple-300 dark:border-purple-500/40',
-              pink: 'text-pink-700 dark:text-pink-300 bg-pink-100 dark:bg-pink-950/70 border-pink-300 dark:border-pink-500/40',
-              blue: 'text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border-blue-300 dark:border-blue-500/40',
-            };
+                <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+                  {siteData.about.positioning.paragraph2}
+                </p>
 
-            const borderHovers = {
-              cyan: 'hover:border-cyan-400 dark:hover:border-cyan-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]',
-              purple: 'hover:border-purple-400 dark:hover:border-purple-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]',
-              pink: 'hover:border-pink-400 dark:hover:border-pink-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.25)]',
-              blue: 'hover:border-blue-400 dark:hover:border-blue-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]',
-            };
+                <div className="pt-2 flex flex-wrap gap-2.5">
+                  {['MNCs & Corporates', 'Mindful Strategy', 'Large Manufacturers', 'Proven Impact'].map((tag, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-300 flex items-center gap-1.5 shadow-sm">
+                      <CheckCircle className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-            return (
-              <div
-                key={pillar.id || idx}
-                className={`group relative rounded-2xl p-7 bg-white dark:bg-[#0a0e20]/80 border border-slate-200 dark:border-slate-800 transition-all duration-300 ${borderHovers[pillar.color] || borderHovers.cyan} backdrop-blur-md flex flex-col justify-between`}
-              >
-                <div>
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${iconColors[pillar.color] || iconColors.cyan}`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-
-                  <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-2.5 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
-                    {pillar.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {pillar.description}
+              {/* Right Column: Neural Network Processing AI Model Canvas */}
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <NeuralNetworkCanvas />
+                <div className="text-center mt-3">
+                  <p className="text-xs sm:text-sm text-cyan-600 dark:text-cyan-400 font-mono font-bold tracking-wider">
+                    Neural Network Processing AI Model
                   </p>
                 </div>
               </div>
-            );
-          })}
+
+            </div>
+          </div>
+
+          {/* 4 Pillars Grid (Mindful Strategy, Market Leadership, Proven Results, Expert Team) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {siteData.about.pillars.map((pillar, idx) => {
+              const Icon = iconMap[pillar.icon] || Cpu;
+
+              const iconColors = {
+                cyan: 'text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/70 border-cyan-300 dark:border-cyan-500/40',
+                purple: 'text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/70 border-purple-300 dark:border-purple-500/40',
+                pink: 'text-pink-700 dark:text-pink-300 bg-pink-100 dark:bg-pink-950/70 border-pink-300 dark:border-pink-500/40',
+                blue: 'text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border-blue-300 dark:border-blue-500/40',
+              };
+
+              const borderHovers = {
+                cyan: 'hover:border-cyan-400 dark:hover:border-cyan-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]',
+                purple: 'hover:border-purple-400 dark:hover:border-purple-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]',
+                pink: 'hover:border-pink-400 dark:hover:border-pink-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.25)]',
+                blue: 'hover:border-blue-400 dark:hover:border-blue-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]',
+              };
+
+              return (
+                <div
+                  key={pillar.id || idx}
+                  className={`group relative rounded-2xl p-7 bg-white dark:bg-[#0a0e20]/80 border border-slate-200 dark:border-slate-800 transition-all duration-300 ${borderHovers[pillar.color] || borderHovers.cyan} backdrop-blur-md flex flex-col justify-between`}
+                >
+                  <div>
+                    <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${iconColors[pillar.color] || iconColors.cyan}`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+
+                    <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-2.5 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
+                      {pillar.title}
+                    </h3>
+
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
         </div>
 
       </div>

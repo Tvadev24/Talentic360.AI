@@ -22,50 +22,129 @@ html.light {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Custom Cyber Glow Effects */
-.neon-border-cyan {
-  border: 1px solid rgba(0, 240, 255, 0.45);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
-}
+/* =========================================================================
+   NATURAL & REAL ILLUMINATED SECTION BOXES (MATCHING REFERENCE IMAGE 5)
+   Premium Glassmorphism + Glowing Perimeter Neon Outlines for Light & Dark Modes
+   ========================================================================= */
 
-.neon-border-pink {
-  border: 1px solid rgba(236, 72, 153, 0.45);
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.25), inset 0 0 15px rgba(236, 72, 153, 0.1);
-}
-
-.neon-border-purple {
-  border: 1px solid rgba(168, 85, 247, 0.45);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25), inset 0 0 15px rgba(168, 85, 247, 0.1);
-}
-
-.cyber-gradient-card {
-  background: linear-gradient(135deg, rgba(20, 25, 45, 0.85) 0%, rgba(10, 13, 24, 0.95) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.cyber-card-glow {
+.section-box {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1.75rem; /* rounded-3xl */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cyber-card-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.8), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.8));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+/* Base Light Theme Box (Luminous, Clean, Frosted Glass) */
+html.light .section-box {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 255, 0.90) 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 
+    0 20px 45px -15px rgba(15, 23, 42, 0.08),
+    0 0 28px -4px rgba(56, 189, 248, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
-.cyber-card-glow:hover::before {
-  opacity: 1;
+/* Base Dark Theme Box (Deep Space Cyber Glass with Radiant Neon Glow) */
+html.dark .section-box {
+  background: linear-gradient(145deg, rgba(12, 17, 36, 0.88) 0%, rgba(7, 10, 24, 0.93) 100%);
+  border: 1.5px solid rgba(0, 240, 255, 0.6);
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.85),
+    0 0 35px -5px rgba(0, 240, 255, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Variant: Cyan / Sky Blue Glow */
+html.light .section-box-cyan {
+  border: 1.5px solid rgba(2, 132, 199, 0.55);
+  box-shadow: 
+    0 0 24px rgba(14, 165, 233, 0.22),
+    0 0 45px rgba(14, 165, 233, 0.10),
+    0 20px 45px -15px rgba(15, 23, 42, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+html.dark .section-box-cyan {
+  border: 1.5px solid rgba(0, 240, 255, 0.65);
+  box-shadow: 
+    0 0 25px rgba(0, 240, 255, 0.35),
+    0 0 50px rgba(0, 240, 255, 0.15),
+    inset 0 0 15px rgba(0, 240, 255, 0.08),
+    0 25px 60px -15px rgba(0, 0, 0, 0.85);
+}
+.section-box-cyan:hover {
+  box-shadow: 
+    0 30px 65px -15px rgba(0, 0, 0, 0.4),
+    0 0 48px -4px rgba(0, 240, 255, 0.45);
+}
+
+/* Variant: Purple / Violet Glow */
+html.light .section-box-purple {
+  border: 1.5px solid rgba(124, 58, 237, 0.55);
+  box-shadow: 
+    0 0 24px rgba(168, 85, 247, 0.22),
+    0 0 45px rgba(168, 85, 247, 0.10),
+    0 20px 45px -15px rgba(15, 23, 42, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+html.dark .section-box-purple {
+  border: 1.5px solid rgba(168, 85, 247, 0.65);
+  box-shadow: 
+    0 0 25px rgba(168, 85, 247, 0.35),
+    0 0 50px rgba(168, 85, 247, 0.15),
+    inset 0 0 15px rgba(168, 85, 247, 0.08),
+    0 25px 60px -15px rgba(0, 0, 0, 0.85);
+}
+.section-box-purple:hover {
+  box-shadow: 
+    0 30px 65px -15px rgba(0, 0, 0, 0.4),
+    0 0 48px -4px rgba(168, 85, 247, 0.45);
+}
+
+/* Variant: Magenta / Pink Glow */
+html.light .section-box-magenta {
+  border: 1.5px solid rgba(219, 39, 119, 0.55);
+  box-shadow: 
+    0 0 24px rgba(236, 72, 153, 0.22),
+    0 0 45px rgba(236, 72, 153, 0.10),
+    0 20px 45px -15px rgba(15, 23, 42, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+html.dark .section-box-magenta {
+  border: 1.5px solid rgba(244, 63, 94, 0.65);
+  box-shadow: 
+    0 0 25px rgba(244, 63, 94, 0.35),
+    0 0 50px rgba(244, 63, 94, 0.15),
+    inset 0 0 15px rgba(244, 63, 94, 0.08),
+    0 25px 60px -15px rgba(0, 0, 0, 0.85);
+}
+.section-box-magenta:hover {
+  box-shadow: 
+    0 30px 65px -15px rgba(0, 0, 0, 0.4),
+    0 0 48px -4px rgba(244, 63, 94, 0.45);
+}
+
+/* Variant: Multi-gradient Cyber Glow */
+html.light .section-box-cyber {
+  border: 1.5px solid rgba(99, 102, 241, 0.55);
+  box-shadow: 
+    0 0 24px rgba(129, 140, 248, 0.22),
+    0 0 45px rgba(129, 140, 248, 0.10),
+    0 20px 45px -15px rgba(15, 23, 42, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+html.dark .section-box-cyber {
+  border: 1.5px solid rgba(129, 140, 248, 0.65);
+  box-shadow: 
+    0 0 25px rgba(129, 140, 248, 0.35),
+    0 0 50px rgba(129, 140, 248, 0.15),
+    inset 0 0 15px rgba(129, 140, 248, 0.08),
+    0 25px 60px -15px rgba(0, 0, 0, 0.85);
+}
+.section-box-cyber:hover {
+  box-shadow: 
+    0 30px 65px -15px rgba(0, 0, 0, 0.4),
+    0 0 48px -4px rgba(129, 140, 248, 0.45);
 }
 
 /* Floor reflection effect */

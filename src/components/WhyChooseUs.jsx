@@ -24,26 +24,25 @@ export default function WhyChooseUs({ onGetStarted }) {
   };
 
   return (
-    <section id="whyus" className="relative py-24 bg-slate-50/70 dark:bg-[#060815]/70 backdrop-blur-[2px] overflow-hidden transition-colors duration-200 border-b border-slate-200/60 dark:border-slate-800/60">
+    <section id="whyus" className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200">
       {/* Anchor for 'Industries' and 'Insights' navigation tabs */}
       <div id="industries" className="absolute -top-24 pointer-events-none"></div>
       <div id="insights" className="absolute -top-24 pointer-events-none"></div>
 
-      {/* Glow backgrounds */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[400px] bg-cyan-500/10 dark:bg-cyan-500/15 blur-[140px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[400px] bg-purple-600/10 dark:bg-purple-600/15 blur-[140px] pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-6">
-            Why Choose <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">TALENTIC 360.AI LLP</span>
-          </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-            Experience the difference with a training partner committed to excellence, innovation, and your success.
-          </p>
-        </div>
+        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
+        <div className="section-box section-box-cyber p-6 sm:p-10 lg:p-12">
+
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-6">
+              Why Choose <span className="bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">TALENTIC 360.AI LLP</span>
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              Experience the difference with a training partner committed to excellence, innovation, and your success.
+            </p>
+          </div>
 
         {/* 6 Grid Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
@@ -105,6 +104,9 @@ export default function WhyChooseUs({ onGetStarted }) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* End of section-box */}
         </div>
 
       </div>
