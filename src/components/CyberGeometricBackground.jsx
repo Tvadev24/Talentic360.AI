@@ -626,8 +626,10 @@ export default function CyberGeometricBackground({ theme }) {
     >
       <canvas 
         ref={canvasRef} 
-        className="w-full h-full block"
+        className="w-full h-full block blur-[3px] scale-[1.02]"
       />
+      {/* Subtle soft-focus scrim so foreground text stays crisp in both Light and Dark modes */}
+      <div className="absolute inset-0 bg-white/20 dark:bg-[#040714]/20"></div>
     </div>
   );
 }
