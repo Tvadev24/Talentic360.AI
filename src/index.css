@@ -35,14 +35,15 @@ html.light {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Base Light Theme Box (Luminous, Clean, Frosted Glass) */
+/* Base Light Theme Box (Luminous, Thick Glowing Border) */
 html.light .section-box {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 255, 0.90) 100%);
-  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  border: 2.5px solid rgba(59, 130, 246, 0.85);
   box-shadow: 
-    0 20px 45px -15px rgba(15, 23, 42, 0.08),
-    0 0 28px -4px rgba(56, 189, 248, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 1);
+    0 0 28px rgba(59, 130, 246, 0.38),
+    0 0 60px rgba(139, 92, 246, 0.26),
+    0 20px 45px -15px rgba(15, 23, 42, 0.12),
+    inset 0 0 18px rgba(59, 130, 246, 0.14);
 }
 
 /* Base Dark Theme Box (Deep Space Cyber Glass with Radiant Neon Glow) */
@@ -57,12 +58,19 @@ html.dark .section-box {
 
 /* Variant: Cyan / Sky Blue Glow */
 html.light .section-box-cyan {
-  border: 1.5px solid rgba(2, 132, 199, 0.55);
+  border: 2.5px solid rgba(14, 165, 233, 0.88);
   box-shadow: 
-    0 0 24px rgba(14, 165, 233, 0.22),
-    0 0 45px rgba(14, 165, 233, 0.10),
-    0 20px 45px -15px rgba(15, 23, 42, 0.08),
-    inset 0 1px 2px rgba(255, 255, 255, 1);
+    0 0 28px rgba(14, 165, 233, 0.45),
+    0 0 65px rgba(56, 189, 248, 0.30),
+    0 20px 45px -15px rgba(15, 23, 42, 0.12),
+    inset 0 0 18px rgba(14, 165, 233, 0.16);
+}
+html.light .section-box-cyan:hover {
+  box-shadow: 
+    0 0 36px rgba(14, 165, 233, 0.60),
+    0 0 78px rgba(56, 189, 248, 0.38),
+    0 24px 50px -15px rgba(15, 23, 42, 0.14),
+    inset 0 0 22px rgba(14, 165, 233, 0.20);
 }
 html.dark .section-box-cyan {
   border: 1.5px solid rgba(0, 240, 255, 0.65);
@@ -80,12 +88,19 @@ html.dark .section-box-cyan {
 
 /* Variant: Purple / Violet Glow */
 html.light .section-box-purple {
-  border: 1.5px solid rgba(124, 58, 237, 0.55);
+  border: 2.5px solid rgba(124, 58, 237, 0.88);
   box-shadow: 
-    0 0 24px rgba(168, 85, 247, 0.22),
-    0 0 45px rgba(168, 85, 247, 0.10),
-    0 20px 45px -15px rgba(15, 23, 42, 0.08),
-    inset 0 1px 2px rgba(255, 255, 255, 1);
+    0 0 28px rgba(124, 58, 237, 0.45),
+    0 0 65px rgba(168, 85, 247, 0.30),
+    0 20px 45px -15px rgba(15, 23, 42, 0.12),
+    inset 0 0 18px rgba(168, 85, 247, 0.16);
+}
+html.light .section-box-purple:hover {
+  box-shadow: 
+    0 0 36px rgba(124, 58, 237, 0.60),
+    0 0 78px rgba(168, 85, 247, 0.38),
+    0 24px 50px -15px rgba(15, 23, 42, 0.14),
+    inset 0 0 22px rgba(168, 85, 247, 0.20);
 }
 html.dark .section-box-purple {
   border: 1.5px solid rgba(168, 85, 247, 0.65);
@@ -145,6 +160,35 @@ html.dark .section-box-cyber {
   box-shadow: 
     0 30px 65px -15px rgba(0, 0, 0, 0.4),
     0 0 48px -4px rgba(129, 140, 248, 0.45);
+}
+
+/* =========================================================================
+   LIGHT MODE ONLY: THICK & INTENSE GLOWING BORDERS FOR ALL CONTENT BOXES
+   Dark mode remains completely untouched.
+   ========================================================================= */
+html.light main .rounded-3xl[class*="border"],
+html.light main .rounded-2xl[class*="border"],
+html.light main a.rounded-xl[class*="border"],
+html.light main div.rounded-xl[class*="border"][class*="p-"]:not([class*="w-8"]):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]) {
+  border-width: 2px !important;
+  border-color: rgba(124, 58, 237, 0.78) !important;
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.34),
+    0 0 44px rgba(59, 130, 246, 0.24),
+    0 12px 30px -10px rgba(79, 70, 229, 0.18),
+    inset 0 0 12px rgba(168, 85, 247, 0.12) !important;
+}
+
+html.light main .rounded-3xl[class*="border"]:hover,
+html.light main .rounded-2xl[class*="border"]:hover,
+html.light main a.rounded-xl[class*="border"]:hover,
+html.light main div.rounded-xl[class*="border"][class*="p-"]:not([class*="w-8"]):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]):hover {
+  border-color: rgba(37, 99, 235, 0.95) !important;
+  box-shadow:
+    0 0 28px rgba(59, 130, 246, 0.48),
+    0 0 58px rgba(168, 85, 247, 0.34),
+    0 16px 36px -10px rgba(79, 70, 229, 0.24),
+    inset 0 0 16px rgba(59, 130, 246, 0.16) !important;
 }
 
 /* Floor reflection effect */
