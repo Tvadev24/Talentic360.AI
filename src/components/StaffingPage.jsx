@@ -1,0 +1,495 @@
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import {
+  Search,
+  Building2,
+  Briefcase,
+  ArrowRight,
+  ArrowLeft,
+  ChevronDown,
+  ChevronUp,
+  Upload,
+  Sparkles,
+  X
+} from 'lucide-react';
+import { INDUSTRIES_DATA, FUNCTIONS_DATA } from '../data/staffingData';
+
+const slugify = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+export default function StaffingPage({ onBackHome, onApplyCareer }) {
+  const [view, setView] = useState('industry'); // 'industry' | 'function'
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedIndustry, setSelectedIndustry] = useState('');
+  const [selectedFunction, setSelectedFunction] = useState('');
+  const [openCards, setOpenCards] = useState({});
+  const [highlightedRole, setHighlightedRole] = useState(null); // { cardKey, role }
+
+  const searchWrapRef = useRef(null);
+
+  const sortedIndustries = useMemo(() => Object.keys(INDUSTRIES_DATA).sort(), []);
+  const sortedFunctions = useMemo(() => Object.keys(FUNCTIONS_DATA).sort(), []);
+
+  // Build search index across all industries, functions, and roles
+  const searchIndex = useMemo(() => {
+    const items = [];
+    Object.entries(INDUSTRIES_DATA).forEach(([cat, roles]) => {
+      items.push({ label: cat, type: 'Industry', view: 'industry', cat });
+      roles.forEach((role) =>
+        items.push({ label: role, type: 'Role', view: 'industry', cat, role })
+      );
+    });
+    Object.entries(FUNCTIONS_DATA).forEach(([cat, roles]) => {
+      items.push({ label: cat, type: 'Function', view: 'function', cat });
+      roles.forEach((role) =>
+        items.push({ label: role, type: 'Role', view: 'function', cat, role })
+      );
+    });
+    return items;
+  }, []);
+
+  // Unique top 12 suggestions for search query
+  const suggestions = useMemo(() => {
+    const term = searchQuery.toLowerCase().trim();
+    if (!term) return [];
+    const seen = new Set();
+    const out = [];
+    for (const item of searchIndex) {
+      const hay = `${item.label} ${item.cat}`.toLowerCase();
+      if (hay.includes(term)) {
+        const key = `${item.view}|${item.cat}|${item.role || ''}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          out.push(item);
+        }
+        if (out.length >= 12) break;
+      }
+    }
+    return out;
+  }, [searchQuery, searchIndex]);
+
+  // Close suggestions dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const revealCard = (targetView, catName, roleName = null) => {
+    setView(targetView);
+    const cardKey = `${targetView}-${slugify(catName)}`;
+    setOpenCards((prev) => ({ ...prev, [cardKey]: true }));
+    if (roleName) {
+      setHighlightedRole({ cardKey, role: roleName });
+    } else {
+      setHighlightedRole(null);
+    }
+
+    setTimeout(() => {
+      const el = document.getElementById(cardKey);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+  };
+
+  const handleIndustryChange = (e) => {
+    const val = e.target.value;
+    setSelectedIndustry(val);
+    if (val) {
+      setSelectedFunction('');
+      setSearchQuery('');
+      revealCard('industry', val);
+    }
+  };
+
+  const handleFunctionChange = (e) => {
+    const val = e.target.value;
+    setSelectedFunction(val);
+    if (val) {
+      setSelectedIndustry('');
+      setSearchQuery('');
+      revealCard('function', val);
+    }
+  };
+
+  const handleSuggestionClick = (item) => {
+    setSearchQuery(item.label);
+    setShowSuggestions(false);
+    setSelectedIndustry(item.view === 'industry' ? item.cat : '');
+    setSelectedFunction(item.view === 'function' ? item.cat : '');
+    revealCard(item.view, item.cat, item.role || null);
+  };
+
+  const toggleCard = (cardKey) => {
+    setOpenCards((prev) => ({ ...prev, [cardKey]: !prev[cardKey] }));
+  };
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
+  const activeData = view === 'industry' ? INDUSTRIES_DATA : FUNCTIONS_DATA;
+  const activeKeys = view === 'industry' ? sortedIndustries : sortedFunctions;
+
+  const filteredKeys = useMemo(() => {
+    const term = searchQuery.toLowerCase().trim();
+    if (!term) return activeKeys;
+    return activeKeys.filter((name) => {
+      const roles = activeData[name] || [];
+      const searchable = `${name} ${roles.join(' ')}`.toLowerCase();
+      return searchable.includes(term);
+    });
+  }, [activeKeys, activeData, searchQuery]);
+
+  return (
+    <div className="pt-24 sm:pt-28 pb-16 relative z-10">
+      {/* =========================================================================
+          1. HERO BANNER (Inside Illuminated Purple Capsule Box)
+         ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12">
+        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-14">
+          {/* Top Bar: Back to Home */}
+          <div className="mb-6">
+            <button
+              onClick={onBackHome}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-purple-500/30 transition-all cursor-pointer"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to Home</span>
+            </button>
+          </div>
+
+          <div className="max-w-4xl space-y-5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-purple-100 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-500/40">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>TALENTIC 360.AI / WHITE COLLAR STAFFING</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-display tracking-tight text-slate-900 dark:text-white leading-[1.02]">
+              Find where your{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]">
+                experience belongs.
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-medium">
+              Explore professional opportunities across industries and functions. Search your role, discover adjacent career paths and join our talent network for relevant current and future openings.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+              <button
+                onClick={() => scrollToId('career-form')}
+                className="group px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2.5 cursor-pointer"
+              >
+                <Upload className="w-4 h-4" />
+                <span>Upload Your CV</span>
+              </button>
+
+              <button
+                onClick={() => scrollToId('directory')}
+                className="px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 shadow-sm dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:text-white dark:border-cyan-500/40 transition-all flex items-center gap-2 cursor-pointer"
+              >
+                <span>Explore Roles</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          2. STICKY SEARCH & FILTER TOOLBAR
+         ========================================================================= */}
+      <div className="sticky top-20 z-30 bg-white/90 dark:bg-[#050814]/90 backdrop-blur-xl border-y border-slate-200/80 dark:border-purple-500/25 shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] py-4 mb-8 sm:mb-12 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
+            {/* Search Box with Autocomplete Suggestions */}
+            <div ref={searchWrapRef} className="relative lg:col-span-6">
+              <div className="relative flex items-center">
+                <Search className="w-4 h-4 text-slate-400 dark:text-cyan-400 absolute left-4 pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => {
+                    if (searchQuery.trim()) setShowSuggestions(true);
+                  }}
+                  placeholder="Search any role, function or industry — e.g. HR, Accountant, Laravel"
+                  className="w-full pl-11 pr-10 py-3 rounded-xl bg-slate-50 dark:bg-[#0c1228] border border-slate-300 dark:border-purple-500/40 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setShowSuggestions(false);
+                      setHighlightedRole(null);
+                    }}
+                    aria-label="Clear search"
+                    className="absolute right-3 p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+
+              {/* Autocomplete Suggestions Dropdown */}
+              {showSuggestions && searchQuery.trim() !== '' && (
+                <div className="absolute left-0 right-0 top-[calc(100%+6px)] bg-white dark:bg-[#0b1024] border border-slate-200 dark:border-purple-500/40 rounded-2xl shadow-2xl max-h-80 overflow-y-auto z-40">
+                  {suggestions.length > 0 ? (
+                    suggestions.map((item, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => handleSuggestionClick(item)}
+                        className="w-full text-left px-4 py-3 border-b border-slate-100 dark:border-slate-800/80 last:border-0 hover:bg-purple-50 dark:hover:bg-purple-950/40 flex items-center justify-between gap-3 transition-colors cursor-pointer"
+                      >
+                        <div>
+                          <span className="text-sm font-semibold text-slate-900 dark:text-white block">
+                            {item.label}
+                          </span>
+                          {item.role && (
+                            <span className="text-[11px] text-slate-500 dark:text-slate-400 block">
+                              {item.cat}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-purple-700 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 shrink-0">
+                          {item.type}
+                        </span>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-4 py-3.5 flex items-center justify-between gap-3 text-sm text-slate-600 dark:text-slate-300">
+                      <span>No exact match. You can still upload your CV.</span>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-600 dark:text-cyan-400">
+                        Talent Network
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* By Industry Dropdown */}
+            <div className="lg:col-span-3">
+              <select
+                value={selectedIndustry}
+                onChange={handleIndustryChange}
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0c1228] border border-slate-300 dark:border-purple-500/40 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400 cursor-pointer transition-all"
+              >
+                <option value="">By Industry ▾</option>
+                {sortedIndustries.map((ind) => (
+                  <option key={ind} value={ind} className="bg-white dark:bg-[#0c1228] text-slate-900 dark:text-white">
+                    {ind}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* By Role / Function Dropdown */}
+            <div className="lg:col-span-3">
+              <select
+                value={selectedFunction}
+                onChange={handleFunctionChange}
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0c1228] border border-slate-300 dark:border-purple-500/40 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400 cursor-pointer transition-all"
+              >
+                <option value="">By Role / Function ▾</option>
+                {sortedFunctions.map((fn) => (
+                  <option key={fn} value={fn} className="bg-white dark:bg-[#0c1228] text-slate-900 dark:text-white">
+                    {fn}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* View Switcher Tabs */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <button
+              onClick={() => setView('industry')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                view === 'industry'
+                  ? 'text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
+              }`}
+            >
+              <Building2 className="w-3.5 h-3.5" />
+              <span>Browse by Industry ({sortedIndustries.length})</span>
+            </button>
+
+            <button
+              onClick={() => setView('function')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                view === 'function'
+                  ? 'text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
+              }`}
+            >
+              <Briefcase className="w-3.5 h-3.5" />
+              <span>Browse by Function ({sortedFunctions.length})</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          3. DIRECTORY SECTION (Inside Illuminated Cyan Capsule Box)
+         ========================================================================= */}
+      <main id="directory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <section className="section-box section-box-cyan p-6 sm:p-10 lg:p-12">
+          <div className="mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-2">
+              {view === 'industry' ? 'Browse by Industry' : 'Browse by Function'}
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-medium">
+              {view === 'industry'
+                ? 'Select a sector to explore its white-collar job families and common professional titles.'
+                : 'Your function can travel across industries. Explore roles by professional discipline.'}
+            </p>
+          </div>
+
+          {filteredKeys.length === 0 ? (
+            <div className="text-center py-12 px-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+              <p className="text-base font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                No categories matched "{searchQuery}".
+              </p>
+              <button
+                onClick={() => setSearchQuery('')}
+                className="px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] to-[#783cec] cursor-pointer"
+              >
+                Reset Search
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredKeys.map((name) => {
+                const roles = activeData[name] || [];
+                const cardKey = `${view}-${slugify(name)}`;
+                const isOpen = !!openCards[cardKey];
+
+                return (
+                  <article
+                    key={cardKey}
+                    id={cardKey}
+                    onClick={(e) => {
+                      if (!e.target.closest('button.apply-btn')) {
+                        toggleCard(cardKey);
+                      }
+                    }}
+                    className={`group rounded-2xl p-6 transition-all duration-300 cursor-pointer border backdrop-blur-md flex flex-col justify-between ${
+                      isOpen
+                        ? 'bg-white dark:bg-[#0d142e] border-purple-400 dark:border-cyan-400/70 shadow-xl dark:shadow-[0_0_30px_rgba(0,240,255,0.2)]'
+                        : 'bg-white/95 dark:bg-[#0a0f24]/90 border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-500/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-2.5">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-purple-600 dark:text-cyan-400">
+                          {roles.length} professional titles
+                        </span>
+                        <span className="text-slate-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-cyan-300 transition-colors">
+                          {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        </span>
+                      </div>
+
+                      <h3 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
+                        {name}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        {roles.slice(0, 4).join(' · ')}
+                        {roles.length > 4 ? '…' : ''}
+                      </p>
+                    </div>
+
+                    {/* Expanded Roles List */}
+                    {isOpen && (
+                      <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <div className="flex flex-wrap gap-1.5">
+                          {roles.map((role) => {
+                            const isHighlighted =
+                              highlightedRole &&
+                              highlightedRole.cardKey === cardKey &&
+                              highlightedRole.role === role;
+
+                            return (
+                              <span
+                                key={role}
+                                className={`inline-block text-xs font-medium px-2.5 py-1 rounded-lg border transition-colors ${
+                                  isHighlighted
+                                    ? 'bg-red-500/15 border-red-500 text-red-700 dark:bg-red-500/25 dark:border-red-400 dark:text-white font-bold'
+                                    : 'bg-slate-50 border-slate-200 text-slate-700 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-200'
+                                }`}
+                              >
+                                {role}
+                              </span>
+                            );
+                          })}
+                        </div>
+
+                        <div className="mt-4">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onApplyCareer();
+                            }}
+                            className="apply-btn inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-lg hover:scale-[1.02] transition-all cursor-pointer"
+                          >
+                            <span>Apply / Upload CV</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* =========================================================================
+            4. BOTTOM CTA SECTION (Inside Illuminated Cyber Capsule Box)
+           ========================================================================= */}
+        <section id="career-form" className="section-box section-box-cyber p-8 sm:p-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-2">
+                Don’t see your exact title?
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                Job titles evolve. Submit your CV and choose the closest industry/function; equivalent and emerging titles are welcome.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={onApplyCareer}
+              className="shrink-0 group px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5 cursor-pointer"
+            >
+              <span>Join Talent Network</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}

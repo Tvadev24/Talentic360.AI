@@ -19,7 +19,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-export default function Navbar({ onOpenContact, theme, onToggleTheme }) {
+export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage = 'home', onOpenStaffing, onNavigateHome }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState('English');
@@ -40,11 +40,22 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme }) {
     { label: 'Contact us', href: '#contact', icon: Mail },
   ];
 
-  // Smooth scroll handler
+  // Smooth scroll / page navigation handler
   const handleTabClick = (e, href, label) => {
     e.preventDefault();
     setActiveTab(label);
     setMobileMenuOpen(false);
+
+    if (label === 'Staffing' && onOpenStaffing) {
+      onOpenStaffing();
+      return;
+    }
+
+    if (activePage !== 'home' && onNavigateHome) {
+      const targetId = label === 'Contact us' ? 'contact' : href.replace('#', '');
+      onNavigateHome(targetId);
+      return;
+    }
 
     if (label === 'Contact us' && onOpenContact) {
       onOpenContact();
@@ -60,8 +71,17 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme }) {
 
   // Detect scroll to handle transparency over video vs blurred glass when scrolled
   useEffect(() => {
+    if (activePage === 'staffing') {
+      setActiveTab('Staffing');
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 25);
+
+      if (activePage === 'staffing') {
+        setActiveTab('Staffing');
+        return;
+      }
 
       const scrollPosition = window.scrollY + 200;
       const sections = [
@@ -90,12 +110,12 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme }) {
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activePage]);
 
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || activePage === 'staffing'
           ? 'bg-white/90 dark:bg-[#04060d]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-purple-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.85)]'
           : 'bg-transparent border-b border-transparent shadow-none'
       }`}

@@ -10,9 +10,11 @@ import ContactSection from './components/ContactSection';
 import PartnersSection from './components/PartnersSection';
 import Footer from './components/Footer';
 import ProgramModal from './components/ProgramModal';
+import StaffingPage from './components/StaffingPage';
 
 export default function App() {
   const [selectedModalProgram, setSelectedModalProgram] = useState(null);
+  const [activePage, setActivePage] = useState('home'); // 'home' | 'staffing'
 
   // Theme state: defaults to 'dark'
   const [theme, setTheme] = useState(() => {
@@ -59,7 +61,30 @@ export default function App() {
     }
   };
 
+  const handleOpenStaffing = () => {
+    setActivePage('staffing');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateHome = (targetId) => {
+    setActivePage('home');
+    if (targetId && targetId !== 'hero') {
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 80);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleScrollToContact = () => {
+    if (activePage !== 'home') {
+      handleNavigateHome('contact');
+      return;
+    }
     const contactElem = document.getElementById('contact');
     if (contactElem) {
       contactElem.scrollIntoView({ behavior: 'smooth' });
@@ -84,46 +109,60 @@ export default function App() {
         onOpenContact={handleScrollToContact} 
         theme={theme}
         onToggleTheme={handleToggleTheme}
+        activePage={activePage}
+        onOpenStaffing={handleOpenStaffing}
+        onNavigateHome={handleNavigateHome}
       />
 
-      {/* Main Content Sections (Matching https://talentic360ai.in) */}
+      {/* Main Content Sections or Dedicated Staffing Page */}
       <main className="flex-1">
-        
-        {/* 1. Hero Video Banner with pure fonts over full-bleed video */}
-        <Hero 
-          onGetStarted={handleScrollToContact} 
-        />
+        {activePage === 'staffing' ? (
+          <StaffingPage 
+            onBackHome={() => handleNavigateHome('hero')}
+            onApplyCareer={() => handleNavigateHome('contact')}
+          />
+        ) : (
+          <>
+            {/* 1. Hero Video Banner with pure fonts over full-bleed video */}
+            <Hero 
+              onGetStarted={handleScrollToContact} 
+            />
 
-        {/* 2. About TALENTIC 360.AI LLP & Unique Positioning with Neural Network Model */}
-        <AboutSection 
-          onExplorePrograms={handleScrollToContact} 
-        />
+            {/* 2. About TALENTIC 360.AI LLP & Unique Positioning with Neural Network Model */}
+            <AboutSection 
+              onExplorePrograms={handleScrollToContact} 
+            />
 
-        {/* 2.5 White Collar Staffing Solutions with Photo Collage & Know More Modal */}
-        <StaffingSection 
-          onKnowMore={handleScrollToContact} 
-        />
+            {/* 2.5 White Collar Staffing Solutions with Photo & Know More redirecting to Staffing Tab */}
+            <StaffingSection 
+              onKnowMore={handleOpenStaffing} 
+            />
 
-        {/* 3. The 7 Core Programs (Academic, Vocational, Corporate, Government, Post-Graduate, Volunteering, Remote) */}
-        <ProgramsSection 
-          onOpenProgramModal={handleOpenProgramModal} 
-        />
+            {/* 3. The 7 Core Programs (Academic, Vocational, Corporate, Government, Post-Graduate, Volunteering, Remote) */}
+            <ProgramsSection 
+              onOpenProgramModal={handleOpenProgramModal} 
+            />
 
-        {/* 4. Why Choose TALENTIC 360.AI LLP & 3 Verified Metrics (10k+ / 500+ / 95%) */}
-        <WhyChooseUs 
-          onGetStarted={handleScrollToContact} 
-        />
+            {/* 4. Why Choose TALENTIC 360.AI LLP & 3 Verified Metrics (10k+ / 500+ / 95%) */}
+            <WhyChooseUs 
+              onGetStarted={handleScrollToContact} 
+            />
 
-        {/* 5. Get in Touch: Contact Information, Office Hours & Interactive Consultation Form */}
-        <ContactSection />
+            {/* 5. Get in Touch: Contact Information, Office Hours & Interactive Consultation Form */}
+            <ContactSection />
 
-        {/* 6. Strategic Partners & CSR Institutional Donors Video Showcase */}
-        <PartnersSection />
-
+            {/* 6. Strategic Partners & CSR Institutional Donors Video Showcase */}
+            <PartnersSection />
+          </>
+        )}
       </main>
 
       {/* 6. Footer (with TALENTIC 360.AI LLP title and logo, Quick Links, Programs, Contact, Powered By, Compliance, Copyright) */}
-      <Footer />
+      <Footer 
+        activePage={activePage}
+        onOpenStaffing={handleOpenStaffing}
+        onNavigateHome={handleNavigateHome}
+      />
 
       {/* Program Details Modal */}
       <ProgramModal 

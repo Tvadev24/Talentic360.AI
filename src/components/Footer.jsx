@@ -41,12 +41,22 @@ const SnapchatIcon = () => (
   </svg>
 );
 
-export default function Footer() {
+export default function Footer({ activePage = 'home', onOpenStaffing, onNavigateHome }) {
   const [cookieDismissed, setCookieDismissed] = useState(false);
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, href, label) => {
     e.preventDefault();
+    if (label === 'Staffing' && onOpenStaffing) {
+      onOpenStaffing();
+      return;
+    }
+
     const targetId = href.replace('#', '');
+    if (activePage !== 'home' && onNavigateHome) {
+      onNavigateHome(targetId);
+      return;
+    }
+
     const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -219,7 +229,7 @@ export default function Footer() {
                 <li key={idx}>
                   <a 
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={(e) => handleNavClick(e, item.href, item.label)}
                     className="text-xs text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-300 transition-colors flex items-center gap-1.5 group cursor-pointer"
                   >
                     <ChevronRight className="w-3 h-3 text-purple-500 dark:text-purple-400 group-hover:translate-x-0.5 group-hover:text-red-500 transition-all shrink-0" />
