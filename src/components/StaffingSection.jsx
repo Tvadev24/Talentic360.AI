@@ -40,6 +40,9 @@ export default function StaffingSection({ onKnowMore }) {
       className="relative py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Enclosing Illuminated Section Box */}
+        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
@@ -172,6 +175,8 @@ export default function StaffingSection({ onKnowMore }) {
             </div>
 
           </div>
+
+        </div>
 
       </div>
 
