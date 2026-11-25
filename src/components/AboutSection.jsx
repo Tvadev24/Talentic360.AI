@@ -115,14 +115,11 @@ export default function AboutSection({ onExplorePrograms }) {
   };
 
   return (
-    <section id="about" className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200">
+    <section id="about" className="relative py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200">
       {/* Navigation Anchor for 'Who we are' */}
       <div id="who-we-are" className="absolute -top-24 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
-        <div className="section-box section-box-cyan p-6 sm:p-10 lg:p-12">
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -218,8 +215,6 @@ export default function AboutSection({ onExplorePrograms }) {
               );
             })}
           </div>
-
-        </div>
 
       </div>
     </section>

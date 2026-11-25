@@ -83,12 +83,9 @@ export default function ProgramsSection({ onOpenProgramModal }) {
           <section
             key={program.id}
             id={program.id}
-            className="relative py-10 sm:py-14 bg-transparent transition-colors duration-200"
+            className="relative py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200"
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              
-              {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
-              <div className={`section-box ${isEven ? 'section-box-cyan' : 'section-box-purple'} p-6 sm:p-10 lg:p-12`}>
                 
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
@@ -149,8 +146,6 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
-
-              </div>
 
             </div>
           </section>

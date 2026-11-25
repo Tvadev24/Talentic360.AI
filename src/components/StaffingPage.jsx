@@ -197,10 +197,9 @@ export default function StaffingPage({ onBackHome }) {
   return (
     <div className="pt-24 sm:pt-28 pb-16 relative z-10">
       {/* =========================================================================
-          1. HERO BANNER (Inside Illuminated Purple Capsule Box)
+          1. HERO BANNER
          ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12">
-        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-14">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14">
           {/* Top Bar: Back to Home + CV Database Viewer */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <button
@@ -258,7 +257,6 @@ export default function StaffingPage({ onBackHome }) {
               </button>
             </div>
           </div>
-        </div>
       </section>
 
       {/* =========================================================================
@@ -400,10 +398,10 @@ export default function StaffingPage({ onBackHome }) {
       </div>
 
       {/* =========================================================================
-          3. DIRECTORY SECTION (Inside Illuminated Cyan Capsule Box)
+          3. DIRECTORY SECTION
          ========================================================================= */}
-      <main id="directory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <section className="section-box section-box-cyan p-6 sm:p-10 lg:p-12">
+      <main id="directory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <section className="py-4">
           <div className="mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-2">
               {view === 'industry' ? 'Browse by Industry' : 'Browse by Function'}
@@ -521,9 +519,9 @@ export default function StaffingPage({ onBackHome }) {
         </section>
 
         {/* =========================================================================
-            4. BOTTOM CTA SECTION (Inside Illuminated Cyber Capsule Box)
+            4. BOTTOM CTA SECTION
            ========================================================================= */}
-        <section id="career-form" className="section-box section-box-cyber p-8 sm:p-12">
+        <section id="career-form" className="pt-12 border-t border-slate-200/70 dark:border-slate-800/70">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <h2 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-2">

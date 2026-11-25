@@ -16,12 +16,9 @@ export default function PartnersSection() {
   return (
     <section 
       id="partners"
-      className="relative py-12 sm:py-16 bg-transparent transition-colors duration-200"
+      className="relative py-20 sm:py-24 bg-transparent transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        
-        {/* Enclosing Illuminated Section Box (Matching Reference Image 5) */}
-        <div className="section-box section-box-cyan p-6 sm:p-10 lg:p-12">
 
           {/* Section Heading (Matching Image: Bold title with italic serif 'Partners') */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-3">
@@ -60,9 +57,6 @@ export default function PartnersSection() {
             </div>
 
           </div>
-
-        {/* End of section-box */}
-        </div>
 
       </div>
     </section>
