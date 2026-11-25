@@ -210,7 +210,7 @@ export default function WhyChooseUs({ onGetStarted }) {
               return (
                 <div
                   key={idx}
-                  className={`group relative text-center p-8 sm:p-10 rounded-3xl bg-white/95 dark:bg-gradient-to-b dark:from-[#0c1228]/95 dark:via-[#090d20]/95 dark:to-[#060814]/98 border ${metric.cardBorder} ${metric.cardShadow} backdrop-blur-xl transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1`}
+                  className={`group relative text-center p-6 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#090e22] dark:bg-gradient-to-b dark:from-[#0e1530] dark:via-[#090e22] dark:to-[#060916] border ${metric.cardBorder} ${metric.cardShadow} backdrop-blur-xl transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1`}
                 >
                   {/* Top Badge with Icon */}
                   <div className="flex items-center justify-center gap-2 mb-4">
@@ -221,7 +221,7 @@ export default function WhyChooseUs({ onGetStarted }) {
                   </div>
 
                   {/* High-Visibility Animated Counter Number */}
-                  <div className={`font-display font-black text-5xl sm:text-6xl lg:text-7xl bg-gradient-to-r ${metric.gradient} ${metric.glow} bg-clip-text text-transparent my-3 tracking-tight`}>
+                  <div className={`font-display font-black text-4xl sm:text-5xl lg:text-[2.85rem] xl:text-[3.4rem] px-1 bg-gradient-to-r ${metric.gradient} ${metric.glow} bg-clip-text text-transparent my-3 tracking-tight whitespace-nowrap`}>
                     <AnimatedMetricCounter 
                       targetValue={metric.target} 
                       suffix={metric.suffix} 
@@ -235,7 +235,7 @@ export default function WhyChooseUs({ onGetStarted }) {
                   </div>
 
                   {/* Description */}
-                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed font-medium">
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed font-medium">
                     {metric.desc}
                   </div>
                 </div>
