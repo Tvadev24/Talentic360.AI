@@ -7,6 +7,9 @@ node_modules/
 dist/
 dist-ssr/
 
+# Local CV database & uploaded candidate files
+database/
+
 # Raw video sources & installer packages
 Video/
 *.apk
