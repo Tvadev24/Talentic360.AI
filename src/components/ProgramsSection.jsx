@@ -173,6 +173,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Trade Apprenticeships': {
       src: '/assets/trade-apprenticeships-bg.jpg',
       position: 'object-[35%_20%]'
+    },
+    'Fast-Track Certifications': {
+      src: '/assets/fast-track-certifications-bg.jpg',
+      position: 'object-[50%_15%]'
     }
   };
 
@@ -236,7 +240,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                       return (
                         <div
                           key={itemIdx}
-                          className="group relative min-h-[300px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-between"
+                          className="group relative min-h-[300px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-end"
                         >
                           {/* Clear, Unobstructed Background Photo */}
                           <img
@@ -245,18 +249,11 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                             className={`absolute inset-0 w-full h-full object-cover ${bgCard.position} group-hover:scale-105 transition-transform duration-700`}
                           />
 
-                          {/* Bottom-only Gradient Scrim so top & technicians stay crystal clear */}
+                          {/* Bottom-only Gradient Scrim so upper photo stays crystal clear */}
                           <div
                             aria-hidden="true"
                             className="absolute inset-x-0 bottom-0 h-[56%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
                           />
-
-                          {/* Top-left compact glass icon badge */}
-                          <div className="relative z-10 p-5">
-                            <div className="w-10 h-10 rounded-xl bg-white/85 dark:bg-slate-900/80 backdrop-blur-md border border-white/60 dark:border-slate-700/80 flex items-center justify-center text-purple-600 dark:text-cyan-400 shadow-sm">
-                              <ItemIcon className="w-5 h-5" />
-                            </div>
-                          </div>
 
                           {/* Bottom Title & Description */}
                           <div className="relative z-10 p-5 sm:p-6 pt-12">
