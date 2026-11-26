@@ -288,13 +288,13 @@ export default function StaffingSection({ onKnowMore }) {
                 </div>
               </div>
 
-              {/* Button of 'Know More' under the content */}
+              {/* Button of 'Connect With Us' under the content */}
               <div className="pt-2 flex sm:justify-start justify-center">
                 <button
                   onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
                   className="group px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
                 >
-                  <span>Know More</span>
+                  <span>Connect With Us</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
