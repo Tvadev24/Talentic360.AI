@@ -57,7 +57,7 @@ export default function HalftoneWaveBackground({ theme }) {
       parallaxX,
       parallaxY
     }) => {
-      const maxRadius = width < 768 ? 3.8 : 5.4;
+      const maxRadius = width < 768 ? 5.6 : 8.4;
 
       for (let i = 0; i <= cols; i++) {
         const u = i / cols;
@@ -75,45 +75,45 @@ export default function HalftoneWaveBackground({ theme }) {
             baseX = (-0.06 + u * 0.68) * width;
             baseY = (0.44 + v * 0.66) * height;
 
-            // Organic undulating fabric/wave warp
-            const phase = u * 4.2 + v * 2.8 + time * 0.65;
-            waveX = Math.sin(phase) * (width * 0.024) + Math.cos(v * 3.5 + time * 0.4) * (width * 0.012);
+            // Bigger, clearly visible undulating wave motion
+            const phase = u * 4.2 + v * 2.8 + time * 1.15;
+            waveX = Math.sin(phase) * (width * 0.038) + Math.cos(v * 3.5 + time * 0.75) * (width * 0.020);
             waveY =
-              Math.sin(u * 4.8 + time * 0.55) * (height * 0.048) +
-              Math.cos(v * 3.2 - time * 0.45) * (height * 0.025);
+              Math.sin(u * 4.8 + time * 0.95) * (height * 0.072) +
+              Math.cos(v * 3.2 - time * 0.8) * (height * 0.040);
 
             // Distance from bottom-left corner (0, 1) -> tapers cleanly to 0 before center
             const distFromCorner = Math.hypot(u * 1.15, (1 - v) * 1.15);
-            const waveRidge = 0.82 + 0.18 * Math.sin(u * 5.0 + v * 4.0 + time * 0.5);
+            const waveRidge = 0.80 + 0.20 * Math.sin(u * 5.0 + v * 4.0 + time * 0.9);
             intensity = Math.max(0, 1 - distFromCorner * 0.92) * waveRidge;
           } else {
             // Top-right corner: sweeps from top-right outward toward top-center & middle-right
             baseX = (0.38 + u * 0.68) * width;
             baseY = (-0.08 + v * 0.64) * height;
 
-            const phase = u * 4.0 - v * 2.9 + time * 0.6;
-            waveX = Math.sin(phase) * (width * 0.022) + Math.cos(v * 3.4 - time * 0.4) * (width * 0.012);
+            const phase = u * 4.0 - v * 2.9 + time * 1.1;
+            waveX = Math.sin(phase) * (width * 0.036) + Math.cos(v * 3.4 - time * 0.75) * (width * 0.020);
             waveY =
-              Math.cos(u * 4.6 + time * 0.55) * (height * 0.045) +
-              Math.sin(v * 3.1 + time * 0.45) * (height * 0.024);
+              Math.cos(u * 4.6 + time * 0.95) * (height * 0.070) +
+              Math.sin(v * 3.1 + time * 0.8) * (height * 0.038);
 
             // Distance from top-right corner (1, 0) -> tapers cleanly to 0 before center
             const distFromCorner = Math.hypot((1 - u) * 1.15, v * 1.15);
-            const waveRidge = 0.82 + 0.18 * Math.cos(u * 5.0 - v * 4.0 + time * 0.5);
+            const waveRidge = 0.80 + 0.20 * Math.cos(u * 5.0 - v * 4.0 + time * 0.9);
             intensity = Math.max(0, 1 - distFromCorner * 0.92) * waveRidge;
           }
 
           if (intensity <= 0.03) continue;
 
-          const x = baseX + waveX + parallaxX * (corner === 'bottom-left' ? 10 : -10);
-          const y = baseY + waveY + parallaxY * (corner === 'bottom-left' ? 10 : -10);
+          const x = baseX + waveX + parallaxX * (corner === 'bottom-left' ? 16 : -16);
+          const y = baseY + waveY + parallaxY * (corner === 'bottom-left' ? 16 : -16);
 
-          const radius = Math.pow(intensity, 1.35) * maxRadius;
-          if (radius < 0.35) continue;
+          const radius = Math.pow(intensity, 1.25) * maxRadius;
+          if (radius < 0.45) continue;
 
           const alpha = dark
-            ? Math.min(0.42, intensity * 0.45)
-            : Math.min(0.82, intensity * 0.85);
+            ? Math.min(0.68, intensity * 0.72)
+            : Math.min(0.86, intensity * 0.90);
 
           ctx.beginPath();
           ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -131,7 +131,7 @@ export default function HalftoneWaveBackground({ theme }) {
     };
 
     const render = () => {
-      time += 0.014;
+      time += 0.022;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.04;
       mouse.y += (mouse.targetY - mouse.y) * 0.04;
@@ -199,3 +199,4 @@ export default function HalftoneWaveBackground({ theme }) {
     </div>
   );
 }
+
