@@ -241,17 +241,37 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
               )}
             </div>
 
-            {/* Impressive Glowing Get Started Button (Red, Blue, Purple Brand Gradient) */}
+            {/* Impressive Animated Get Started Button with Pointer Hand & Shimmer */}
             <a
               href="#contact"
               onClick={onOpenContact}
-              className="relative group overflow-hidden rounded-xl p-[1px] font-semibold text-xs transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(44,96,234,0.4)] hover:shadow-[0_0_25px_rgba(239,68,68,0.6)] hidden sm:inline-block"
+              className="relative group rounded-xl p-[1.5px] font-semibold text-xs transition-all duration-300 hover:scale-105 active:scale-95 animate-cta-glow hidden sm:inline-block"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative px-3 sm:px-4 py-2 sm:py-2.5 rounded-[11px] bg-[#070b16] transition-colors group-hover:bg-[#070b16]/75 flex items-center gap-1.5 sm:gap-2">
-                <span className="text-white tracking-wide font-bold">Get Started</span>
-                <ArrowRight className="w-3.5 h-3.5 text-purple-300 group-hover:translate-x-1 transition-transform" />
+              <div className="relative overflow-hidden rounded-[11px]">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]"></div>
+                <div className="relative m-[1.5px] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[10px] bg-[#070b16] transition-colors group-hover:bg-[#0b1124] flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+                  {/* Smooth diagonal shimmer sweep */}
+                  <span className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-btn-shimmer"></span>
+                  <span className="relative z-10 text-white tracking-wide font-bold">Get Started</span>
+                  <ArrowRight className="relative z-10 w-3.5 h-3.5 text-purple-300 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
+
+              {/* Animated Pointer Hand Icon (Matching Reference Style) */}
+              <span
+                className="pointer-events-none absolute -bottom-2.5 -right-2 z-20 animate-pointer-tap drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]"
+                aria-hidden="true"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9.5 3.5C9.5 2.67 10.17 2 11 2C11.83 2 12.5 2.67 12.5 3.5V10.2C12.88 9.95 13.34 9.8 13.85 9.8C14.72 9.8 15.46 10.32 15.8 11.07C16.16 10.87 16.57 10.75 17.02 10.75C18.02 10.75 18.88 11.38 19.2 12.27C19.53 12.1 19.9 12 20.3 12C21.52 12 22.5 12.98 22.5 14.2V16.6C22.5 19.86 19.86 22.5 16.6 22.5H13.4C11.2 22.5 9.15 21.45 7.86 19.67L4.7 15.32C4.16 14.57 4.35 13.52 5.12 13.02C5.83 12.56 6.78 12.72 7.3 13.39L9.5 16.1V3.5Z"
+                    fill="#f59e0b"
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </a>
 
             {/* Mobile / Tablet Menu Toggle Button */}

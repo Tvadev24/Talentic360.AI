@@ -322,3 +322,48 @@ html.dark .hero-subtitle-outline {
      0.5px  0.5px 0 rgba(0, 0, 0, 0.9),
      0 2px 6px rgba(0, 0, 0, 0.85);
 }
+
+/* =========================================================================
+   GET STARTED CTA BUTTON ANIMATIONS (SHIMMER + POINTER HAND TAP)
+   ========================================================================= */
+@keyframes pointerTap {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1) rotate(-18deg);
+  }
+  45% {
+    transform: translate(-3px, -3px) scale(0.9) rotate(-22deg);
+  }
+  65% {
+    transform: translate(0px, 0px) scale(1.04) rotate(-18deg);
+  }
+}
+
+@keyframes btnShimmer {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  45%, 100% {
+    transform: translateX(240%) skewX(-20deg);
+  }
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(44, 96, 234, 0.5), 0 0 28px rgba(120, 60, 236, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(120, 60, 236, 0.7), 0 0 38px rgba(239, 68, 68, 0.45);
+  }
+}
+
+.animate-pointer-tap {
+  animation: pointerTap 2.1s ease-in-out infinite;
+}
+
+.animate-btn-shimmer {
+  animation: btnShimmer 3.2s ease-in-out infinite;
+}
+
+.animate-cta-glow {
+  animation: ctaPulseGlow 2.6s ease-in-out infinite;
+}
