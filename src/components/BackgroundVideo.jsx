@@ -7,6 +7,8 @@ export default function BackgroundVideo() {
     // Ensure native video autoplays and continuously loops without stopping
     if (videoRef.current) {
       videoRef.current.muted = true;
+      videoRef.current.defaultPlaybackRate = 0.65;
+      videoRef.current.playbackRate = 0.65;
       videoRef.current.load();
       videoRef.current.play().catch((err) => {
         console.warn('AutoPlay check:', err);
@@ -31,6 +33,9 @@ export default function BackgroundVideo() {
         muted
         playsInline
         preload="auto"
+        onLoadedMetadata={(e) => {
+          e.currentTarget.playbackRate = 0.65;
+        }}
         className="w-full h-full object-cover scale-105 pointer-events-none select-none border-0"
       >
         <source src="/assets/hero-video.mp4" type="video/mp4" />
