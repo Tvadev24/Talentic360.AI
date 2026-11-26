@@ -134,6 +134,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Student Apprenticeships': {
       src: '/assets/student-apprenticeship-hover.jpg',
       position: 'object-center'
+    },
+    'Certification Programs': {
+      src: '/assets/certification-programs-hover.jpg',
+      position: 'object-[68%_top]'
     }
   };
   const iconMap = {
