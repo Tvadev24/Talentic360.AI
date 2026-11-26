@@ -244,7 +244,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           {/* Bottom-only Gradient Scrim so top & technicians stay crystal clear */}
                           <div
                             aria-hidden="true"
-                            className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
+                            className="absolute inset-x-0 bottom-0 h-[56%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
                           />
 
                           {/* Top-left compact glass icon badge */}
@@ -254,18 +254,14 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                             </div>
                           </div>
 
-                          {/* Bottom Title, Description & Footer */}
-                          <div className="relative z-10 p-5 sm:p-6 pt-10">
+                          {/* Bottom Title & Description */}
+                          <div className="relative z-10 p-5 sm:p-6 pt-12">
                             <h3 className="font-display font-bold text-lg text-white mb-1.5 group-hover:text-cyan-300 transition-colors drop-shadow-sm">
                               {item.title}
                             </h3>
                             <p className="text-xs sm:text-[13px] text-slate-200 leading-relaxed line-clamp-3">
                               {item.description}
                             </p>
-                            <div className="pt-3 mt-3 border-t border-white/15 flex items-center justify-between text-[11px] font-semibold text-slate-300">
-                              <span>Curriculum Module</span>
-                              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:text-cyan-300 transition-all" />
-                            </div>
                           </div>
                         </div>
                       );
