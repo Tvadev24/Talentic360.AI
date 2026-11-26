@@ -257,17 +257,31 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
                 </div>
               </div>
 
-              {/* Animated Pointer Hand Icon (Matching Reference Style) */}
+              {/* Animated Pointer Hand Icon (Brand Gradient + Click Ripple) */}
               <span
-                className="pointer-events-none absolute -bottom-2.5 -right-2 z-20 animate-pointer-tap drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]"
+                className="pointer-events-none absolute -bottom-2.5 -right-2 z-20 flex items-center justify-center"
                 aria-hidden="true"
               >
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                {/* Subtle click ripple ring at fingertip */}
+                <span className="absolute -top-0.5 -left-0.5 w-3.5 h-3.5 rounded-full bg-purple-400/70 animate-pointer-ripple"></span>
+
+                <svg
+                  className="w-6 h-6 animate-pointer-tap drop-shadow-[0_2px_10px_rgba(120,60,236,0.8)]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <defs>
+                    <linearGradient id="talenticHandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#2c60ea" />
+                      <stop offset="50%" stopColor="#783cec" />
+                      <stop offset="100%" stopColor="#ef4444" />
+                    </linearGradient>
+                  </defs>
                   <path
                     d="M9.5 3.5C9.5 2.67 10.17 2 11 2C11.83 2 12.5 2.67 12.5 3.5V10.2C12.88 9.95 13.34 9.8 13.85 9.8C14.72 9.8 15.46 10.32 15.8 11.07C16.16 10.87 16.57 10.75 17.02 10.75C18.02 10.75 18.88 11.38 19.2 12.27C19.53 12.1 19.9 12 20.3 12C21.52 12 22.5 12.98 22.5 14.2V16.6C22.5 19.86 19.86 22.5 16.6 22.5H13.4C11.2 22.5 9.15 21.45 7.86 19.67L4.7 15.32C4.16 14.57 4.35 13.52 5.12 13.02C5.83 12.56 6.78 12.72 7.3 13.39L9.5 16.1V3.5Z"
-                    fill="#f59e0b"
+                    fill="url(#talenticHandGrad)"
                     stroke="#ffffff"
-                    strokeWidth="2"
+                    strokeWidth="1.75"
                     strokeLinejoin="round"
                   />
                 </svg>
