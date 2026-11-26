@@ -136,8 +136,8 @@ export default function ProgramsSection({ onOpenProgramModal }) {
       position: 'object-center'
     },
     'Certification Programs': {
-      src: '/assets/certification-programs-hover.jpg',
-      position: 'object-[68%_top]'
+      src: '/assets/certification-hover.jpg',
+      position: 'object-[78%_100%]'
     }
   };
   const iconMap = {
