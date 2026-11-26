@@ -131,7 +131,7 @@ export default function HalftoneWaveBackground({ theme }) {
     };
 
     const render = () => {
-      time += 0.022;
+      time += 0.006;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.04;
       mouse.y += (mouse.targetY - mouse.y) * 0.04;
