@@ -199,6 +199,54 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                   {program.items.map((item, itemIdx) => {
                     const CustomAcademicIcon = program.id === 'academic' ? academicIconMap[item.title] : null;
                     const ItemIcon = CustomAcademicIcon || iconMap[item.icon] || BookOpen;
+                    const isSkillFlipCard =
+                      program.id === 'academic' && item.title === 'Skill Enhancement Courses';
+
+                    if (isSkillFlipCard) {
+                      return (
+                        <div
+                          key={itemIdx}
+                          className="group [perspective:1200px] min-h-[260px]"
+                        >
+                          <div className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(540deg)] will-change-transform">
+                            {/* Front Face: Skill Enhancement Courses */}
+                            <div className="w-full h-full p-6 sm:p-7 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between [backface-visibility:hidden]">
+                              <div>
+                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm p-1.5">
+                                  <ItemIcon className="w-full h-full" />
+                                </div>
+                                <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
+                                  {item.title}
+                                </h3>
+                                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                  {item.description}
+                                </p>
+                              </div>
+
+                              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold text-slate-400 dark:text-slate-500">
+                                <span>Curriculum Module</span>
+                                <ChevronRight className="w-3.5 h-3.5" />
+                              </div>
+                            </div>
+
+                            {/* Back Face: Uploaded SKILLS Visual (revealed after 360+180 flip) */}
+                            <div className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-indigo-400/70 dark:border-cyan-400/70 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] bg-slate-950">
+                              <img
+                                src="/assets/skill-enhancement-hover.jpg"
+                                alt="Skill Enhancement Courses"
+                                className="w-full h-full object-cover object-center"
+                              />
+                              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent flex items-center justify-between">
+                                <span className="font-display font-bold text-xs tracking-wide text-white">
+                                  Skill Enhancement Courses
+                                </span>
+                                <ChevronRight className="w-4 h-4 text-cyan-300" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
 
                     return (
                       <div
