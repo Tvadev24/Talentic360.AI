@@ -208,7 +208,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           key={itemIdx}
                           className="group [perspective:1200px] min-h-[260px]"
                         >
-                          <div className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(540deg)] will-change-transform">
+                          <div className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(180deg)] will-change-transform">
                             {/* Front Face: Skill Enhancement Courses */}
                             <div className="w-full h-full p-6 sm:p-7 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between [backface-visibility:hidden]">
                               <div>
@@ -234,7 +234,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                               <img
                                 src="/assets/skill-enhancement-hover.jpg"
                                 alt="Skill Enhancement Courses"
-                                className="w-full h-full object-cover object-center"
+                                className="w-full h-full object-cover object-right-bottom"
                               />
                               <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent flex items-center justify-between">
                                 <span className="font-display font-bold text-xs tracking-wide text-white">
