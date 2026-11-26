@@ -51,21 +51,17 @@ function RightFitIcon({ className = 'w-6 h-6' }) {
   );
 }
 
-function RightFutureIcon({ className = 'w-6 h-6' }) {
+function RightFutureIcon({ className = 'w-7 h-7' }) {
   return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Shining star at top right */}
-      <path d="M37 4v2M31.5 6.5l1.4 1.4M42.5 6.5l-1.4 1.4" />
-      <path d="M37 10l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5L37 10z" />
-      {/* Person on left */}
-      <circle cx="11.5" cy="23" r="4" />
-      <path d="M5.5 39v-4a6 6 0 0 1 12 0v4" />
-      {/* Baseline & Ascending Staircase */}
-      <path d="M3.5 41h41" />
-      <path d="M21 41v-7h7v-6.5h7V21h9" />
-      {/* Upward arrow along steps */}
-      <path d="M24 38l4-4M31 31l4-4M38 24l3.5-3.5" />
-      <path d="M37.5 20.5h4v4" />
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Upward zigzag growth arrow */}
+      <path d="M7 24l9-9 7 6 13-13" />
+      <path d="M27 8h9v9" />
+      {/* 4 ascending bars */}
+      <rect x="6" y="34" width="6.5" height="8" rx="1.2" />
+      <rect x="16" y="29" width="6.5" height="13" rx="1.2" />
+      <rect x="26" y="23" width="6.5" height="19" rx="1.2" />
+      <rect x="36" y="17" width="6.5" height="25" rx="1.2" />
     </svg>
   );
 }
@@ -136,8 +132,8 @@ export default function StaffingSection({ onKnowMore }) {
               {/* 3 Value Pillars */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
                 <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <RightTalentIcon className="w-6 h-6" />
+                  <div className="w-10 h-10 p-1.5 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightTalentIcon className="w-full h-full" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Talent</h4>
@@ -146,8 +142,8 @@ export default function StaffingSection({ onKnowMore }) {
                 </div>
 
                 <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <RightFitIcon className="w-6 h-6" />
+                  <div className="w-10 h-10 p-1.5 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightFitIcon className="w-full h-full" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Fit</h4>
@@ -156,8 +152,8 @@ export default function StaffingSection({ onKnowMore }) {
                 </div>
 
                 <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <RightFutureIcon className="w-6 h-6" />
+                  <div className="w-10 h-10 p-1.5 rounded-xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightFutureIcon className="w-full h-full" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Future</h4>
