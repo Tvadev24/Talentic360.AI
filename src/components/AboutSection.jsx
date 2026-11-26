@@ -220,8 +220,8 @@ export default function AboutSection({ onExplorePrograms }) {
             </p>
           </div>
 
-          {/* Unique Positioning Box fitted to 1024x424 panoramic image with crystal-clear right side */}
-          <div className="relative rounded-3xl p-6 sm:p-10 lg:px-12 lg:py-10 mb-14 overflow-hidden bg-white dark:bg-[#070b1a] border border-slate-200/90 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] lg:aspect-[1024/424] flex items-center">
+          {/* Unique Positioning Box fitted to 1024x424 panoramic image with crystal-clear presenter & right side */}
+          <div className="relative rounded-3xl p-6 sm:p-8 lg:pl-9 lg:pr-6 lg:py-8 mb-14 overflow-hidden bg-white dark:bg-[#070b1a] border border-slate-200/90 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] lg:aspect-[1024/424] flex items-center">
             {/* Full-box background training image */}
             <img
               src="/assets/unique-positioning-bg.png"
@@ -235,46 +235,46 @@ export default function AboutSection({ onExplorePrograms }) {
               className="pointer-events-none absolute inset-0 bg-white/88 dark:bg-[#070b1a]/88 lg:hidden"
             />
 
-            {/* Desktop Light Mode Directional Fade (0% cloudy blur on right side past 60%) */}
+            {/* Desktop Light Mode Directional Fade (Ends at 47% so presenter & right side are 100% clear) */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 hidden lg:block dark:lg:hidden"
               style={{
                 background:
-                  'linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 44%, rgba(255,255,255,0) 60%)'
+                  'linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.92) 36%, rgba(255,255,255,0) 47%)'
               }}
             />
 
-            {/* Desktop Dark Mode Directional Fade (0% cloudy blur on right side past 60%) */}
+            {/* Desktop Dark Mode Directional Fade (Ends at 47% so presenter & right side are 100% clear) */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 hidden dark:lg:block"
               style={{
                 background:
-                  'linear-gradient(90deg, rgba(7,11,26,0.96) 0%, rgba(7,11,26,0.88) 44%, rgba(7,11,26,0) 60%)'
+                  'linear-gradient(90deg, rgba(7,11,26,0.97) 0%, rgba(7,11,26,0.92) 36%, rgba(7,11,26,0) 47%)'
               }}
             />
             
-            <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               
-              {/* Left Column: Unique Positioning Text (Same portion, prioritized contrast) */}
-              <div className="lg:col-span-7 space-y-5 text-left">
-                <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-cyan-100 dark:to-purple-200">
+              {/* Left Column: Unique Positioning Text (Compact left 5/12 portion, clear of the presenter) */}
+              <div className="lg:col-span-5 space-y-3.5 text-left">
+                <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-extrabold font-display text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-cyan-100 dark:to-purple-200 leading-tight">
                   {siteData.about.positioning.headline}
                 </h3>
                 
-                <p className="text-slate-800 dark:text-slate-200 text-base sm:text-lg leading-relaxed font-medium">
+                <p className="text-slate-800 dark:text-slate-200 text-sm sm:text-[15px] leading-relaxed font-medium">
                   {siteData.about.positioning.paragraph1}
                 </p>
 
-                <p className="text-slate-800 dark:text-slate-200 text-base sm:text-lg leading-relaxed font-medium">
+                <p className="text-slate-800 dark:text-slate-200 text-sm sm:text-[15px] leading-relaxed font-medium">
                   {siteData.about.positioning.paragraph2}
                 </p>
 
-                <div className="pt-2 flex flex-wrap gap-3">
+                <div className="pt-1 flex flex-wrap gap-2">
                   {['MNCs & Corporates', 'Mindful Strategy', 'Large Manufacturers', 'Proven Impact'].map((tag, idx) => (
                     <span key={idx} className="group relative inline-flex cursor-pointer select-none">
-                      <span className="relative overflow-hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-cyan-500/35 text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-sm transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:border-purple-400/80 group-hover:shadow-[0_6px_18px_rgba(120,60,236,0.28)] dark:group-hover:border-cyan-400/80 dark:group-hover:shadow-[0_0_18px_rgba(0,240,255,0.32)]">
+                      <span className="relative overflow-hidden px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-cyan-500/35 text-slate-800 dark:text-slate-200 flex items-center gap-1.5 shadow-sm transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:border-purple-400/80 group-hover:shadow-[0_6px_18px_rgba(120,60,236,0.28)] dark:group-hover:border-cyan-400/80 dark:group-hover:shadow-[0_0_18px_rgba(0,240,255,0.32)]">
                         {/* Smooth opacity cross-fade gradient layer */}
                         <span
                           aria-hidden="true"
@@ -285,7 +285,7 @@ export default function AboutSection({ onExplorePrograms }) {
                           aria-hidden="true"
                           className="pointer-events-none absolute inset-y-0 left-0 w-10 -translate-x-14 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:translate-x-[240%] transition-transform duration-700 ease-out"
                         />
-                        <CheckCircle className="relative z-10 w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 group-hover:text-white dark:group-hover:text-cyan-300 group-hover:rotate-12 transition-all duration-300 ease-out" />
+                        <CheckCircle className="relative z-10 w-3 h-3 text-cyan-600 dark:text-cyan-400 group-hover:text-white dark:group-hover:text-cyan-300 group-hover:rotate-12 transition-all duration-300 ease-out" />
                         <span className="relative z-10 group-hover:text-white transition-colors duration-300">{tag}</span>
                       </span>
                     </span>
@@ -293,8 +293,8 @@ export default function AboutSection({ onExplorePrograms }) {
                 </div>
               </div>
 
-              {/* Right Column: Open space so the right side of the background image stays clear and visible */}
-              <div className="hidden lg:block lg:col-span-5 min-h-[280px]" aria-hidden="true"></div>
+              {/* Right Column: Open space so presenter & screen stay 100% unobstructed */}
+              <div className="hidden lg:block lg:col-span-7 min-h-[280px]" aria-hidden="true"></div>
 
             </div>
           </div>
