@@ -105,13 +105,102 @@ function NeuralNetworkCanvas() {
   );
 }
 
+/* Custom Brand-Matched SVG Icons matching the 4 uploaded icon designs */
+function MindfulStrategyIcon({ className = 'w-7 h-7' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Circuit nodes above central gear */}
+      <circle cx="19" cy="6" r="2" />
+      <circle cx="24" cy="4.5" r="2" />
+      <circle cx="29" cy="6" r="2" />
+      <path d="M19 8v4l2 2M24 6.5V14M29 8v4l-2 2" />
+      {/* Central gear */}
+      <circle cx="24" cy="22" r="4.5" />
+      <path d="M24 14.5v2M24 27.5v2M16.5 22h2M29.5 22h2M18.7 16.7l1.4 1.4M27.9 25.9l1.4 1.4M29.3 16.7l-1.4 1.4M20.1 25.9l-1.4 1.4" />
+      {/* Small side gears */}
+      <circle cx="11.5" cy="14" r="3" />
+      <path d="M11.5 9.5v1.2M11.5 17.3v1.2M7 14h1.2M14.8 14H16" />
+      <circle cx="36.5" cy="14" r="3" />
+      <path d="M36.5 9.5v1.2M36.5 17.3v1.2M32 14h1.2M39.8 14H41" />
+      {/* Cradling hands */}
+      <path d="M6 34V23a2 2 0 0 1 4 0v7l4 4v5H6v-5z" />
+      <path d="M10 30l4.5 2.5a2 2 0 0 1 1 1.7V41H6v-3" />
+      <path d="M42 34V23a2 2 0 0 0-4 0v7l-4 4v5h8v-5z" />
+      <path d="M38 30l-4.5 2.5a2 2 0 0 0-1 1.7V41h9.5v-3" />
+    </svg>
+  );
+}
+
+function MarketLeadershipIcon({ className = 'w-7 h-7' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Presentation board */}
+      <rect x="19" y="5" width="24" height="19" rx="2" />
+      {/* Pie chart inside board */}
+      <circle cx="31" cy="13" r="4.5" />
+      <path d="M31 8.5V13l3.2 3.2" />
+      <path d="M24 20h14" />
+      {/* Presenter */}
+      <circle cx="11.5" cy="10" r="4" />
+      <path d="M5 24v-4.5a4.5 4.5 0 0 1 4.5-4.5h4l4 3.5 3-2.5" />
+      {/* Audience (3 learners) */}
+      <circle cx="10.5" cy="31" r="3.5" />
+      <path d="M5 42.5v-3a5.5 5.5 0 0 1 11 0v3H5z" />
+      <circle cx="24" cy="31" r="3.5" />
+      <path d="M18.5 42.5v-3a5.5 5.5 0 0 1 11 0v3h-11z" />
+      <circle cx="37.5" cy="31" r="3.5" />
+      <path d="M32 42.5v-3a5.5 5.5 0 0 1 11 0v3H32z" />
+    </svg>
+  );
+}
+
+function ProvenResultsIcon({ className = 'w-7 h-7' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Back document */}
+      <path d="M16 9h17a3 3 0 0 1 3 3v12" />
+      {/* Front document */}
+      <path d="M24 41H11a3 3 0 0 1-3-3V12l7-7h12a3 3 0 0 1 3 3v14" />
+      <path d="M8 12h7V5" />
+      {/* Document text lines */}
+      <path d="M14 20h10M14 26h10M14 32h7" />
+      {/* Shield with checkmark */}
+      <path d="M33 25c4.5 0 8 1.5 8 5.5 0 5.5-3.5 9.5-8 11.5-4.5-2-8-6-8-11.5 0-4 3.5-5.5 8-5.5z" />
+      <path d="M29.5 33.5l2.5 2.5 4.5-4.5" />
+    </svg>
+  );
+}
+
+function ExpertTeamIcon({ className = 'w-7 h-7' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Center leader */}
+      <circle cx="24" cy="11" r="4.5" />
+      <path d="M17.5 24v-2.5a6.5 6.5 0 0 1 13 0V24" />
+      {/* Left team member */}
+      <circle cx="11.5" cy="18" r="3.5" />
+      <path d="M5.5 31v-2.5a5.5 5.5 0 0 1 10-3.2" />
+      <path d="M5.5 31h7" />
+      {/* Right team member */}
+      <circle cx="36.5" cy="18" r="3.5" />
+      <path d="M42.5 31v-2.5a5.5 5.5 0 0 0-10-3.2" />
+      <path d="M35.5 31h7" />
+      {/* Star in foreground */}
+      <path d="M24 24l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6-4.3-4.2 6-.9L24 24z" />
+    </svg>
+  );
+}
+
 export default function AboutSection({ onExplorePrograms }) {
-  const iconMap = {
-    BrainCircuit,
-    Award,
-    Target,
-    UserCheck,
-    Cpu
+  const pillarIconMap = {
+    'mindful-strategy': MindfulStrategyIcon,
+    'market-leadership': MarketLeadershipIcon,
+    'proven-results': ProvenResultsIcon,
+    'expert-team': ExpertTeamIcon,
+    BrainCircuit: MindfulStrategyIcon,
+    Award: MarketLeadershipIcon,
+    Target: ProvenResultsIcon,
+    UserCheck: ExpertTeamIcon
   };
 
   return (
@@ -189,7 +278,7 @@ export default function AboutSection({ onExplorePrograms }) {
           {/* 4 Pillars Grid (Mindful Strategy, Market Leadership, Proven Results, Expert Team) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {siteData.about.pillars.map((pillar, idx) => {
-              const Icon = iconMap[pillar.icon] || Cpu;
+              const Icon = pillarIconMap[pillar.id] || pillarIconMap[pillar.icon] || Cpu;
 
               const iconColors = {
                 cyan: 'text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/70 border-cyan-300 dark:border-cyan-500/40',
@@ -211,8 +300,8 @@ export default function AboutSection({ onExplorePrograms }) {
                   className={`group relative rounded-2xl p-7 bg-white dark:bg-[#0a0e20]/80 border border-slate-200 dark:border-slate-800 transition-all duration-300 ${borderHovers[pillar.color] || borderHovers.cyan} backdrop-blur-md flex flex-col justify-between`}
                 >
                   <div>
-                    <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${iconColors[pillar.color] || iconColors.cyan}`}>
-                      <Icon className="w-6 h-6" />
+                    <div className={`w-14 h-14 rounded-xl border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 ${iconColors[pillar.color] || iconColors.cyan}`}>
+                      <Icon className="w-8 h-8" />
                     </div>
 
                     <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-2.5 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
