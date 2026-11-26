@@ -148,13 +148,14 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
             {/* Controlled Distance (Ek Dum Thoda Sa Distance) between Title & Navigation Tabs */}
             <div 
               className={`hidden lg:flex items-center ml-3 sm:ml-4 xl:ml-6 gap-0.5 xl:gap-1 transition-all duration-300 ${
-                isScrolled
+                isScrolled || activePage === 'staffing'
                   ? 'bg-slate-100/90 dark:bg-[#090e21]/80 border border-slate-200/90 dark:border-slate-800 px-2.5 xl:px-3 py-1 rounded-full shadow-inner backdrop-blur-md'
-                  : 'bg-transparent border-0 shadow-none'
+                  : 'bg-slate-950/60 border border-white/25 px-2.5 xl:px-3 py-1 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md'
               }`}
             >
               {navTabs.map((tab) => {
                 const isActive = activeTab === tab.label;
+                const solidNav = isScrolled || activePage === 'staffing';
                 return (
                   <a
                     key={tab.label}
@@ -162,12 +163,12 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
                     onClick={(e) => handleTabClick(e, tab.href, tab.label)}
                     className={`relative px-2 xl:px-2.5 py-1 rounded-full text-xs xl:text-[13px] font-semibold tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                       isActive
-                        ? isScrolled
+                        ? solidNav
                           ? 'bg-white dark:bg-gradient-to-r dark:from-purple-900/70 dark:to-blue-900/70 text-[#2c60ea] dark:text-purple-200 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.3)] dark:border dark:border-purple-500/40 font-bold'
-                          : 'text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] font-black'
-                        : isScrolled
+                          : 'bg-white/20 text-white border border-white/30 shadow-sm font-bold'
+                        : solidNav
                           ? 'text-slate-600 hover:text-slate-900 hover:bg-white/70 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60'
-                          : 'text-white hover:text-purple-300'
+                          : 'text-white/95 hover:text-white hover:bg-white/15'
                     }`}
                   >
                     <span>{tab.label}</span>
@@ -190,9 +191,9 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
             <button
               onClick={onToggleTheme}
               className={`relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl transition-all duration-300 ${
-                isScrolled
+                isScrolled || activePage === 'staffing'
                   ? 'bg-slate-100 hover:bg-slate-200 border border-slate-300 text-amber-600 shadow-sm dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:border-slate-700/60 dark:text-amber-400 dark:shadow-[0_0_15px_rgba(251,191,36,0.25)]'
-                  : 'bg-transparent hover:bg-white/10 text-amber-300 border-0'
+                  : 'bg-slate-950/60 hover:bg-slate-900/80 text-amber-300 border border-white/25 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.35)]'
               }`}
               title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
               aria-label={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
@@ -211,9 +212,9 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl text-xs font-medium transition-all shadow-sm ${
-                  isScrolled
+                  isScrolled || activePage === 'staffing'
                     ? 'text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700/60 hover:border-purple-400 hover:text-purple-600 dark:hover:text-purple-300'
-                    : 'text-white bg-transparent hover:bg-white/10 border-0 hover:text-purple-200'
+                    : 'text-white bg-slate-950/60 hover:bg-slate-900/80 border border-white/25 backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.35)] hover:text-purple-200'
                 }`}
                 title="Select Language"
               >
@@ -257,9 +258,9 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`lg:hidden flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl transition-all focus:outline-none ${
-                isScrolled
+                isScrolled || activePage === 'staffing'
                   ? 'bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:bg-slate-900/80 dark:hover:bg-slate-800 dark:border-slate-700 text-slate-700 dark:text-slate-200'
-                  : 'bg-transparent hover:bg-white/10 border-0 text-white'
+                  : 'bg-slate-950/60 hover:bg-slate-900/80 border border-white/25 backdrop-blur-md text-white shadow-[0_4px_15px_rgba(0,0,0,0.35)]'
               }`}
               aria-label="Toggle navigation menu"
             >
