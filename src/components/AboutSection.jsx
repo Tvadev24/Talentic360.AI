@@ -151,11 +151,19 @@ export default function AboutSection({ onExplorePrograms }) {
                   {siteData.about.positioning.paragraph2}
                 </p>
 
-                <div className="pt-2 flex flex-wrap gap-2.5">
+                <div className="pt-2 flex flex-wrap gap-3">
                   {['MNCs & Corporates', 'Mindful Strategy', 'Large Manufacturers', 'Proven Impact'].map((tag, idx) => (
-                    <span key={idx} className="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-300 flex items-center gap-1.5 shadow-sm">
-                      <CheckCircle className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-                      {tag}
+                    <span
+                      key={idx}
+                      className="group relative overflow-hidden px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-cyan-500/30 text-slate-800 dark:text-slate-200 flex items-center gap-2 shadow-sm cursor-pointer select-none transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.04] hover:bg-gradient-to-r hover:from-[#2c60ea] hover:via-[#783cec] hover:to-[#ef4444] hover:text-white hover:border-transparent hover:shadow-[0_8px_22px_rgba(120,60,236,0.38)] dark:hover:from-cyan-500/25 dark:hover:via-purple-600/30 dark:hover:to-pink-500/25 dark:hover:border-cyan-400 dark:hover:text-white dark:hover:shadow-[0_0_22px_rgba(0,240,255,0.42)]"
+                    >
+                      {/* Shimmer sweep on hover */}
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-y-0 left-0 w-8 -translate-x-12 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:translate-x-[240%] transition-transform duration-700 ease-out"
+                      />
+                      <CheckCircle className="relative z-10 w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 group-hover:text-white dark:group-hover:text-cyan-300 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
+                      <span className="relative z-10">{tag}</span>
                     </span>
                   ))}
                 </div>
