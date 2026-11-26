@@ -96,13 +96,11 @@ export default function App() {
     <div className="min-h-screen relative bg-transparent text-slate-800 dark:text-slate-100 flex flex-col font-sans selection:bg-purple-500 selection:text-white transition-colors duration-200">
       
       {/* =========================================================================
-          PREVIOUS FUTURISTIC 3D CYBER GEOMETRIC BACKGROUND (COMMENTED FOR FUTURE USE)
-          ========================================================================= */}
+          PREVIOUS 3D CYBER GEOMETRIC BACKGROUND (Kept commented for future use)
+         ========================================================================= */}
       {/* <CyberGeometricBackground theme={theme} /> */}
 
-      {/* =========================================================================
-          HALFTONE WAVE INTERACTIVE BACKGROUND (LIGHT & DARK MODE ADAPTED)
-          ========================================================================= */}
+      {/* Halftone Wave Background with clean plain center space */}
       <HalftoneWaveBackground theme={theme} />
 
       {/* Transparent Sticky Header with Logo, Navigation Tabs & Theme Switcher */}
