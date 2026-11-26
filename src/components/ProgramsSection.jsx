@@ -169,6 +169,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Technical Skills Training': {
       src: '/assets/technical-skills-bg.jpg',
       position: 'object-[75%_25%]'
+    },
+    'Trade Apprenticeships': {
+      src: '/assets/trade-apprenticeships-bg.jpg',
+      position: 'object-[35%_20%]'
     }
   };
 
