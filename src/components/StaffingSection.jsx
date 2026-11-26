@@ -68,8 +68,10 @@ function RightFutureIcon({ className = 'w-7 h-7' }) {
 
 export default function StaffingSection({ onKnowMore }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const timelineRef = useRef(null);
+  const sectionRef = useRef(null);
   const [rayProgress, setRayProgress] = useState(0);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
     let targetProgress = 0;
@@ -77,20 +79,32 @@ export default function StaffingSection({ onKnowMore }) {
     let rafId;
 
     const updateTarget = () => {
-      const el = timelineRef.current;
+      const desktop = window.innerWidth >= 1024;
+      setIsDesktop(desktop);
+
+      const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      const start = vh * 0.85;
-      const total = Math.max(rect.height + vh * 0.15, 1);
-      const raw = (start - rect.top) / total;
-      targetProgress = Math.max(0, Math.min(1, raw)) * 100;
+
+      if (desktop) {
+        // Sticky pinned at top-24 (96px): progress 0 -> 100 while scrolling through the 250vh section
+        const stickyTop = 96;
+        const scrollable = Math.max(rect.height - vh, 1);
+        const raw = (stickyTop - rect.top) / scrollable;
+        targetProgress = Math.max(0, Math.min(1, raw)) * 100;
+      } else {
+        const start = vh * 0.8;
+        const total = Math.max(rect.height - vh * 0.25, 1);
+        const raw = (start - rect.top) / total;
+        targetProgress = Math.max(0, Math.min(1, raw)) * 100;
+      }
     };
 
     const tick = () => {
-      // Smooth slow lerp so the ray moves gently with user scrolling
-      currentProgress += (targetProgress - currentProgress) * 0.06;
-      if (Math.abs(targetProgress - currentProgress) < 0.05) {
+      // Smooth lerp so the ray glides forward & backward naturally with scrolling
+      currentProgress += (targetProgress - currentProgress) * 0.085;
+      if (Math.abs(targetProgress - currentProgress) < 0.04) {
         currentProgress = targetProgress;
       }
       setRayProgress(currentProgress);
@@ -114,27 +128,71 @@ export default function StaffingSection({ onKnowMore }) {
       num: '01',
       title: 'HR Solution',
       subtitle: 'Talent Acquisition, HRBP & People Operations',
-      threshold: 10
+      description: 'End-to-end human capital leadership to scale high-performing teams, streamline compliance, and build resilient workplace cultures.',
+      features: [
+        'Executive & Leadership Search',
+        'HRBP & Workforce Planning',
+        'Payroll, Policy & Compliance',
+        'L&D & Performance Systems'
+      ]
     },
     {
       num: '02',
       title: 'Software Architecture',
       subtitle: 'Full Stack, Cloud & Enterprise Systems',
-      threshold: 35
+      description: 'Principal engineers and solution architects who design scalable cloud infrastructure, resilient APIs, and mission-critical platforms.',
+      features: [
+        'Cloud-Native & Microservices',
+        'Enterprise System Design',
+        'AI / Data Platform Engineering',
+        'DevSecOps & Reliability'
+      ]
     },
     {
       num: '03',
       title: 'Digital Marketing',
       subtitle: 'Brand Strategy, SEO & Performance Growth',
-      threshold: 60
+      description: 'Data-driven growth strategists and demand-generation specialists focused on measurable pipeline, brand authority, and ROI.',
+      features: [
+        'Performance & Paid Media',
+        'Technical SEO & Organic Growth',
+        'B2B Demand Generation',
+        'Marketing Analytics & CRO'
+      ]
     },
     {
       num: '04',
       title: 'Accountant / CA',
       subtitle: 'Financial Audit, Taxation & Compliance',
-      threshold: 85
+      description: 'Chartered Accountants and finance controllers delivering precision reporting, statutory audits, tax structuring, and FP&A.',
+      features: [
+        'Statutory Audit & Assurance',
+        'GST, Direct & Corporate Tax',
+        'FP&A & Treasury Management',
+        'Regulatory & ROC Compliance'
+      ]
     }
   ];
+
+  // Determine which single topic is expanded based on scroll ray progress (or tap on mobile)
+  const scrollActiveIndex =
+    rayProgress < 25 ? 0 : rayProgress < 50 ? 1 : rayProgress < 75 ? 2 : 3;
+  const activeIndex = isDesktop ? scrollActiveIndex : mobileActiveIndex;
+
+  const handleSelectTopic = (idx) => {
+    if (!isDesktop) {
+      setMobileActiveIndex(idx);
+      return;
+    }
+    const el = sectionRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const sectionTop = window.scrollY + rect.top;
+    const scrollable = Math.max(rect.height - window.innerHeight, 1);
+    const targetFraction = idx === 0 ? 0.08 : idx === 1 ? 0.37 : idx === 2 ? 0.62 : 0.92;
+    const destination = sectionTop - 96 + scrollable * targetFraction;
+    window.scrollTo({ top: destination, behavior: 'smooth' });
+  };
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -157,14 +215,15 @@ export default function StaffingSection({ onKnowMore }) {
   return (
     <section 
       id="staffing" 
-      className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
+      ref={sectionRef}
+      className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[250vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="lg:sticky lg:top-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Enclosing Illuminated Section Box */}
         <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
             {/* =========================================================================
                 LEFT SIDE: THE CONTENT (Title, Text, Pillars & Know More Button)
@@ -243,102 +302,161 @@ export default function StaffingSection({ onKnowMore }) {
             </div>
 
             {/* =========================================================================
-                RIGHT SIDE: SCROLL-DRIVEN RAY TIMELINE WITH SERIAL NUMBERS (01 - 04)
+                RIGHT SIDE: SCROLL-PINNED HALO-STYLE ACCORDION RAY TIMELINE (01 - 04)
                ========================================================================= */}
-            <div ref={timelineRef} className="lg:col-span-5 xl:col-span-5 relative pl-2 sm:pl-4 py-2">
-              <div className="relative space-y-5">
+            <div className="lg:col-span-5 xl:col-span-5 relative pl-1 sm:pl-2 py-1">
+              {/* Top Scroll Hint */}
+              <div className="flex items-center justify-between mb-4 px-1">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                  Core Verticals
+                </span>
+                <span className="text-[11px] font-mono font-semibold text-indigo-600 dark:text-cyan-300">
+                  {whiteCollarTopics[activeIndex].num} / 04
+                </span>
+              </div>
+
+              <div className="relative pl-10 sm:pl-12">
                 {/* Vertical Background Track Line */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-[19px] top-5 bottom-6 w-[2px] bg-slate-300/80 dark:bg-slate-700/80 rounded-full"
+                  className="absolute left-[23px] sm:left-[27px] top-3 bottom-5 w-[2px] bg-slate-200 dark:bg-slate-800 rounded-full"
                 />
 
-                {/* Animated Glowing Scroll Ray */}
+                {/* Animated Glowing Scroll Ray (moves forward & backward with scroll) */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-[18px] top-5 w-[4px] rounded-full bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-[0_0_14px_rgba(120,60,236,0.75)] dark:shadow-[0_0_18px_rgba(168,85,247,0.9)] transition-[height] duration-75"
+                  className="absolute left-[22px] sm:left-[26px] top-3 w-[4px] rounded-full bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-[0_0_14px_rgba(120,60,236,0.7)] dark:shadow-[0_0_18px_rgba(168,85,247,0.9)]"
                   style={{
-                    height: `calc((100% - 2.75rem) * ${Math.min(100, Math.max(0, rayProgress)) / 100})`
+                    height: `calc((100% - 2rem) * ${Math.min(100, Math.max(0, rayProgress)) / 100})`
                   }}
                 >
                   {/* Glowing Ray Tip */}
-                  {rayProgress > 1 && (
+                  {rayProgress > 0.5 && (
                     <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-300 dark:bg-cyan-300 shadow-[0_0_12px_rgba(251,191,36,0.95)] dark:shadow-[0_0_14px_rgba(34,211,238,0.95)]" />
                   )}
                 </div>
 
-                {/* Serial Numbered Topics (01 - 04) */}
-                {whiteCollarTopics.map((topic) => {
-                  const isActive = rayProgress >= topic.threshold;
-                  return (
-                    <div
-                      key={topic.num}
-                      onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                      className="relative flex items-center gap-4 group cursor-pointer"
-                    >
-                      {/* Serial Number Node */}
-                      <div
-                        className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-display font-black text-xs tracking-wider shrink-0 transition-all duration-500 border ${
-                          isActive
-                            ? 'bg-gradient-to-br from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_18px_rgba(120,60,236,0.65)] scale-110'
-                            : 'bg-white dark:bg-[#0d142c] text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700'
-                        }`}
-                      >
-                        {topic.num}
-                      </div>
+                {/* Accordion Topic List (Only 1 expanded at a time) */}
+                <div className="space-y-2.5">
+                  {whiteCollarTopics.map((topic, idx) => {
+                    const isActive = idx === activeIndex;
+                    const isPassed = idx < activeIndex;
 
-                      {/* Topic Card */}
-                      <div
-                        className={`flex-1 p-4 rounded-2xl border backdrop-blur-md transition-all duration-500 flex items-center justify-between gap-3 ${
-                          isActive
-                            ? 'bg-white dark:bg-[#0e1530] border-purple-400/80 dark:border-purple-400/70 shadow-lg dark:shadow-[0_0_24px_rgba(120,60,236,0.28)] translate-x-1'
-                            : 'bg-white/75 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-500/50'
-                        }`}
-                      >
-                        <div>
-                          <h4 className="font-display font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
-                            {topic.title}
-                          </h4>
-                          <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                            {topic.subtitle}
-                          </p>
-                        </div>
-                        <ChevronRight
-                          className={`w-4 h-4 shrink-0 transition-all duration-300 ${
-                            isActive
-                              ? 'text-purple-600 dark:text-cyan-300 translate-x-0.5'
-                              : 'text-slate-400 dark:text-slate-500 group-hover:translate-x-1'
-                          }`}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                    return (
+                      <div key={topic.num} className="relative">
+                        {/* Serial Number + Rail Ring Node */}
+                        <button
+                          type="button"
+                          onClick={() => handleSelectTopic(idx)}
+                          aria-label={`Select ${topic.num} ${topic.title}`}
+                          className="absolute -left-10 sm:-left-12 top-3 flex items-center gap-1.5 cursor-pointer group focus:outline-none"
+                        >
+                          <span
+                            className={`text-[11px] font-mono font-bold w-4 text-right transition-colors duration-300 ${
+                              isActive
+                                ? 'text-indigo-600 dark:text-cyan-300'
+                                : isPassed
+                                  ? 'text-slate-600 dark:text-slate-300'
+                                  : 'text-slate-400 dark:text-slate-500'
+                            }`}
+                          >
+                            {topic.num}
+                          </span>
+                          <span
+                            className={`relative z-10 w-4 h-4 rounded-full flex items-center justify-center transition-all duration-300 ${
+                              isActive
+                                ? 'bg-white dark:bg-[#0d142c] border-[3px] border-[#783cec] dark:border-cyan-300 ring-4 ring-purple-500/20 dark:ring-cyan-400/20 scale-110 shadow-[0_0_12px_rgba(120,60,236,0.6)]'
+                                : isPassed
+                                  ? 'bg-[#2c60ea] dark:bg-purple-500 border-2 border-white dark:border-[#0d142c]'
+                                  : 'bg-white dark:bg-[#0d142c] border-2 border-slate-300 dark:border-slate-600 group-hover:border-purple-400'
+                            }`}
+                          />
+                        </button>
 
-                {/* Ray Ends with "Explore White Rule" Button */}
-                <div className="relative flex items-center gap-4 pt-1">
-                  {/* End Terminal Dot */}
-                  <div
-                    className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-500 border ${
+                        {/* Expanded Card vs Collapsed Row */}
+                        {isActive ? (
+                          <div className="rounded-2xl bg-white/95 dark:bg-[#0d142c]/95 border border-indigo-200/90 dark:border-purple-500/45 p-4 sm:p-5 shadow-[0_12px_32px_rgba(120,60,236,0.12)] dark:shadow-[0_12px_32px_rgba(120,60,236,0.28)] transition-all duration-300">
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <h4 className="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">
+                                  {topic.title}
+                                </h4>
+                                <p className="text-xs font-semibold text-indigo-600 dark:text-cyan-300 mt-0.5">
+                                  {topic.subtitle}
+                                </p>
+                              </div>
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-purple-500/20 text-indigo-700 dark:text-purple-200 border border-indigo-200/70 dark:border-purple-400/30 shrink-0">
+                                Active
+                              </span>
+                            </div>
+
+                            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mt-2.5">
+                              {topic.description}
+                            </p>
+
+                            {/* 4 Sub-Feature Rows (HALO-style) */}
+                            <div className="mt-3.5 pt-3 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {topic.features.map((feat) => (
+                                <div
+                                  key={feat}
+                                  className="flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-50/90 dark:bg-slate-900/70 px-2.5 py-2 rounded-lg border border-slate-200/60 dark:border-slate-800"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#2c60ea] to-[#783cec] shrink-0" />
+                                  <span className="truncate">{feat}</span>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Explore White Rule Button */}
+                            <button
+                              type="button"
+                              onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
+                              className="mt-4 w-full group px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-300 flex items-center justify-between cursor-pointer"
+                            >
+                              <span>Explore White Rule</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleSelectTopic(idx)}
+                            className="w-full text-left px-4 py-2.5 rounded-xl bg-white/60 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900/90 border border-slate-200/70 dark:border-slate-800/80 hover:border-purple-300 dark:hover:border-purple-500/40 transition-all duration-200 flex items-center justify-between gap-3 cursor-pointer group"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <span className="font-display font-semibold text-sm text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white truncate">
+                                {topic.title}
+                              </span>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Ray Terminal End Pill: Explore White Rule */}
+                <div className="relative mt-3 pt-1">
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -left-[22px] sm:-left-[22px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                       rayProgress >= 92
-                        ? 'bg-gradient-to-br from-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_18px_rgba(239,68,68,0.65)] scale-105'
-                        : 'bg-white dark:bg-[#0d142c] text-slate-400 dark:text-slate-500 border-slate-300 dark:border-slate-700'
+                        ? 'bg-[#ef4444] shadow-[0_0_12px_rgba(239,68,68,0.85)] scale-125'
+                        : 'bg-slate-300 dark:bg-slate-700'
                     }`}
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-
+                  />
                   <button
                     type="button"
                     onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                    className={`flex-1 group px-6 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] transition-all duration-500 flex items-center justify-between cursor-pointer ${
+                    className={`w-full px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer border ${
                       rayProgress >= 92
-                        ? 'shadow-[0_0_26px_rgba(120,60,236,0.55)] scale-[1.02]'
-                        : 'shadow-md hover:shadow-xl hover:scale-[1.02]'
+                        ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_20px_rgba(120,60,236,0.45)]'
+                        : 'bg-white/70 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-slate-800 hover:border-purple-400'
                     }`}
                   >
                     <span>Explore White Rule</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
