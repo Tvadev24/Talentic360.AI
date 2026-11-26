@@ -13,6 +13,63 @@ import {
   ChevronRight
 } from 'lucide-react';
 
+/* Custom Brand-Matched SVG Icons matching the 3 uploaded Staffing icon designs */
+function RightTalentIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Star above center */}
+      <path d="M24 3l1.7 3.5 3.8.5-2.7 2.7.6 3.8L24 11.7l-3.4 1.8.6-3.8-2.7-2.7 3.8-.5L24 3z" />
+      {/* Left & Right people */}
+      <circle cx="9.5" cy="14" r="3" />
+      <path d="M4.5 24v-2a5 5 0 0 1 10 0v2H4.5z" />
+      <circle cx="38.5" cy="14" r="3" />
+      <path d="M33.5 24v-2a5 5 0 0 1 10 0v2h-10z" />
+      {/* Magnifying glass circle + candidate inside */}
+      <circle cx="24" cy="25" r="9.5" />
+      <circle cx="24" cy="22.5" r="3" />
+      <path d="M18.5 31.5a5.5 5.5 0 0 1 11 0" />
+      {/* Magnifying glass handle */}
+      <path d="M31 32l3 3" />
+      <rect x="33.5" y="34" width="6" height="9" rx="2" transform="rotate(-45 36.5 38.5)" />
+    </svg>
+  );
+}
+
+function RightFitIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Outer circle */}
+      <circle cx="22" cy="24" r="17" />
+      {/* Person silhouette inside */}
+      <circle cx="22" cy="19" r="5" />
+      <path d="M12.5 35.5v-3a8 8 0 0 1 14-5.2" />
+      {/* Verified checkmark badge & ribbon */}
+      <circle cx="35.5" cy="31" r="7.5" fill="currentColor" fillOpacity="0.12" />
+      <path d="M32.5 31l2 2 4-4" />
+      <path d="M31.5 37.5V44l4-2.2 4 2.2v-6.5" />
+    </svg>
+  );
+}
+
+function RightFutureIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Shining star at top right */}
+      <path d="M37 4v2M31.5 6.5l1.4 1.4M42.5 6.5l-1.4 1.4" />
+      <path d="M37 10l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5L37 10z" />
+      {/* Person on left */}
+      <circle cx="11.5" cy="23" r="4" />
+      <path d="M5.5 39v-4a6 6 0 0 1 12 0v4" />
+      {/* Baseline & Ascending Staircase */}
+      <path d="M3.5 41h41" />
+      <path d="M21 41v-7h7v-6.5h7V21h9" />
+      {/* Upward arrow along steps */}
+      <path d="M24 38l4-4M31 31l4-4M38 24l3.5-3.5" />
+      <path d="M37.5 20.5h4v4" />
+    </svg>
+  );
+}
+
 export default function StaffingSection({ onKnowMore }) {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -78,9 +135,9 @@ export default function StaffingSection({ onKnowMore }) {
 
               {/* 3 Value Pillars */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
-                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <Target className="w-4 h-4" />
+                <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightTalentIcon className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Talent</h4>
@@ -88,9 +145,9 @@ export default function StaffingSection({ onKnowMore }) {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
-                    <UserCheck className="w-4 h-4" />
+                <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightFitIcon className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Fit</h4>
@@ -98,9 +155,9 @@ export default function StaffingSection({ onKnowMore }) {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
-                    <TrendingUp className="w-4 h-4" />
+                <div className="group p-4 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 shadow-sm transition-all duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <RightFutureIcon className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">The Right Future</h4>
