@@ -126,57 +126,44 @@ export default function StaffingSection({ onKnowMore }) {
   const whiteCollarTopics = [
     {
       num: '01',
-      title: 'HR Solution',
-      subtitle: 'Talent Acquisition, HRBP & People Operations',
-      description: 'End-to-end human capital leadership to scale high-performing teams, streamline compliance, and build resilient workplace cultures.',
+      title: 'Software Architecture',
+      subtitle: 'Enterprise Systems, Cloud & Engineering Leadership',
+      description: 'Senior architects and principal engineers who design dependable cloud foundations, clean APIs, and scalable core platforms.',
       features: [
-        'Executive & Leadership Search',
-        'HRBP & Workforce Planning',
-        'Payroll, Policy & Compliance',
-        'L&D & Performance Systems'
+        'Cloud & Distributed Systems',
+        'Enterprise Application Design',
+        'Data & AI Platform Engineering',
+        'Security, DevOps & Reliability'
       ]
     },
     {
       num: '02',
-      title: 'Software Architecture',
-      subtitle: 'Full Stack, Cloud & Enterprise Systems',
-      description: 'Principal engineers and solution architects who design scalable cloud infrastructure, resilient APIs, and mission-critical platforms.',
+      title: 'Tax Auditor',
+      subtitle: 'Statutory Audit, Direct/Indirect Tax & Compliance',
+      description: 'Qualified tax auditors and chartered specialists who keep statutory filings, GST reconciliations, and corporate audits airtight.',
       features: [
-        'Cloud-Native & Microservices',
-        'Enterprise System Design',
-        'AI / Data Platform Engineering',
-        'DevSecOps & Reliability'
+        'Statutory & Internal Audits',
+        'GST & Corporate Tax Filings',
+        'Financial Controls & Reporting',
+        'Regulatory & ROC Compliance'
       ]
     },
     {
       num: '03',
-      title: 'Digital Marketing',
-      subtitle: 'Brand Strategy, SEO & Performance Growth',
-      description: 'Data-driven growth strategists and demand-generation specialists focused on measurable pipeline, brand authority, and ROI.',
+      title: 'HR BP',
+      subtitle: 'Workforce Strategy, Talent Partnering & Culture',
+      description: 'Experienced HR Business Partners who align hiring plans with business goals, strengthen retention, and guide leadership teams.',
       features: [
-        'Performance & Paid Media',
-        'Technical SEO & Organic Growth',
-        'B2B Demand Generation',
-        'Marketing Analytics & CRO'
-      ]
-    },
-    {
-      num: '04',
-      title: 'Accountant / CA',
-      subtitle: 'Financial Audit, Taxation & Compliance',
-      description: 'Chartered Accountants and finance controllers delivering precision reporting, statutory audits, tax structuring, and FP&A.',
-      features: [
-        'Statutory Audit & Assurance',
-        'GST, Direct & Corporate Tax',
-        'FP&A & Treasury Management',
-        'Regulatory & ROC Compliance'
+        'Strategic Workforce Planning',
+        'Leadership & Functional Hiring',
+        'Performance & Retention Programs',
+        'Policy, Payroll & Compliance'
       ]
     }
   ];
 
   // Determine which single topic is expanded based on scroll ray progress (or tap on mobile)
-  const scrollActiveIndex =
-    rayProgress < 25 ? 0 : rayProgress < 50 ? 1 : rayProgress < 75 ? 2 : 3;
+  const scrollActiveIndex = rayProgress < 34 ? 0 : rayProgress < 68 ? 1 : 2;
   const activeIndex = isDesktop ? scrollActiveIndex : mobileActiveIndex;
 
   const handleSelectTopic = (idx) => {
@@ -189,7 +176,7 @@ export default function StaffingSection({ onKnowMore }) {
     const rect = el.getBoundingClientRect();
     const sectionTop = window.scrollY + rect.top;
     const scrollable = Math.max(rect.height - window.innerHeight, 1);
-    const targetFraction = idx === 0 ? 0.08 : idx === 1 ? 0.37 : idx === 2 ? 0.62 : 0.92;
+    const targetFraction = idx === 0 ? 0.14 : idx === 1 ? 0.5 : 0.88;
     const destination = sectionTop - 96 + scrollable * targetFraction;
     window.scrollTo({ top: destination, behavior: 'smooth' });
   };
@@ -302,133 +289,112 @@ export default function StaffingSection({ onKnowMore }) {
             </div>
 
             {/* =========================================================================
-                RIGHT SIDE: SCROLL-PINNED HALO-STYLE ACCORDION RAY TIMELINE (01 - 04)
+                RIGHT SIDE: EDITORIAL SCROLL-PINNED ACCORDION TIMELINE (01 - 03)
                ========================================================================= */}
             <div className="lg:col-span-5 xl:col-span-5 relative pl-1 sm:pl-2 py-1">
-              {/* Top Scroll Hint */}
-              <div className="flex items-center justify-between mb-4 px-1">
-                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              <div className="flex items-center justify-between mb-5 px-1">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                   Core Verticals
                 </span>
-                <span className="text-[11px] font-mono font-semibold text-indigo-600 dark:text-cyan-300">
-                  {whiteCollarTopics[activeIndex].num} / 04
+                <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
+                  {whiteCollarTopics[activeIndex].num} / 03
                 </span>
               </div>
 
-              <div className="relative pl-10 sm:pl-12">
+              <div className="relative pl-11 sm:pl-12">
                 {/* Vertical Background Track Line */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-[23px] sm:left-[27px] top-3 bottom-5 w-[2px] bg-slate-200 dark:bg-slate-800 rounded-full"
+                  className="absolute left-[26px] sm:left-[28px] top-3.5 bottom-6 w-[2px] bg-slate-200/90 dark:bg-slate-800 rounded-full"
                 />
 
-                {/* Animated Glowing Scroll Ray (moves forward & backward with scroll) */}
+                {/* Animated Scroll Ray (moves forward & backward with scroll) */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-[22px] sm:left-[26px] top-3 w-[4px] rounded-full bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-[0_0_14px_rgba(120,60,236,0.7)] dark:shadow-[0_0_18px_rgba(168,85,247,0.9)]"
+                  className="absolute left-[25.5px] sm:left-[27.5px] top-3.5 w-[3px] rounded-full bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444]"
                   style={{
-                    height: `calc((100% - 2rem) * ${Math.min(100, Math.max(0, rayProgress)) / 100})`
+                    height: `calc((100% - 2.4rem) * ${Math.min(100, Math.max(0, rayProgress)) / 100})`
                   }}
                 >
-                  {/* Glowing Ray Tip */}
                   {rayProgress > 0.5 && (
-                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-300 dark:bg-cyan-300 shadow-[0_0_12px_rgba(251,191,36,0.95)] dark:shadow-[0_0_14px_rgba(34,211,238,0.95)]" />
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#783cec] dark:bg-cyan-300 ring-4 ring-purple-500/20 dark:ring-cyan-400/20" />
                   )}
                 </div>
 
                 {/* Accordion Topic List (Only 1 expanded at a time) */}
-                <div className="space-y-2.5">
+                <div className="divide-y divide-slate-200/75 dark:divide-slate-800/80">
                   {whiteCollarTopics.map((topic, idx) => {
                     const isActive = idx === activeIndex;
                     const isPassed = idx < activeIndex;
 
                     return (
-                      <div key={topic.num} className="relative">
+                      <div key={topic.num} className="relative py-2 first:pt-0">
                         {/* Serial Number + Rail Ring Node */}
                         <button
                           type="button"
                           onClick={() => handleSelectTopic(idx)}
                           aria-label={`Select ${topic.num} ${topic.title}`}
-                          className="absolute -left-10 sm:-left-12 top-3 flex items-center gap-1.5 cursor-pointer group focus:outline-none"
+                          className="absolute -left-11 sm:-left-12 top-3.5 flex items-center gap-2 cursor-pointer group focus:outline-none"
                         >
                           <span
-                            className={`text-[11px] font-mono font-bold w-4 text-right transition-colors duration-300 ${
+                            className={`text-xs font-mono w-4 text-right transition-colors duration-300 ${
                               isActive
-                                ? 'text-indigo-600 dark:text-cyan-300'
+                                ? 'font-bold text-slate-900 dark:text-white'
                                 : isPassed
-                                  ? 'text-slate-600 dark:text-slate-300'
-                                  : 'text-slate-400 dark:text-slate-500'
+                                  ? 'font-medium text-slate-600 dark:text-slate-300'
+                                  : 'font-normal text-slate-400 dark:text-slate-500'
                             }`}
                           >
                             {topic.num}
                           </span>
                           <span
-                            className={`relative z-10 w-4 h-4 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            className={`relative z-10 w-3.5 h-3.5 rounded-full transition-all duration-300 ${
                               isActive
-                                ? 'bg-white dark:bg-[#0d142c] border-[3px] border-[#783cec] dark:border-cyan-300 ring-4 ring-purple-500/20 dark:ring-cyan-400/20 scale-110 shadow-[0_0_12px_rgba(120,60,236,0.6)]'
+                                ? 'bg-white dark:bg-[#0d142c] border-[3px] border-[#2c60ea] dark:border-cyan-300 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 scale-110'
                                 : isPassed
-                                  ? 'bg-[#2c60ea] dark:bg-purple-500 border-2 border-white dark:border-[#0d142c]'
-                                  : 'bg-white dark:bg-[#0d142c] border-2 border-slate-300 dark:border-slate-600 group-hover:border-purple-400'
+                                  ? 'bg-[#2c60ea] dark:bg-purple-400 border-2 border-white dark:border-[#0d142c]'
+                                  : 'bg-white dark:bg-[#0d142c] border-2 border-slate-300 dark:border-slate-600 group-hover:border-slate-400'
                             }`}
                           />
                         </button>
 
-                        {/* Expanded Card vs Collapsed Row */}
+                        {/* Expanded Editorial Panel vs Clean Collapsed Row */}
                         {isActive ? (
-                          <div className="rounded-2xl bg-white/95 dark:bg-[#0d142c]/95 border border-indigo-200/90 dark:border-purple-500/45 p-4 sm:p-5 shadow-[0_12px_32px_rgba(120,60,236,0.12)] dark:shadow-[0_12px_32px_rgba(120,60,236,0.28)] transition-all duration-300">
-                            <div className="flex items-start justify-between gap-3">
-                              <div>
-                                <h4 className="font-display font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">
-                                  {topic.title}
-                                </h4>
-                                <p className="text-xs font-semibold text-indigo-600 dark:text-cyan-300 mt-0.5">
-                                  {topic.subtitle}
-                                </p>
-                              </div>
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-purple-500/20 text-indigo-700 dark:text-purple-200 border border-indigo-200/70 dark:border-purple-400/30 shrink-0">
-                                Active
-                              </span>
-                            </div>
+                          <div className="rounded-xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/80 p-4 sm:p-5 shadow-sm transition-all duration-300">
+                            <h4 className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">
+                              {topic.title}
+                            </h4>
+                            <p className="text-xs font-medium text-indigo-600 dark:text-cyan-300 mt-0.5">
+                              {topic.subtitle}
+                            </p>
 
                             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mt-2.5">
                               {topic.description}
                             </p>
 
-                            {/* 4 Sub-Feature Rows (HALO-style) */}
-                            <div className="mt-3.5 pt-3 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {/* Clean Full-Text List (No truncated pills) */}
+                            <ul className="mt-3.5 pt-3 border-t border-slate-200/75 dark:border-slate-800 space-y-2">
                               {topic.features.map((feat) => (
-                                <div
+                                <li
                                   key={feat}
-                                  className="flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-50/90 dark:bg-slate-900/70 px-2.5 py-2 rounded-lg border border-slate-200/60 dark:border-slate-800"
+                                  className="flex items-center gap-2.5 text-xs sm:text-[13px] text-slate-700 dark:text-slate-200"
                                 >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#2c60ea] to-[#783cec] shrink-0" />
-                                  <span className="truncate">{feat}</span>
-                                </div>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400 shrink-0" />
+                                  <span>{feat}</span>
+                                </li>
                               ))}
-                            </div>
-
-                            {/* Explore White Rule Button */}
-                            <button
-                              type="button"
-                              onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                              className="mt-4 w-full group px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-300 flex items-center justify-between cursor-pointer"
-                            >
-                              <span>Explore White Rule</span>
-                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            </ul>
                           </div>
                         ) : (
                           <button
                             type="button"
                             onClick={() => handleSelectTopic(idx)}
-                            className="w-full text-left px-4 py-2.5 rounded-xl bg-white/60 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900/90 border border-slate-200/70 dark:border-slate-800/80 hover:border-purple-300 dark:hover:border-purple-500/40 transition-all duration-200 flex items-center justify-between gap-3 cursor-pointer group"
+                            className="w-full text-left py-2 px-1 flex items-center justify-between gap-3 cursor-pointer group"
                           >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <span className="font-display font-semibold text-sm text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white truncate">
-                                {topic.title}
-                              </span>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                            <span className="font-display font-medium text-sm sm:text-[15px] text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                              {topic.title}
+                            </span>
+                            <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-200 group-hover:translate-x-0.5 transition-all shrink-0" />
                           </button>
                         )}
                       </div>
@@ -436,27 +402,27 @@ export default function StaffingSection({ onKnowMore }) {
                   })}
                 </div>
 
-                {/* Ray Terminal End Pill: Explore White Rule */}
-                <div className="relative mt-3 pt-1">
+                {/* Single Terminal Button at End of Ray: Apply For Hiring */}
+                <div className="relative mt-4 pt-1">
                   <span
                     aria-hidden="true"
-                    className={`absolute -left-[22px] sm:-left-[22px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      rayProgress >= 92
-                        ? 'bg-[#ef4444] shadow-[0_0_12px_rgba(239,68,68,0.85)] scale-125'
+                    className={`absolute -left-[22.5px] sm:-left-[24.5px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full transition-all duration-300 ${
+                      rayProgress >= 90
+                        ? 'bg-[#ef4444] ring-4 ring-red-500/20 scale-110'
                         : 'bg-slate-300 dark:bg-slate-700'
                     }`}
                   />
                   <button
                     type="button"
                     onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                    className={`w-full px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer border ${
-                      rayProgress >= 92
-                        ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_20px_rgba(120,60,236,0.45)]'
-                        : 'bg-white/70 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-slate-800 hover:border-purple-400'
+                    className={`w-full group px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer ${
+                      rayProgress >= 90
+                        ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white shadow-md'
+                        : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-95 shadow-sm'
                     }`}
                   >
-                    <span>Explore White Rule</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>Apply For Hiring</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
