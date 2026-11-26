@@ -177,6 +177,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Fast-Track Certifications': {
       src: '/assets/fast-track-certifications-bg.jpg',
       position: 'object-bottom'
+    },
+    'Career Advancement Programs': {
+      src: '/assets/career-advancement-bg.jpg',
+      position: 'object-[50%_28%]'
     }
   };
 
@@ -240,7 +244,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                       return (
                         <div
                           key={itemIdx}
-                          className="group relative min-h-[300px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-end"
+                          className="group relative min-h-[340px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-end"
                         >
                           {/* Clear, Unobstructed Background Photo */}
                           <img
@@ -252,15 +256,15 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           {/* Bottom-only Gradient Scrim so upper photo stays crystal clear */}
                           <div
                             aria-hidden="true"
-                            className="absolute inset-x-0 bottom-0 h-[56%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
+                            className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
                           />
 
-                          {/* Bottom Title & Description */}
-                          <div className="relative z-10 p-5 sm:p-6 pt-12">
-                            <h3 className="font-display font-bold text-lg text-white mb-1.5 group-hover:text-cyan-300 transition-colors drop-shadow-sm">
+                          {/* Bottom Title & Description anchored tight to bottom */}
+                          <div className="relative z-10 px-4 sm:px-5 pb-3.5 pt-16">
+                            <h3 className="font-display font-bold text-base sm:text-[17px] text-white mb-1 group-hover:text-cyan-300 transition-colors drop-shadow-sm leading-snug">
                               {item.title}
                             </h3>
-                            <p className="text-xs sm:text-[13px] text-slate-200 leading-relaxed line-clamp-3">
+                            <p className="text-[11px] sm:text-xs text-slate-200 leading-snug line-clamp-3">
                               {item.description}
                             </p>
                           </div>
