@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Users, 
   UserCheck, 
@@ -68,6 +68,73 @@ function RightFutureIcon({ className = 'w-7 h-7' }) {
 
 export default function StaffingSection({ onKnowMore }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const timelineRef = useRef(null);
+  const [rayProgress, setRayProgress] = useState(0);
+
+  useEffect(() => {
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let rafId;
+
+    const updateTarget = () => {
+      const el = timelineRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = vh * 0.85;
+      const total = Math.max(rect.height + vh * 0.15, 1);
+      const raw = (start - rect.top) / total;
+      targetProgress = Math.max(0, Math.min(1, raw)) * 100;
+    };
+
+    const tick = () => {
+      // Smooth slow lerp so the ray moves gently with user scrolling
+      currentProgress += (targetProgress - currentProgress) * 0.06;
+      if (Math.abs(targetProgress - currentProgress) < 0.05) {
+        currentProgress = targetProgress;
+      }
+      setRayProgress(currentProgress);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    updateTarget();
+    window.addEventListener('scroll', updateTarget, { passive: true });
+    window.addEventListener('resize', updateTarget, { passive: true });
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener('scroll', updateTarget);
+      window.removeEventListener('resize', updateTarget);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const whiteCollarTopics = [
+    {
+      num: '01',
+      title: 'HR Solution',
+      subtitle: 'Talent Acquisition, HRBP & People Operations',
+      threshold: 10
+    },
+    {
+      num: '02',
+      title: 'Software Architecture',
+      subtitle: 'Full Stack, Cloud & Enterprise Systems',
+      threshold: 35
+    },
+    {
+      num: '03',
+      title: 'Digital Marketing',
+      subtitle: 'Brand Strategy, SEO & Performance Growth',
+      threshold: 60
+    },
+    {
+      num: '04',
+      title: 'Accountant / CA',
+      subtitle: 'Financial Audit, Taxation & Compliance',
+      threshold: 85
+    }
+  ];
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -176,55 +243,105 @@ export default function StaffingSection({ onKnowMore }) {
             </div>
 
             {/* =========================================================================
-                RIGHT SIDE: THE PICTURES (Conference Room & Supporting Thumbnails)
+                RIGHT SIDE: SCROLL-DRIVEN RAY TIMELINE WITH SERIAL NUMBERS (01 - 04)
                ========================================================================= */}
-            <div className="lg:col-span-5 xl:col-span-5 h-full flex flex-col justify-center">
-              <div className="group relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 dark:shadow-[0_0_40px_rgba(168,85,247,0.25)] border border-slate-200 dark:border-purple-500/40 bg-slate-100 dark:bg-slate-900 transition-all duration-500 hover:scale-[1.01]">
-                
-                {/* Main Picture */}
-                <img 
-                  src="/assets/white-collar-1.jpg" 
-                  alt="White Collar Staffing Solutions - Building Stronger Teams with the Right Talent" 
-                  className="w-full h-full min-h-[340px] sm:min-h-[440px] lg:min-h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none block"
+            <div ref={timelineRef} className="lg:col-span-5 xl:col-span-5 relative pl-2 sm:pl-4 py-2">
+              <div className="relative space-y-5">
+                {/* Vertical Background Track Line */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[19px] top-5 bottom-6 w-[2px] bg-slate-300/80 dark:bg-slate-700/80 rounded-full"
                 />
 
-              </div>
-
-              {/* Supporting Verified Thumbnails Strip */}
-              <div className="grid grid-cols-2 gap-3 mt-4">
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
-                  <img 
-                    src="/assets/white-collar-2.jpg" 
-                    alt="Trusted Executive Partnership Handshake" 
-                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
-                  />
-                  <div className="min-w-0">
-                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
-                      Executive Hiring
-                    </span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
-                      Vetted Specialists
-                    </span>
-                  </div>
+                {/* Animated Glowing Scroll Ray */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[18px] top-5 w-[4px] rounded-full bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-[0_0_14px_rgba(120,60,236,0.75)] dark:shadow-[0_0_18px_rgba(168,85,247,0.9)] transition-[height] duration-75"
+                  style={{
+                    height: `calc((100% - 2.75rem) * ${Math.min(100, Math.max(0, rayProgress)) / 100})`
+                  }}
+                >
+                  {/* Glowing Ray Tip */}
+                  {rayProgress > 1 && (
+                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-300 dark:bg-cyan-300 shadow-[0_0_12px_rgba(251,191,36,0.95)] dark:shadow-[0_0_14px_rgba(34,211,238,0.95)]" />
+                  )}
                 </div>
 
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-md">
-                  <img 
-                    src="/assets/white-collar-3.jpg" 
-                    alt="Boardroom Strategy Meeting" 
-                    className="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-purple-500/30"
-                  />
-                  <div className="min-w-0">
-                    <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 block truncate">
-                      Leadership Teams
-                    </span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
-                      Enterprise Fit
-                    </span>
+                {/* Serial Numbered Topics (01 - 04) */}
+                {whiteCollarTopics.map((topic) => {
+                  const isActive = rayProgress >= topic.threshold;
+                  return (
+                    <div
+                      key={topic.num}
+                      onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
+                      className="relative flex items-center gap-4 group cursor-pointer"
+                    >
+                      {/* Serial Number Node */}
+                      <div
+                        className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-display font-black text-xs tracking-wider shrink-0 transition-all duration-500 border ${
+                          isActive
+                            ? 'bg-gradient-to-br from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_18px_rgba(120,60,236,0.65)] scale-110'
+                            : 'bg-white dark:bg-[#0d142c] text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+                        }`}
+                      >
+                        {topic.num}
+                      </div>
+
+                      {/* Topic Card */}
+                      <div
+                        className={`flex-1 p-4 rounded-2xl border backdrop-blur-md transition-all duration-500 flex items-center justify-between gap-3 ${
+                          isActive
+                            ? 'bg-white dark:bg-[#0e1530] border-purple-400/80 dark:border-purple-400/70 shadow-lg dark:shadow-[0_0_24px_rgba(120,60,236,0.28)] translate-x-1'
+                            : 'bg-white/75 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-500/50'
+                        }`}
+                      >
+                        <div>
+                          <h4 className="font-display font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
+                            {topic.title}
+                          </h4>
+                          <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                            {topic.subtitle}
+                          </p>
+                        </div>
+                        <ChevronRight
+                          className={`w-4 h-4 shrink-0 transition-all duration-300 ${
+                            isActive
+                              ? 'text-purple-600 dark:text-cyan-300 translate-x-0.5'
+                              : 'text-slate-400 dark:text-slate-500 group-hover:translate-x-1'
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Ray Ends with "Explore White Rule" Button */}
+                <div className="relative flex items-center gap-4 pt-1">
+                  {/* End Terminal Dot */}
+                  <div
+                    className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-500 border ${
+                      rayProgress >= 92
+                        ? 'bg-gradient-to-br from-[#783cec] to-[#ef4444] text-white border-transparent shadow-[0_0_18px_rgba(239,68,68,0.65)] scale-105'
+                        : 'bg-white dark:bg-[#0d142c] text-slate-400 dark:text-slate-500 border-slate-300 dark:border-slate-700'
+                    }`}
+                  >
+                    <ArrowRight className="w-4 h-4" />
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
+                    className={`flex-1 group px-6 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] transition-all duration-500 flex items-center justify-between cursor-pointer ${
+                      rayProgress >= 92
+                        ? 'shadow-[0_0_26px_rgba(120,60,236,0.55)] scale-[1.02]'
+                        : 'shadow-md hover:shadow-xl hover:scale-[1.02]'
+                    }`}
+                  >
+                    <span>Explore White Rule</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
-
             </div>
 
           </div>
