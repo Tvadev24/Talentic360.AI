@@ -91,15 +91,26 @@ function StudentApprenticeshipIcon({ className = 'w-full h-full' }) {
 
 function CertificationIcon({ className = 'w-full h-full' }) {
   return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-      {/* Certificate frame with notched corners */}
-      <path d="M9 8h30a4 4 0 0 0 4 4v18a4 4 0 0 0-4 4h-3M27 34H9a4 4 0 0 0-4-4V12a4 4 0 0 0 4-4z" />
-      {/* Certificate text lines */}
-      <path d="M12 15h24M12 20h20M12 25h12" />
-      {/* Ribbon seal badge */}
-      <circle cx="34" cy="31" r="6.5" fill="currentColor" fillOpacity="0.14" />
-      <circle cx="34" cy="31" r="3" />
-      <path d="M30.5 36.5V44l3.5-2.2 3.5 2.2v-7.5" />
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Outer rounded certificate frame (interrupted at bottom-right for the seal) */}
+      <path d="M26 36H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h36a2 2 0 0 1 2 2v17" />
+      {/* Inner decorative notched-corner border */}
+      <path d="M26 32.5H11a3.5 3.5 0 0 0-3.5-3.5V14A3.5 3.5 0 0 0 11 10.5h26a3.5 3.5 0 0 0 3.5 3.5v10" />
+      {/* Certificate text lines matching reference */}
+      <path d="M12.5 15.5h23" />
+      <path d="M12.5 19.5h3.5M19.5 19.5h16" />
+      <path d="M12.5 23.5h23" />
+      <path d="M19 28h7.5" />
+      {/* Scalloped rosette seal */}
+      <path
+        d="M35.5 25c1 0 1.4.8 2.3 1.1.9.3 1.7-.2 2.4.5.7.7.2 1.5.5 2.4.3.9 1.1 1.3 1.1 2.3s-.8 1.4-1.1 2.3c-.3.9.2 1.7-.5 2.4-.7.7-1.5.2-2.4.5-.9.3-1.3 1.1-2.3 1.1s-1.4-.8-2.3-1.1c-.9-.3-1.7.2-2.4-.5-.7-.7-.2-1.5-.5-2.4-.3-.9-1.1-1.3-1.1-2.3s.8-1.4 1.1-2.3c.3-.9-.2-1.7.5-2.4.7-.7 1.5-.2 2.4-.5.9-.3 1.3-1.1 2.3-1.1z"
+        fill="currentColor"
+        fillOpacity="0.12"
+      />
+      <circle cx="35.5" cy="31.3" r="3" />
+      {/* Dual notched ribbon tails */}
+      <path d="M32.2 37l-1.7 6.5 3-1.8 2 1.8V38" />
+      <path d="M38.8 37l1.7 6.5-3-1.8-2 1.8V38" />
     </svg>
   );
 }
