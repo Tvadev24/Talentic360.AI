@@ -220,19 +220,39 @@ export default function AboutSection({ onExplorePrograms }) {
             </p>
           </div>
 
-          {/* Unique Positioning Box with Full-Bleed Background Image & Theme-Aware Directional Fade */}
-          <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 mb-14 overflow-hidden bg-white dark:bg-[#070b1a] border border-slate-200/90 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] min-h-[380px] sm:min-h-[430px] flex items-center">
+          {/* Unique Positioning Box fitted to 1024x424 panoramic image with crystal-clear right side */}
+          <div className="relative rounded-3xl p-6 sm:p-10 lg:px-12 lg:py-10 mb-14 overflow-hidden bg-white dark:bg-[#070b1a] border border-slate-200/90 dark:border-cyan-500/30 shadow-lg dark:shadow-[0_0_40px_rgba(0,0,0,0.7)] lg:aspect-[1024/424] flex items-center">
             {/* Full-box background training image */}
             <img
               src="/assets/unique-positioning-bg.png"
               alt="TALENTIC 360.AI Corporate Training & Workforce Transformation"
-              className="absolute inset-0 w-full h-full object-cover object-right pointer-events-none select-none"
+              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
             />
 
-            {/* Light & Dark Mode Directional Fade Scrim (Strong fade on left for content priority, clear on right for image visibility) */}
+            {/* Mobile Full Scrim (< lg) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-white/88 dark:bg-[#070b1a]/88 lg:bg-transparent lg:bg-gradient-to-r lg:from-white/95 lg:via-white/85 lg:via-55% lg:to-white/5 dark:lg:from-[#070b1a]/95 dark:lg:via-[#070b1a]/85 dark:lg:via-55% dark:lg:to-[#070b1a]/15"
+              className="pointer-events-none absolute inset-0 bg-white/88 dark:bg-[#070b1a]/88 lg:hidden"
+            />
+
+            {/* Desktop Light Mode Directional Fade (0% cloudy blur on right side past 60%) */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 hidden lg:block dark:lg:hidden"
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 44%, rgba(255,255,255,0) 60%)'
+              }}
+            />
+
+            {/* Desktop Dark Mode Directional Fade (0% cloudy blur on right side past 60%) */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 hidden dark:lg:block"
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(7,11,26,0.96) 0%, rgba(7,11,26,0.88) 44%, rgba(7,11,26,0) 60%)'
+              }}
             />
             
             <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
