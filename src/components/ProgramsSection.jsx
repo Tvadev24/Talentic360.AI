@@ -122,6 +122,16 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Student Apprenticeships': StudentApprenticeshipIcon,
     'Certification Programs': CertificationIcon
   };
+  const academicFlipImages = {
+    'Skill Enhancement Courses': {
+      src: '/assets/skill-enhancement-hover.jpg',
+      position: 'object-[62%_100%]'
+    },
+    'Student Apprenticeships': {
+      src: '/assets/student-apprenticeship-hover.jpg',
+      position: 'object-center'
+    }
+  };
   const iconMap = {
     GraduationCap,
     BookOpen,
@@ -199,17 +209,17 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                   {program.items.map((item, itemIdx) => {
                     const CustomAcademicIcon = program.id === 'academic' ? academicIconMap[item.title] : null;
                     const ItemIcon = CustomAcademicIcon || iconMap[item.icon] || BookOpen;
-                    const isSkillFlipCard =
-                      program.id === 'academic' && item.title === 'Skill Enhancement Courses';
+                    const flipImage =
+                      program.id === 'academic' ? academicFlipImages[item.title] : null;
 
-                    if (isSkillFlipCard) {
+                    if (flipImage) {
                       return (
                         <div
                           key={itemIdx}
                           className="group [perspective:1200px] min-h-[260px]"
                         >
                           <div className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(180deg)] will-change-transform">
-                            {/* Front Face: Skill Enhancement Courses */}
+                            {/* Front Face */}
                             <div className="w-full h-full p-6 sm:p-7 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between [backface-visibility:hidden]">
                               <div>
                                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm p-1.5">
@@ -229,12 +239,12 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                               </div>
                             </div>
 
-                            {/* Back Face: Uploaded SKILLS Visual (revealed after 180 flip) */}
+                            {/* Back Face: Clean Hover Image (revealed after 180 flip) */}
                             <div className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-indigo-400/70 dark:border-cyan-400/70 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] bg-slate-950">
                               <img
-                                src="/assets/skill-enhancement-hover.jpg"
-                                alt="Skill Enhancement Courses"
-                                className="w-full h-full object-cover object-[62%_100%]"
+                                src={flipImage.src}
+                                alt={item.title}
+                                className={`w-full h-full object-cover ${flipImage.position}`}
                               />
                             </div>
                           </div>
