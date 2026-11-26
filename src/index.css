@@ -46,15 +46,14 @@ html.light .section-box {
     inset 0 0 18px rgba(59, 130, 246, 0.14);
 }
 
-/* Base Dark Theme Box (Matching Light Mode Thick Glowing Border) */
+/* Base Dark Theme Box (Authentic, Natural Glass Border with Subtle Glow) */
 html.dark .section-box {
   background: linear-gradient(145deg, rgba(12, 17, 36, 0.88) 0%, rgba(7, 10, 24, 0.93) 100%);
-  border: 2.5px solid rgba(59, 130, 246, 0.85);
+  border: 1.5px solid rgba(99, 102, 241, 0.42);
   box-shadow: 
-    0 0 28px rgba(59, 130, 246, 0.42),
-    0 0 60px rgba(139, 92, 246, 0.30),
-    0 25px 60px -15px rgba(0, 0, 0, 0.85),
-    inset 0 0 18px rgba(59, 130, 246, 0.16);
+    0 0 16px rgba(59, 130, 246, 0.16),
+    0 20px 50px -15px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Variant: Cyan / Sky Blue Glow */
@@ -104,19 +103,18 @@ html.light .section-box-purple:hover {
     inset 0 0 22px rgba(168, 85, 247, 0.20);
 }
 html.dark .section-box-purple {
-  border: 2.5px solid rgba(139, 92, 246, 0.9);
+  border: 1.5px solid rgba(139, 92, 246, 0.45);
   box-shadow: 
-    0 0 30px rgba(124, 58, 237, 0.50),
-    0 0 68px rgba(168, 85, 247, 0.34),
-    0 25px 60px -15px rgba(0, 0, 0, 0.85),
-    inset 0 0 18px rgba(168, 85, 247, 0.18);
+    0 0 18px rgba(124, 58, 237, 0.18),
+    0 20px 50px -15px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 html.dark .section-box-purple:hover {
+  border-color: rgba(139, 92, 246, 0.65);
   box-shadow: 
-    0 0 38px rgba(124, 58, 237, 0.65),
-    0 0 82px rgba(168, 85, 247, 0.44),
-    0 28px 65px -15px rgba(0, 0, 0, 0.85),
-    inset 0 0 22px rgba(168, 85, 247, 0.22);
+    0 0 24px rgba(124, 58, 237, 0.28),
+    0 24px 55px -15px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Variant: Magenta / Pink Glow */
@@ -195,31 +193,29 @@ html.light main div.rounded-xl[class*="border"][class*="p-"]:not([class*="w-8"])
 }
 
 /* =========================================================================
-   DARK MODE: MATCHING THICK & VIVID GLOWING BORDERS FOR ALL CONTENT BOXES
+   DARK MODE ONLY: NATURAL, AUTHENTIC GLASS BORDERS WITH SUBTLE GLOW
    ========================================================================= */
 html.dark main .rounded-3xl[class*="border"],
 html.dark main .rounded-2xl[class*="border"],
 html.dark main a.rounded-xl[class*="border"],
 html.dark main div.rounded-xl[class*="border"][class*="p-"]:not([class*="w-8"]):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]) {
-  border-width: 2px !important;
-  border-color: rgba(139, 92, 246, 0.85) !important;
+  border-width: 1px !important;
+  border-color: rgba(139, 92, 246, 0.40) !important;
   box-shadow:
-    0 0 22px rgba(124, 58, 237, 0.42),
-    0 0 48px rgba(59, 130, 246, 0.28),
-    0 16px 36px -10px rgba(0, 0, 0, 0.65),
-    inset 0 0 14px rgba(168, 85, 247, 0.16) !important;
+    0 0 14px rgba(124, 58, 237, 0.16),
+    0 12px 30px -10px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
 }
 
 html.dark main .rounded-3xl[class*="border"]:hover,
 html.dark main .rounded-2xl[class*="border"]:hover,
 html.dark main a.rounded-xl[class*="border"]:hover,
 html.dark main div.rounded-xl[class*="border"][class*="p-"]:not([class*="w-8"]):not([class*="w-10"]):not([class*="w-12"]):not([class*="w-14"]):hover {
-  border-color: rgba(59, 130, 246, 0.95) !important;
+  border-color: rgba(99, 102, 241, 0.68) !important;
   box-shadow:
-    0 0 32px rgba(59, 130, 246, 0.55),
-    0 0 64px rgba(168, 85, 247, 0.40),
-    0 20px 40px -10px rgba(0, 0, 0, 0.75),
-    inset 0 0 18px rgba(59, 130, 246, 0.20) !important;
+    0 0 22px rgba(99, 102, 241, 0.26),
+    0 16px 36px -10px rgba(0, 0, 0, 0.80),
+    inset 0 1px 0 rgba(255, 255, 255, 0.11) !important;
 }
 
 /* Floor reflection effect */
