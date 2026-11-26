@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import CyberGeometricBackground from './components/CyberGeometricBackground';
+// import CyberGeometricBackground from './components/CyberGeometricBackground';
+import HalftoneWaveBackground from './components/HalftoneWaveBackground';
 import AboutSection from './components/AboutSection';
 import StaffingSection from './components/StaffingSection';
 import ProgramsSection from './components/ProgramsSection';
@@ -95,14 +96,14 @@ export default function App() {
     <div className="min-h-screen relative bg-transparent text-slate-800 dark:text-slate-100 flex flex-col font-sans selection:bg-purple-500 selection:text-white transition-colors duration-200">
       
       {/* =========================================================================
-          FUTURISTIC 3D CYBER GEOMETRIC INTERACTIVE BACKGROUND
-          - Rotating & tumbling 3D wireframe pyramids / polyhedra
-          - Dynamic 3D undulating particle dot wave terrain
-          - Constellation mesh & floating geometric shapes
-          - Moveable / interactive with mouse parallax and organic drift
-          - Visible & lightfull in Light Mode, Cyberpunk Neon in Dark Mode
-         ========================================================================= */}
-      <CyberGeometricBackground theme={theme} />
+          PREVIOUS FUTURISTIC 3D CYBER GEOMETRIC BACKGROUND (COMMENTED FOR FUTURE USE)
+          ========================================================================= */}
+      {/* <CyberGeometricBackground theme={theme} /> */}
+
+      {/* =========================================================================
+          HALFTONE WAVE INTERACTIVE BACKGROUND (LIGHT & DARK MODE ADAPTED)
+          ========================================================================= */}
+      <HalftoneWaveBackground theme={theme} />
 
       {/* Transparent Sticky Header with Logo, Navigation Tabs & Theme Switcher */}
       <Navbar 
