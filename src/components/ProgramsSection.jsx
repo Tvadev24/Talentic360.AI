@@ -176,7 +176,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'Fast-Track Certifications': {
       src: '/assets/fast-track-certifications-bg.jpg',
-      position: 'object-[50%_15%]'
+      position: 'object-bottom'
     }
   };
 
