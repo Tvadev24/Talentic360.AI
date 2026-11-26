@@ -229,19 +229,13 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                               </div>
                             </div>
 
-                            {/* Back Face: Uploaded SKILLS Visual (revealed after 360+180 flip) */}
+                            {/* Back Face: Uploaded SKILLS Visual (revealed after 180 flip) */}
                             <div className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-indigo-400/70 dark:border-cyan-400/70 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] bg-slate-950">
                               <img
                                 src="/assets/skill-enhancement-hover.jpg"
                                 alt="Skill Enhancement Courses"
-                                className="w-full h-full object-cover object-right-bottom"
+                                className="w-full h-full object-cover object-[62%_100%]"
                               />
-                              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent flex items-center justify-between">
-                                <span className="font-display font-bold text-xs tracking-wide text-white">
-                                  Skill Enhancement Courses
-                                </span>
-                                <ChevronRight className="w-4 h-4 text-cyan-300" />
-                              </div>
                             </div>
                           </div>
                         </div>
