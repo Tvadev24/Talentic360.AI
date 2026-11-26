@@ -123,6 +123,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Certification Programs': CertificationIcon
   };
   const academicFlipImages = {
+    'Higher Education Partnerships': {
+      src: '/assets/higher-ed-hover.jpg',
+      position: 'object-center'
+    },
     'Skill Enhancement Courses': {
       src: '/assets/skill-enhancement-hover.jpg',
       position: 'object-[62%_100%]'
