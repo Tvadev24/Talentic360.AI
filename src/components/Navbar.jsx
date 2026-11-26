@@ -121,36 +121,34 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-20 gap-2">
+        <div className="flex items-center justify-between h-20 gap-2 lg:gap-4">
           
-          {/* Left Brand Area: Logo + Title + Small Controlled Distance + Desktop Navigation Tabs */}
-          <div className="flex items-center min-w-0">
+          {/* Brand Logo & Website Title */}
+          <a 
+            href="#hero" 
+            onClick={(e) => handleTabClick(e, '#hero', 'Home')}
+            className="flex items-center gap-2 sm:gap-2.5 group shrink-0"
+          >
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0">
+              <img 
+                src="/assets/talentic-logo.png" 
+                alt="TALENTIC 360.AI Logo" 
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
             
-            {/* Brand Logo & Website Title */}
-            <a 
-              href="#hero" 
-              onClick={(e) => handleTabClick(e, '#hero', 'Home')}
-              className="flex items-center gap-2 sm:gap-2.5 group shrink-0"
-            >
-              <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0">
-                <img 
-                  src="/assets/talentic-logo.png" 
-                  alt="TALENTIC 360.AI Logo" 
-                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              
-              <span className="font-display font-black tracking-tight text-base sm:text-lg lg:text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#5945e7] to-[#783cec] shrink-0 whitespace-nowrap">
-                TALENTIC 360.AI
-              </span>
-            </a>
+            <span className="font-display font-black tracking-tight text-base sm:text-lg lg:text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#2c60ea] via-[#5945e7] to-[#783cec] shrink-0 whitespace-nowrap">
+              TALENTIC 360.AI
+            </span>
+          </a>
 
-            {/* Controlled Distance (Ek Dum Thoda Sa Distance) between Title & Navigation Tabs */}
+          {/* Centered Desktop Navigation Tabs (Evenly balanced, no awkward gap) */}
+          <div className="hidden lg:flex flex-1 items-center justify-center min-w-0">
             <div 
-              className={`hidden lg:flex items-center ml-3 sm:ml-4 xl:ml-6 gap-0.5 xl:gap-1 transition-all duration-300 ${
+              className={`flex items-center gap-0.5 xl:gap-1.5 transition-all duration-300 ${
                 isScrolled || activePage === 'staffing'
-                  ? 'bg-slate-100/90 dark:bg-[#090e21]/80 border border-slate-200/90 dark:border-slate-800 px-2.5 xl:px-3 py-1 rounded-full shadow-inner backdrop-blur-md'
-                  : 'bg-slate-950/60 border border-white/25 px-2.5 xl:px-3 py-1 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md'
+                  ? 'bg-slate-100/90 dark:bg-[#090e21]/80 border border-slate-200/90 dark:border-slate-800 px-2.5 xl:px-4 py-1.5 rounded-full shadow-inner backdrop-blur-md'
+                  : 'bg-slate-950/60 border border-white/25 px-2.5 xl:px-4 py-1.5 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md'
               }`}
             >
               {navTabs.map((tab) => {
@@ -161,7 +159,7 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
                     key={tab.label}
                     href={tab.href}
                     onClick={(e) => handleTabClick(e, tab.href, tab.label)}
-                    className={`relative px-2 xl:px-2.5 py-1 rounded-full text-xs xl:text-[13px] font-semibold tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                    className={`relative px-2 xl:px-3 py-1 rounded-full text-xs xl:text-[13px] font-semibold tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                       isActive
                         ? solidNav
                           ? 'bg-white dark:bg-gradient-to-r dark:from-purple-900/70 dark:to-blue-900/70 text-[#2c60ea] dark:text-purple-200 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.3)] dark:border dark:border-purple-500/40 font-bold'
@@ -179,7 +177,6 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
                 );
               })}
             </div>
-
           </div>
 
           {/* =========================================================================
