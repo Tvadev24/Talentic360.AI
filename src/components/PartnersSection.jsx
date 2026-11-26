@@ -16,7 +16,7 @@ export default function PartnersSection() {
   return (
     <section 
       id="partners"
-      className="relative py-20 sm:py-24 bg-transparent transition-colors duration-200"
+      className="relative py-10 sm:py-14 bg-transparent transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
 

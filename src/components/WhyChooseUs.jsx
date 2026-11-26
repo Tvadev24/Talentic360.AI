@@ -138,7 +138,7 @@ export default function WhyChooseUs({ onGetStarted }) {
   ];
 
   return (
-    <section id="whyus" className="relative py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200">
+    <section id="whyus" className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200">
       {/* Anchor for 'Industries' and 'Insights' navigation tabs */}
       <div id="industries" className="absolute -top-24 pointer-events-none"></div>
       <div id="insights" className="absolute -top-24 pointer-events-none"></div>

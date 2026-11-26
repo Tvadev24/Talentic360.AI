@@ -37,7 +37,7 @@ export default function StaffingSection({ onKnowMore }) {
   return (
     <section 
       id="staffing" 
-      className="relative py-20 sm:py-24 bg-transparent border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-200"
+      className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
