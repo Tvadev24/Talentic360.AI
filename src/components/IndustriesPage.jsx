@@ -138,42 +138,43 @@ export default function IndustriesPage({ onBackHome }) {
           1. HERO BANNER ("Industries | Home | Industries")
          ========================================================================= */}
       <section className="relative overflow-hidden border-b border-indigo-200/70 dark:border-purple-500/30">
-        {/* Atmospheric Office Photo + Brand Gradient Overlay */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center opacity-25 dark:opacity-20 scale-105"
-          style={{ backgroundImage: "url('/assets/unique-positioning-bg.png')" }}
+        {/* Clear Overhead Office Photo */}
+        <img
+          src="/assets/industries-hero-bg.jpg"
+          alt="Industries Hero"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
+        {/* Balanced Dark Overlay so Photo & Centered Title Stay Crystal Clear */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/92 via-[#1e1b4b]/88 to-[#0f172a]/92"
+          className="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/55 to-slate-950/70"
         />
 
         {/* Subtle Floating Glow Orbs */}
         <div
           aria-hidden="true"
-          className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#2c60ea]/25 blur-3xl animate-pulse"
+          className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#2c60ea]/20 blur-3xl animate-pulse pointer-events-none"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-[#783cec]/25 blur-3xl animate-pulse"
+          className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-[#783cec]/20 blur-3xl animate-pulse pointer-events-none"
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <button
             type="button"
             onClick={onBackHome}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-slate-950/50 hover:bg-slate-950/75 text-white border border-white/25 backdrop-blur-md transition-all cursor-pointer mb-6 shadow-sm"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Home</span>
           </button>
 
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-white mb-3">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.65)] mb-3">
               Industries
             </h1>
-            <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-200">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-950/45 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-semibold text-white shadow-sm">
               <button
                 type="button"
                 onClick={onBackHome}
@@ -181,7 +182,7 @@ export default function IndustriesPage({ onBackHome }) {
               >
                 Home
               </button>
-              <span className="text-slate-400">|</span>
+              <span className="text-slate-300">|</span>
               <span className="text-cyan-300">Industries</span>
             </div>
           </div>
@@ -374,3 +375,4 @@ export default function IndustriesPage({ onBackHome }) {
     </div>
   );
 }
+
