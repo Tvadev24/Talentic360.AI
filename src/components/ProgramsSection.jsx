@@ -618,102 +618,115 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
   const [pageIdx, setPageIdx] = useState(0);
   const [turning, setTurning] = useState(false);
 
-  const triggerTurn = (nextIdx) => {
+  const nextIdx = (pageIdx + 1) % pages.length;
+
+  const handleNext = () => {
     if (turning) return;
     setTurning(true);
     setTimeout(() => {
       setPageIdx(nextIdx);
       setTurning(false);
-    }, 240);
+    }, 520);
   };
 
-  const handleNext = () => triggerTurn((pageIdx + 1) % pages.length);
-
-  const page = pages[pageIdx];
-
-  return (
-    <div className="relative [perspective:1200px] h-full pr-2 pb-1.5 select-none">
-      {/* Stacked Copy / Notebook Paper Edges on Right & Bottom */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1.5 bottom-0 left-2 right-0 rounded-2xl bg-slate-200/90 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/70"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute top-0.5 bottom-0.5 left-1 right-1 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80"
-      />
-
-      {/* Interactive Turning Page */}
-      <div
-        onClick={handleNext}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleNext();
-          }
-        }}
-        style={{
-          transformOrigin: 'left center',
-          transform: turning ? 'rotateY(-22deg)' : 'rotateY(0deg)',
-          opacity: turning ? 0.72 : 1
-        }}
-        className="relative z-10 h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-indigo-200/90 dark:border-cyan-500/40 shadow-md hover:shadow-xl hover:border-indigo-400 dark:hover:border-cyan-400 transition-all duration-300 ease-out flex flex-col justify-start cursor-pointer overflow-hidden"
-      >
-        {/* Subtle Notebook Spine Accent on Left */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444]"
-        />
-
-        {page.type === 'cover' && (
-          <div>
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
-              <ItemIcon className="w-6 h-6" />
-            </div>
-            <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
-              {item.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {item.description}
-            </p>
+  const renderPageContent = (page) => (
+    <>
+      {page.type === 'cover' && (
+        <div>
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
+            <ItemIcon className="w-6 h-6" />
           </div>
-        )}
+          <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
+            {item.title}
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      )}
 
-        {page.type === 'prose' && (
-          <div className="space-y-2.5 pl-1">
-            <h4 className="font-display font-bold text-sm text-indigo-600 dark:text-cyan-300">
-              {page.heading}
-            </h4>
-            {page.paragraphs.map((p, i) => (
-              <p key={i} className="text-[11.5px] sm:text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                {p}
-              </p>
+      {page.type === 'prose' && (
+        <div className="space-y-2.5">
+          <h4 className="font-display font-bold text-sm text-indigo-600 dark:text-cyan-300">
+            {page.heading}
+          </h4>
+          {page.paragraphs.map((p, i) => (
+            <p key={i} className="text-[11.5px] sm:text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              {p}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {page.type === 'highlights' && (
+        <div className="space-y-2.5">
+          <h4 className="font-display font-bold text-xs uppercase tracking-wider text-indigo-600 dark:text-cyan-300">
+            {page.heading}
+          </h4>
+          <div className="space-y-2">
+            {page.items.map((pt) => (
+              <div key={pt.title} className="text-[11.5px] leading-snug">
+                <span className="font-bold text-slate-900 dark:text-white">{pt.title}: </span>
+                <span className="text-slate-600 dark:text-slate-300">{pt.text}</span>
+              </div>
             ))}
           </div>
-        )}
+          {page.quote && (
+            <p className="pt-2 border-t border-slate-200/80 dark:border-slate-800 text-[11.5px] font-display font-bold italic text-indigo-600 dark:text-cyan-300">
+              {page.quote}
+            </p>
+          )}
+        </div>
+      )}
+    </>
+  );
 
-        {page.type === 'highlights' && (
-          <div className="space-y-2.5 pl-1">
-            <h4 className="font-display font-bold text-xs uppercase tracking-wider text-indigo-600 dark:text-cyan-300">
-              {page.heading}
-            </h4>
-            <div className="space-y-2">
-              {page.items.map((pt) => (
-                <div key={pt.title} className="text-[11.5px] leading-snug">
-                  <span className="font-bold text-slate-900 dark:text-white">{pt.title}: </span>
-                  <span className="text-slate-600 dark:text-slate-300">{pt.text}</span>
-                </div>
-              ))}
-            </div>
-            {page.quote && (
-              <p className="pt-2 border-t border-slate-200/80 dark:border-slate-800 text-[11.5px] font-display font-bold italic bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">
-                {page.quote}
-              </p>
-            )}
-          </div>
-        )}
+  return (
+    <div
+      onClick={handleNext}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleNext();
+        }
+      }}
+      className="relative [perspective:1400px] h-full pr-1.5 pb-1.5 select-none cursor-pointer group"
+    >
+      {/* Subtle Stacked Paper Edges on Right & Bottom (No Neon Glow) */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1.5 bottom-0 left-1.5 right-0 rounded-2xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute top-0.5 bottom-0.5 left-0.5 right-0.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+      />
+
+      {/* Underneath Sheet: Next Page waiting cleanly */}
+      <div className="relative h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-start overflow-hidden">
+        {renderPageContent(pages[nextIdx])}
+      </div>
+
+      {/* Top Turning Sheet: Current Page swings open from left spine */}
+      <div
+        style={{
+          transformOrigin: 'left center',
+          transform: turning ? 'rotateY(-135deg)' : 'rotateY(0deg)',
+          opacity: turning ? 0 : 1,
+          transition: turning
+            ? 'transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease-in 100ms'
+            : 'none'
+        }}
+        className="absolute inset-0 right-1.5 bottom-1.5 z-10 p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-slate-200 dark:border-slate-800 group-hover:border-indigo-300 dark:group-hover:border-cyan-500/50 shadow-sm flex flex-col justify-start overflow-hidden [backface-visibility:hidden] will-change-transform"
+      >
+        {/* Subtle left book-crease shadow */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-2 bg-gradient-to-r from-slate-200/45 dark:from-black/30 to-transparent pointer-events-none"
+        />
+        {renderPageContent(pages[pageIdx])}
       </div>
     </div>
   );
