@@ -88,8 +88,8 @@ export default function StaffingSection({ onKnowMore }) {
       const vh = window.innerHeight;
 
       if (desktop) {
-        // Sticky pinned at top-24 (96px): progress 0 -> 100 while scrolling through the 250vh section
-        const stickyTop = 96;
+        // Sticky pinned at top-[72px]: progress 0 -> 100 while scrolling through the 250vh section
+        const stickyTop = 72;
         const scrollable = Math.max(rect.height - vh, 1);
         const raw = (stickyTop - rect.top) / scrollable;
         targetProgress = Math.max(0, Math.min(1, raw)) * 100;
@@ -177,7 +177,7 @@ export default function StaffingSection({ onKnowMore }) {
     const sectionTop = window.scrollY + rect.top;
     const scrollable = Math.max(rect.height - window.innerHeight, 1);
     const targetFraction = idx === 0 ? 0.14 : idx === 1 ? 0.5 : 0.88;
-    const destination = sectionTop - 96 + scrollable * targetFraction;
+    const destination = sectionTop - 72 + scrollable * targetFraction;
     window.scrollTo({ top: destination, behavior: 'smooth' });
   };
 
@@ -203,19 +203,19 @@ export default function StaffingSection({ onKnowMore }) {
     <section
       id="staffing"
       ref={sectionRef}
-      className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[250vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
+      className="relative py-10 sm:py-14 lg:py-5 lg:min-h-[250vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
     >
-      <div className="lg:sticky lg:top-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="lg:sticky lg:top-[72px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Enclosing Illuminated Section Box */}
-        <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
+        <div className="section-box section-box-purple p-6 sm:p-8 lg:p-7 xl:p-8">
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
             {/* =========================================================================
-                LEFT SIDE: THE CONTENT (Title, Text, Pillars & Know More Button)
+                LEFT SIDE: THE CONTENT (Title, Text, Pillars & For Business CTA)
                ========================================================================= */}
-            <div className="lg:col-span-7 xl:col-span-7 space-y-6 text-left">
+            <div className="lg:col-span-7 xl:col-span-7 space-y-5 lg:space-y-4 text-left">
 
               {/* Main Heading: White Collar Staffing Solutions */}
               <div>
