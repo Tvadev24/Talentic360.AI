@@ -275,20 +275,20 @@ export default function StaffingSection({ onKnowMore }) {
                 </div>
               </div>
 
-              {/* For Businesses: Client Hiring Callout + 'Connect With Us' CTA */}
+              {/* For Business: Editorial Client Hiring Callout + 'Connect With Us' CTA */}
               <div className="pt-2">
-                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-indigo-50/90 via-purple-50/70 to-white/90 dark:from-slate-900/90 dark:via-[#121936]/90 dark:to-slate-900/80 border border-indigo-200/80 dark:border-purple-500/35 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100/90 dark:bg-purple-500/20 border border-indigo-200/80 dark:border-purple-400/30">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-700 dark:text-purple-200">
+                <div className="relative p-5 sm:p-6 rounded-2xl bg-white/95 dark:bg-[#0b1126]/95 border border-slate-200/90 dark:border-slate-700/80 border-l-4 border-l-[#2c60ea] dark:border-l-cyan-400 shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5">
+                      <span className="h-[2.5px] w-7 rounded-full bg-gradient-to-r from-[#2c60ea] to-[#783cec]" />
+                      <span className="text-xs sm:text-sm font-display font-black uppercase tracking-[0.2em] bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">
                         For Business
                       </span>
                     </div>
-                    <h4 className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">
+                    <h4 className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight leading-tight">
                       Find Your Next Candidate
                     </h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                    <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed max-w-md">
                       Hire pre-vetted architects, tax auditors &amp; HR leaders ready to deliver from day one.
                     </p>
                   </div>
