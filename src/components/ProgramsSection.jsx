@@ -897,7 +897,7 @@ function HoverResetVideo({ src, className }) {
       ([entry]) => {
         if (!entry.isIntersecting) {
           el.pause();
-          el.currentTime = 0;
+          el.currentTime = 0.1;
         }
       },
       { threshold: 0.05 }
@@ -907,8 +907,20 @@ function HoverResetVideo({ src, className }) {
   }, []);
 
   return (
-    <video ref={videoRef} loop muted playsInline preload="auto" className={className}>
-      <source src={src} type="video/mp4" />
+    <video
+      ref={videoRef}
+      loop
+      muted
+      playsInline
+      preload="auto"
+      onLoadedData={(e) => {
+        if (e.currentTarget.paused && e.currentTarget.currentTime < 0.1) {
+          e.currentTarget.currentTime = 0.1;
+        }
+      }}
+      className={className}
+    >
+      <source src={`${src}#t=0.1`} type="video/mp4" />
     </video>
   );
 }
