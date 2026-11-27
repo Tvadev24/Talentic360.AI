@@ -1017,6 +1017,11 @@ export default function ProgramsSection({ onOpenProgramModal }) {
       src: '/assets/virtual-workshops.mp4',
       position: 'object-[85%_22%]',
       isVideo: true
+    },
+    'Self-Paced Learning': {
+      src: '/assets/self-paced-learning.mp4',
+      position: 'object-[50%_20%]',
+      isVideo: true
     }
   };
 
