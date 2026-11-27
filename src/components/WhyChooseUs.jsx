@@ -58,6 +58,83 @@ function AnimatedMetricCounter({ targetValue, suffix = '', isVisible }) {
   );
 }
 
+/* Custom Brand-Matched SVG Icons for Why Choose Us */
+function MarketLeadershipSvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 6l3.2 2.4 3.9-.6 1.5 3.6 3.7 1.4-.5 3.9 2.4 3.1-2.4 3.1.5 3.9-3.7 1.4-1.5 3.6-3.9-.6L24 33.6l-3.2-2.4-3.9.6-1.5-3.6-3.7-1.4.5-3.9L9.8 19.8l2.4-3.1-.5-3.9 3.7-1.4 1.5-3.6 3.9.6L24 6z" fill="currentColor" fillOpacity="0.2" />
+      <path d="M22 16l2.5-2v11M21.5 25h6" />
+      <path d="M17.5 31.5L15 42l9-3.8 9 3.8-2.5-10.5" fill="currentColor" fillOpacity="0.14" />
+    </svg>
+  );
+}
+
+function InnovativeApproachSvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 5v3M10.5 10.5l2.2 2.2M37.5 10.5l-2.2 2.2M6 22h3M39 22h3" />
+      <path d="M24 12a10 10 0 0 0-6.5 17.6c1.4 1.3 2.2 2.9 2.5 4.9h8c.3-2 1.1-3.6 2.5-4.9A10 10 0 0 0 24 12z" fill="currentColor" fillOpacity="0.2" />
+      <path d="M21 22l2.5-3.5L26 22l-2.5 3.5L21 22z" fill="currentColor" fillOpacity="0.35" />
+      <path d="M20 38.5h8M21.5 42h5" />
+    </svg>
+  );
+}
+
+function ProvenTrackRecordSvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 40h34" />
+      <rect x="10" y="29" width="5.5" height="11" rx="1" fill="currentColor" fillOpacity="0.18" />
+      <rect x="19" y="23" width="5.5" height="17" rx="1" fill="currentColor" fillOpacity="0.22" />
+      <rect x="28" y="16" width="5.5" height="24" rx="1" fill="currentColor" fillOpacity="0.28" />
+      <path d="M10 21l9-6 7 3.5L38 8" />
+      <path d="M32 8h6v6" />
+    </svg>
+  );
+}
+
+function ExpertFacultySvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 15l18-7 18 7-18 7L6 15z" fill="currentColor" fillOpacity="0.22" />
+      <path d="M13 18v6.5c0 2.5 5 4.5 11 4.5s11-2 11-4.5V18" />
+      <path d="M40 16v9" />
+      <circle cx="40" cy="26.5" r="1.5" fill="currentColor" />
+      <path d="M11 35.5c3.5-2.5 8-3.8 13-3.8s9.5 1.3 13 3.8l-13 5.5-13-5.5z" fill="currentColor" fillOpacity="0.15" />
+    </svg>
+  );
+}
+
+function CareerGrowthSvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 38h8v-7h8v-7h8v-7h8" />
+      <path d="M10 25l10-8 6 4 12-11" />
+      <path d="M32 10h6v6" />
+      <circle cx="14" cy="14" r="3" fill="currentColor" fillOpacity="0.25" />
+    </svg>
+  );
+}
+
+function QualityAssuranceSvg({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 6l14 6v10.5c0 9.8-6 16.8-14 19.5-8-2.7-14-9.7-14-19.5V12l14-6z" fill="currentColor" fillOpacity="0.2" />
+      <circle cx="24" cy="23" r="8" fill="currentColor" fillOpacity="0.15" />
+      <path d="M20 23l2.8 2.8 5.7-5.7" />
+    </svg>
+  );
+}
+
+const whyChooseIconMap = {
+  'Market Leadership': MarketLeadershipSvg,
+  'Innovative Approach': InnovativeApproachSvg,
+  'Proven Track Record': ProvenTrackRecordSvg,
+  'Expert Faculty': ExpertFacultySvg,
+  'Career Growth': CareerGrowthSvg,
+  'Quality Assurance': QualityAssuranceSvg
+};
+
 export default function WhyChooseUs({ onGetStarted }) {
   const metricsRef = useRef(null);
   const [isMetricsVisible, setIsMetricsVisible] = useState(false);
@@ -158,7 +235,7 @@ export default function WhyChooseUs({ onGetStarted }) {
         {/* 6 Layered Offset Cards (Matching Reference Format) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-14 pt-10 mb-20">
           {siteData.whyChooseUs.map((card, idx) => {
-            const Icon = iconMap[card.icon] || ShieldCheck;
+            const Icon = whyChooseIconMap[card.title] || iconMap[card.icon] || ShieldCheck;
 
             const cardThemes = [
               {
@@ -206,9 +283,9 @@ export default function WhyChooseUs({ onGetStarted }) {
                 <div className="relative z-10 h-full rounded-2xl pt-11 pb-7 px-7 bg-white dark:bg-[#0b1126] border border-slate-200/90 dark:border-slate-700/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_14px_34px_rgba(0,0,0,0.45)] translate-y-1.5 group-hover:-translate-y-3 group-hover:translate-x-1.5 group-hover:shadow-[0_22px_45px_rgba(15,23,42,0.16)] dark:group-hover:shadow-[0_22px_45px_rgba(0,0,0,0.65)] transition-all duration-300 ease-out">
                   {/* Top-Centered Floating Circular Icon Badge */}
                   <div
-                    className={`absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg ring-4 ring-white dark:ring-[#0b1126] group-hover:scale-110 transition-transform duration-300 ${theme.badge}`}
+                    className={`absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 p-2.5 rounded-full flex items-center justify-center text-white shadow-lg ring-4 ring-white dark:ring-[#0b1126] group-hover:scale-110 transition-transform duration-300 ${theme.badge}`}
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-full h-full" />
                   </div>
 
                   {/* Centered Title */}
