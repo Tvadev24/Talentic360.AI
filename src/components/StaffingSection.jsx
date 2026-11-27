@@ -309,15 +309,6 @@ export default function StaffingSection({ onKnowMore }) {
                 RIGHT SIDE: EDITORIAL SCROLL-PINNED ACCORDION TIMELINE (01 - 03)
                ========================================================================= */}
             <div className="lg:col-span-5 xl:col-span-5 relative pl-1 sm:pl-2 py-1">
-              <div className="flex items-center justify-between mb-5 px-1">
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                  Core Verticals
-                </span>
-                <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
-                  {whiteCollarTopics[activeIndex].num} / 03
-                </span>
-              </div>
-
               <div className="relative pl-11 sm:pl-12">
                 {/* Vertical Background Track Line */}
                 <div
