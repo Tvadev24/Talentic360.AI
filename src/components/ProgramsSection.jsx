@@ -609,6 +609,68 @@ const bookletCardsData = {
         }
       ]
     }
+  ],
+  'Professional Excellence': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Elevate Your Skills. Strengthen Your Leadership.',
+      paragraphs: [
+        "Designed for ambitious professionals and aspiring leaders, our Professional Excellence programs focus on developing advanced competencies, leadership capabilities, and the practical expertise required to excel in today's dynamic professional environment."
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Structured Learning & Strategic Thinking',
+      paragraphs: [
+        'Go beyond conventional training through structured learning, industry-oriented knowledge, strategic thinking, and professional development. Enhance your ability to make informed decisions, manage complex challenges, lead teams effectively, and deliver meaningful results.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Real-World Performance',
+      paragraphs: [
+        'Our programs aim to bridge the gap between professional knowledge and real-world performance, empowering individuals to unlock their potential and pursue higher levels of professional achievement.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Development Areas',
+      items: [
+        {
+          title: 'Leadership & Management',
+          text: 'Build the confidence and capabilities to lead teams, manage responsibilities, and drive organizational success.'
+        },
+        {
+          title: 'Advanced Skill Development',
+          text: 'Strengthen specialized competencies relevant to evolving industry requirements.'
+        },
+        {
+          title: 'Strategic Thinking',
+          text: 'Develop problem-solving, decision-making, and critical analytical abilities.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Development Areas',
+      items: [
+        {
+          title: 'Professional Communication',
+          text: 'Enhance interpersonal skills, collaboration, and workplace effectiveness.'
+        },
+        {
+          title: 'Performance Excellence',
+          text: 'Improve productivity, adaptability, and the ability to deliver measurable outcomes.'
+        },
+        {
+          title: 'Career Advancement',
+          text: 'Prepare for greater responsibilities, leadership positions, and long-term professional growth.'
+        }
+      ]
+    }
   ]
 };
 
