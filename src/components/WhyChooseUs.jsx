@@ -156,7 +156,7 @@ export default function WhyChooseUs({ onGetStarted }) {
           </div>
 
         {/* 6 Layered Offset Cards (Matching Reference Format) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-14 pt-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-14 pt-10 mb-20">
           {siteData.whyChooseUs.map((card, idx) => {
             const Icon = iconMap[card.icon] || ShieldCheck;
 
@@ -202,8 +202,8 @@ export default function WhyChooseUs({ onGetStarted }) {
                   className={`absolute inset-x-0 bottom-0 top-3 right-3 rounded-2xl ${theme.backing} opacity-90 dark:opacity-85 transition-transform duration-300`}
                 />
 
-                {/* Foreground Card */}
-                <div className="relative z-10 h-full rounded-2xl pt-11 pb-7 px-7 bg-white dark:bg-[#0b1126] border border-slate-200/90 dark:border-slate-700/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_14px_34px_rgba(0,0,0,0.45)] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300">
+                {/* Foreground Card (sits lower at rest, lifts noticeably on hover) */}
+                <div className="relative z-10 h-full rounded-2xl pt-11 pb-7 px-7 bg-white dark:bg-[#0b1126] border border-slate-200/90 dark:border-slate-700/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_14px_34px_rgba(0,0,0,0.45)] translate-y-1.5 group-hover:-translate-y-3 group-hover:translate-x-1.5 group-hover:shadow-[0_22px_45px_rgba(15,23,42,0.16)] dark:group-hover:shadow-[0_22px_45px_rgba(0,0,0,0.65)] transition-all duration-300 ease-out">
                   {/* Top-Centered Floating Circular Icon Badge */}
                   <div
                     className={`absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg ring-4 ring-white dark:ring-[#0b1126] group-hover:scale-110 transition-transform duration-300 ${theme.badge}`}
