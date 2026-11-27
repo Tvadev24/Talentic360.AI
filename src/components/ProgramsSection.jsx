@@ -1015,7 +1015,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'Virtual Workshops': {
       src: '/assets/virtual-workshops.mp4',
-      position: 'object-[85%_22%]',
+      position: 'object-[15%_22%]',
       isVideo: true
     },
     'Self-Paced Learning': {
