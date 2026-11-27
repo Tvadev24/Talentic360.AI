@@ -160,8 +160,19 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
   const CARD_H = 264;
   const STRIDE = 286;
   const count = program.items.length;
-  const travel = (count - 1) * STRIDE;
-  const activeIdx = Math.min(count - 1, Math.round(progress * (count - 1)));
+  const LOOP = count * STRIDE;
+  const WRAP_MAX = 310;
+  const WRAP_MIN = WRAP_MAX - LOOP;
+
+  const getWrappedX = (idx) => {
+    const raw = -(idx * STRIDE) + progress * LOOP;
+    return ((((raw - WRAP_MIN) % LOOP) + LOOP) % LOOP) + WRAP_MIN;
+  };
+
+  // Active card is the one closest to lens center (x = 0)
+  const activeIdx = program.items.reduce((bestIdx, _, idx) => {
+    return Math.abs(getWrappedX(idx)) < Math.abs(getWrappedX(bestIdx)) ? idx : bestIdx;
+  }, 0);
 
   const handleJumpToCard = (idx) => {
     const el = sectionRef.current;
@@ -169,26 +180,30 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
     const rect = el.getBoundingClientRect();
     const sectionTop = window.scrollY + rect.top;
     const scrollable = Math.max(rect.height - window.innerHeight, 1);
-    const destination = sectionTop - 80 + scrollable * (idx / Math.max(count - 1, 1));
+    const destination = sectionTop - 80 + scrollable * (idx / count);
     window.scrollTo({ top: destination, behavior: 'smooth' });
   };
 
   const renderConveyorCard = (item, idx, magnified = false) => {
     const ItemIcon = iconMap[item.icon] || BookOpen;
+    const x = getWrappedX(idx);
+    const isWrappingEdge = x < WRAP_MIN + 70 || x > WRAP_MAX - 50;
+
     return (
       <div
         key={`${magnified ? 'mag' : 'base'}-${idx}`}
         style={{
           width: `${CARD_W}px`,
           height: `${CARD_H}px`,
-          left: `${-(idx * STRIDE) - CARD_W / 2}px`,
+          left: `${x - CARD_W / 2}px`,
           top: '50%',
-          transform: 'translateY(-50%)'
+          transform: 'translateY(-50%)',
+          opacity: isWrappingEdge ? 0 : magnified ? 1 : 0.78
         }}
-        className={`absolute p-5 rounded-2xl border flex flex-col justify-between transition-colors duration-300 ${
+        className={`absolute p-5 rounded-2xl border flex flex-col justify-between transition-opacity duration-200 ${
           magnified
             ? 'bg-white dark:bg-[#0d1530] border-indigo-400/90 dark:border-cyan-400/80 shadow-xl'
-            : 'bg-white/75 dark:bg-[#0c1226]/75 border-slate-200/80 dark:border-slate-800/80 opacity-75'
+            : 'bg-white/75 dark:bg-[#0c1226]/75 border-slate-200/80 dark:border-slate-800/80'
         }`}
       >
         <div>
@@ -240,12 +255,11 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
               className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-transparent via-indigo-300/60 dark:via-purple-500/40 to-transparent"
             />
 
-            {/* Base Conveyor Strip (glides left -> right toward the magnifying glass) */}
+            {/* Base Conveyor Strip (glides left -> right toward the square magnifying glass) */}
             <div
               className="absolute inset-y-0"
               style={{
-                left: 'calc(100% - 210px)',
-                transform: `translateX(${progress * travel}px)`
+                left: 'calc(100% - 205px)'
               }}
             >
               {program.items.map((item, idx) => renderConveyorCard(item, idx, false))}
@@ -254,29 +268,28 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
             {/* Soft Left Edge Fade */}
             <div
               aria-hidden="true"
-              className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white/90 dark:from-[#070b19]/90 to-transparent pointer-events-none z-10"
+              className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white/95 dark:from-[#070b19]/95 to-transparent pointer-events-none z-10"
             />
 
-            {/* Right-Side Optical Magnifying Glass */}
+            {/* Right-Side Square Optical Magnifying Glass */}
             <div
               className="absolute top-1/2 -translate-y-1/2 z-20"
-              style={{ right: '45px', width: '330px', height: '330px' }}
+              style={{ right: '45px', width: '320px', height: '320px' }}
             >
-              {/* Circular Magnified Lens */}
-              <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-50/95 dark:bg-[#070b1a]/95 border-[5px] border-indigo-500/80 dark:border-cyan-400/80 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 shadow-[0_20px_60px_rgba(44,96,234,0.28),inset_0_0_28px_rgba(120,60,236,0.18)]">
-                {/* Synchronized Magnified (1.24x) Conveyor Layer */}
+              {/* Square Magnified Lens */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-slate-50/95 dark:bg-[#070b1a]/95 border-[5px] border-indigo-500/85 dark:border-cyan-400/85 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 shadow-[0_20px_60px_rgba(44,96,234,0.28),inset_0_0_28px_rgba(120,60,236,0.18)]">
+                {/* Synchronized Magnified (1.22x) Conveyor Layer */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    transform: 'scale(1.24)',
-                    transformOrigin: '165px center'
+                    transform: 'scale(1.22)',
+                    transformOrigin: '160px center'
                   }}
                 >
                   <div
                     className="absolute inset-y-0"
                     style={{
-                      left: '165px',
-                      transform: `translateX(${progress * travel}px)`
+                      left: '160px'
                     }}
                   >
                     {program.items.map((item, idx) => renderConveyorCard(item, idx, true))}
@@ -286,11 +299,11 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
                 {/* Specular Glass Reflection & Optical Sheen */}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 rounded-full bg-gradient-to-br from-white/35 via-transparent to-indigo-500/10 pointer-events-none"
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/30 via-transparent to-indigo-500/10 pointer-events-none"
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute top-5 left-8 w-24 h-10 rounded-full bg-white/30 dark:bg-white/15 blur-md -rotate-25 pointer-events-none"
+                  className="absolute top-3 left-5 w-24 h-8 rounded-full bg-white/30 dark:bg-white/15 blur-md -rotate-12 pointer-events-none"
                 />
               </div>
 
