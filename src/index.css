@@ -388,3 +388,41 @@ html.dark .hero-subtitle-outline {
 .animate-cta-glow {
   animation: ctaPulseGlow 2.6s ease-in-out infinite;
 }
+
+/* =========================================================================
+   STAFFING DIRECTORY 3-COLUMN INFINITE VERTICAL MARQUEE
+   Left & Right columns scroll upward; Middle column scrolls downward
+   ========================================================================= */
+@keyframes marqueeVerticalUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marqueeVerticalDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.marquee-track-up {
+  animation: marqueeVerticalUp var(--marquee-duration, 45s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-down {
+  animation: marqueeVerticalDown var(--marquee-duration, 45s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-column:hover .marquee-track-up,
+.marquee-column:hover .marquee-track-down,
+.marquee-paused {
+  animation-play-state: paused !important;
+}

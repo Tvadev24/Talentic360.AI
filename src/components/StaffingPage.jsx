@@ -370,16 +370,16 @@ export default function StaffingPage({ onBackHome }) {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredKeys.map((name) => {
+            (() => {
+              const renderDirectoryCard = (name, instanceKey, isMarquee = false) => {
                 const roles = activeData[name] || [];
                 const cardKey = `${view}-${slugify(name)}`;
                 const isOpen = !!openCards[cardKey];
 
                 return (
                   <article
-                    key={cardKey}
-                    id={cardKey}
+                    key={instanceKey}
+                    id={!isMarquee ? cardKey : undefined}
                     onClick={(e) => {
                       if (!e.target.closest('button.apply-btn')) {
                         toggleCard(cardKey);
@@ -457,8 +457,62 @@ export default function StaffingPage({ onBackHome }) {
                     )}
                   </article>
                 );
-              })}
-            </div>
+              };
+
+              const isSearching = searchQuery.trim() !== '';
+              const hasAnyOpenCard = Object.values(openCards).some(Boolean);
+              const columns = [0, 1, 2].map((colIdx) =>
+                filteredKeys.filter((_, idx) => idx % 3 === colIdx)
+              );
+
+              return (
+                <>
+                  {/* Desktop 3-Column Opposite-Direction Infinite Marquee (Browse Mode) */}
+                  {!isSearching && (
+                    <div className="hidden lg:grid lg:grid-cols-3 gap-5 h-[720px] overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_7%,black_93%,transparent)]">
+                      {columns.map((colItems, colIdx) => {
+                        const isMiddle = colIdx === 1;
+                        const durationSec = Math.max(20, colItems.length * 3.4);
+                        const loopItems = [...colItems, ...colItems];
+                        const colHasOpen =
+                          hasAnyOpenCard &&
+                          colItems.some((n) => !!openCards[`${view}-${slugify(n)}`]);
+
+                        return (
+                          <div key={colIdx} className="marquee-column overflow-hidden h-full">
+                            <div
+                              style={{ '--marquee-duration': `${durationSec}s` }}
+                              className={`flex flex-col gap-5 ${
+                                isMiddle ? 'marquee-track-down' : 'marquee-track-up'
+                              } ${colHasOpen ? 'marquee-paused' : ''}`}
+                            >
+                              {loopItems.map((name, itemIdx) =>
+                                renderDirectoryCard(
+                                  name,
+                                  `col-${colIdx}-${itemIdx}-${slugify(name)}`,
+                                  itemIdx >= colItems.length
+                                )
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Static Grid Fallback (Active Search or Mobile/Tablet) */}
+                  <div
+                    className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ${
+                      !isSearching ? 'lg:hidden' : ''
+                    }`}
+                  >
+                    {filteredKeys.map((name) =>
+                      renderDirectoryCard(name, `${view}-${slugify(name)}`, false)
+                    )}
+                  </div>
+                </>
+              );
+            })()
           )}
         </section>
 
