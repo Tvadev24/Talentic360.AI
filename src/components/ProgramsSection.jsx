@@ -960,7 +960,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'NGO Partnerships': {
       src: '/assets/ngo-partnerships-bg.jpg',
-      position: 'object-[50%_20%]'
+      position: 'object-[58%_20%]'
     }
   };
 
