@@ -545,8 +545,7 @@ const bookletCardsData = {
           title: 'Professional Excellence',
           text: 'Develop analytical thinking, strategic understanding, and specialized competencies.'
         }
-      ],
-      quote: 'Transform Your Knowledge into Expertise. Turn Your Ambition into Achievement.'
+      ]
     }
   ],
   'Research & Development': [
@@ -608,8 +607,7 @@ const bookletCardsData = {
           title: 'Future-Oriented Learning',
           text: 'Prepare to contribute to innovation, academic excellence, and technological progress.'
         }
-      ],
-      quote: "Think Beyond Boundaries. Innovate with Purpose. Create Tomorrow's Possibilities."
+      ]
     }
   ]
 };
@@ -671,11 +669,6 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
               </div>
             ))}
           </div>
-          {page.quote && (
-            <p className="pt-2 border-t border-slate-200/80 dark:border-slate-800 text-[11.5px] font-display font-bold italic text-indigo-600 dark:text-cyan-300">
-              {page.quote}
-            </p>
-          )}
         </div>
       )}
     </>
