@@ -733,22 +733,183 @@ const bookletCardsData = {
         }
       ]
     }
+  ],
+  'Professional Excellence': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Elevate Your Skills. Strengthen Your Leadership.',
+      paragraphs: [
+        "Designed for ambitious professionals and aspiring leaders, our Professional Excellence programs focus on developing advanced competencies, leadership capabilities, and the practical expertise required to excel in today's dynamic professional environment."
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Structured Learning & Strategic Thinking',
+      paragraphs: [
+        'Go beyond conventional training through structured learning, industry-oriented knowledge, strategic thinking, and professional development. Enhance your ability to make informed decisions, manage complex challenges, lead teams effectively, and deliver meaningful results.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Real-World Performance',
+      paragraphs: [
+        'Our programs aim to bridge the gap between professional knowledge and real-world performance, empowering individuals to unlock their potential and pursue higher levels of professional achievement.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Development Areas',
+      items: [
+        {
+          title: 'Leadership & Management',
+          text: 'Build the confidence and capabilities to lead teams, manage responsibilities, and drive organizational success.'
+        },
+        {
+          title: 'Advanced Skill Development',
+          text: 'Strengthen specialized competencies relevant to evolving industry requirements.'
+        },
+        {
+          title: 'Strategic Thinking',
+          text: 'Develop problem-solving, decision-making, and critical analytical abilities.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Development Areas',
+      items: [
+        {
+          title: 'Professional Communication',
+          text: 'Enhance interpersonal skills, collaboration, and workplace effectiveness.'
+        },
+        {
+          title: 'Performance Excellence',
+          text: 'Improve productivity, adaptability, and the ability to deliver measurable outcomes.'
+        },
+        {
+          title: 'Career Advancement',
+          text: 'Prepare for greater responsibilities, leadership positions, and long-term professional growth.'
+        }
+      ]
+    }
+  ],
+  'Executive Education': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Lead with Vision. Think Strategically. Shape Tomorrow.',
+      paragraphs: [
+        'Designed for senior professionals, business leaders, executives, and decision-makers, our Executive Education programs deliver high-impact learning experiences that strengthen leadership capabilities and strategic expertise.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Strategic Leadership & Management',
+      paragraphs: [
+        'In an increasingly complex and competitive business environment, continuous learning is essential for effective leadership. Our programs focus on advanced management principles, organizational strategy, business innovation, and executive decision-making to help experienced professionals stay ahead of evolving industry demands.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Drive Sustainable Growth',
+      paragraphs: [
+        'Gain valuable insights, broaden your strategic perspective, and develop the capabilities to lead organizations, navigate uncertainty, and drive sustainable growth.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Areas',
+      items: [
+        {
+          title: 'Executive Leadership',
+          text: 'Enhance leadership effectiveness, inspire teams, and build a culture of excellence.'
+        },
+        {
+          title: 'Strategic Decision-Making',
+          text: 'Develop the ability to evaluate complex situations and make informed business decisions.'
+        },
+        {
+          title: 'Business & Organizational Strategy',
+          text: 'Understand strategic planning, organizational development, and sustainable business growth.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Areas',
+      items: [
+        {
+          title: 'Innovation & Transformation',
+          text: 'Explore emerging business trends, digital transformation, and innovative management practices.'
+        },
+        {
+          title: 'Corporate Governance',
+          text: 'Strengthen your understanding of organizational responsibility, ethics, and effective governance.'
+        },
+        {
+          title: 'Executive Performance',
+          text: 'Improve communication, negotiation, problem-solving, and high-level management capabilities.'
+        }
+      ]
+    }
   ]
 };
 
 function BookletFlipCard({ item, ItemIcon, pages }) {
+  const cardRef = useRef(null);
+  const timerRef = useRef(null);
   const [pageIdx, setPageIdx] = useState(0);
   const [turning, setTurning] = useState(false);
 
   const nextIdx = (pageIdx + 1) % pages.length;
 
+  // Reset card back to default cover page whenever it scrolls off-screen
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+          }
+          setTurning(false);
+          setPageIdx(0);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
   const handleNext = () => {
-    if (turning) return;
-    setTurning(true);
-    setTimeout(() => {
-      setPageIdx(nextIdx);
+    // If user clicks rapidly mid-turn, finish the current turn immediately so no click is ever missed
+    if (turning) {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
       setTurning(false);
-    }, 520);
+      setPageIdx((prev) => (prev + 1) % pages.length);
+      return;
+    }
+
+    setTurning(true);
+    timerRef.current = setTimeout(() => {
+      setPageIdx((prev) => (prev + 1) % pages.length);
+      setTurning(false);
+      timerRef.current = null;
+    }, 360);
   };
 
   const renderPageContent = (page) => (
@@ -800,6 +961,7 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
 
   return (
     <div
+      ref={cardRef}
       onClick={handleNext}
       role="button"
       tabIndex={0}
@@ -833,7 +995,7 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
           transform: turning ? 'rotateY(-135deg)' : 'rotateY(0deg)',
           opacity: turning ? 0 : 1,
           transition: turning
-            ? 'transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease-in 100ms'
+            ? 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease-in 80ms'
             : 'none'
         }}
         className="absolute inset-0 right-1.5 bottom-1.5 z-10 p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-slate-200 dark:border-slate-800 group-hover:border-indigo-300 dark:group-hover:border-cyan-500/50 shadow-sm flex flex-col justify-start overflow-hidden [backface-visibility:hidden] will-change-transform"
