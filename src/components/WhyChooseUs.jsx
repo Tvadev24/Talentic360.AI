@@ -155,38 +155,71 @@ export default function WhyChooseUs({ onGetStarted }) {
             </p>
           </div>
 
-        {/* 6 Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        {/* 6 Layered Offset Cards (Matching Reference Format) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-9 gap-y-14 pt-6 mb-20">
           {siteData.whyChooseUs.map((card, idx) => {
             const Icon = iconMap[card.icon] || ShieldCheck;
-            
-            const borderColors = {
-              cyan: 'hover:border-cyan-400 dark:hover:border-cyan-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]',
-              pink: 'hover:border-pink-400 dark:hover:border-pink-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(236,72,153,0.25)]',
-              purple: 'hover:border-purple-400 dark:hover:border-purple-400 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]',
-            };
 
-            const iconColors = {
-              cyan: 'text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/70 border-cyan-300 dark:border-cyan-500/40',
-              pink: 'text-pink-700 dark:text-pink-300 bg-pink-100 dark:bg-pink-950/70 border-pink-300 dark:border-pink-500/40',
-              purple: 'text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/70 border-purple-300 dark:border-purple-500/40',
-            };
+            const cardThemes = [
+              {
+                backing: 'bg-gradient-to-br from-[#2c60ea] to-[#1e40af]',
+                badge: 'bg-gradient-to-br from-[#2c60ea] to-[#1e40af] shadow-blue-500/30',
+                titleHover: 'group-hover:text-[#2c60ea] dark:group-hover:text-cyan-300'
+              },
+              {
+                backing: 'bg-gradient-to-br from-[#783cec] to-[#5b21b6]',
+                badge: 'bg-gradient-to-br from-[#783cec] to-[#5b21b6] shadow-purple-500/30',
+                titleHover: 'group-hover:text-[#783cec] dark:group-hover:text-purple-300'
+              },
+              {
+                backing: 'bg-gradient-to-br from-[#0ea5e9] to-[#0284c7]',
+                badge: 'bg-gradient-to-br from-[#0ea5e9] to-[#0284c7] shadow-sky-500/30',
+                titleHover: 'group-hover:text-sky-600 dark:group-hover:text-cyan-300'
+              },
+              {
+                backing: 'bg-gradient-to-br from-[#ef4444] to-[#dc2626]',
+                badge: 'bg-gradient-to-br from-[#ef4444] to-[#dc2626] shadow-red-500/30',
+                titleHover: 'group-hover:text-[#ef4444] dark:group-hover:text-rose-300'
+              },
+              {
+                backing: 'bg-gradient-to-br from-[#ec4899] to-[#be185d]',
+                badge: 'bg-gradient-to-br from-[#ec4899] to-[#be185d] shadow-pink-500/30',
+                titleHover: 'group-hover:text-pink-600 dark:group-hover:text-pink-300'
+              },
+              {
+                backing: 'bg-gradient-to-br from-[#10b981] to-[#059669]',
+                badge: 'bg-gradient-to-br from-[#10b981] to-[#059669] shadow-emerald-500/30',
+                titleHover: 'group-hover:text-emerald-600 dark:group-hover:text-emerald-300'
+              }
+            ];
+            const theme = cardThemes[idx % cardThemes.length];
 
             return (
-              <div
-                key={idx}
-                className={`group relative rounded-2xl p-8 bg-white dark:bg-[#0a0e20]/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:shadow-xl transition-all duration-300 ${borderColors[card.accent] || borderColors.cyan} backdrop-blur-md flex flex-col justify-between`}
-              >
-                <div>
-                  <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${iconColors[card.accent] || iconColors.cyan}`}>
-                    <Icon className="w-7 h-7" />
+              <div key={idx} className="group relative pl-3 pb-3">
+                {/* Offset Bottom-Left Colored Backing Layer */}
+                <div
+                  aria-hidden="true"
+                  className={`absolute inset-x-0 bottom-0 top-3 right-3 rounded-2xl ${theme.backing} opacity-90 dark:opacity-85 transition-transform duration-300`}
+                />
+
+                {/* Foreground Card */}
+                <div className="relative z-10 h-full rounded-2xl pt-11 pb-7 px-7 bg-white dark:bg-[#0b1126] border border-slate-200/90 dark:border-slate-700/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_14px_34px_rgba(0,0,0,0.45)] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300">
+                  {/* Top-Centered Floating Circular Icon Badge */}
+                  <div
+                    className={`absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg ring-4 ring-white dark:ring-[#0b1126] group-hover:scale-110 transition-transform duration-300 ${theme.badge}`}
+                  >
+                    <Icon className="w-6 h-6" />
                   </div>
 
-                  <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors">
+                  {/* Centered Title */}
+                  <h3
+                    className={`text-center font-display font-bold text-xl text-slate-900 dark:text-white mb-3 transition-colors ${theme.titleHover}`}
+                  >
                     {card.title}
                   </h3>
 
-                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {/* Description */}
+                  <p className="text-center text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
                     {card.description}
                   </p>
                 </div>
