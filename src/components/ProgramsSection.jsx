@@ -1022,6 +1022,11 @@ export default function ProgramsSection({ onOpenProgramModal }) {
       src: '/assets/self-paced-learning.mp4',
       position: 'object-[50%_65%]',
       isVideo: true
+    },
+    'Hybrid Programs': {
+      src: '/assets/hybrid-programs.mp4',
+      position: 'object-[50%_20%]',
+      isVideo: true
     }
   };
 
