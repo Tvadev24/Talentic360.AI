@@ -17,7 +17,7 @@ export default function Hero({ onGetStarted }) {
       {/* Seamless Left-Side Directional Veil for Razor-Sharp Text Contrast Over Any Video Frame */}
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 left-0 w-full md:w-[72%] bg-gradient-to-r from-white/90 via-white/65 to-transparent dark:from-[#050814]/90 dark:via-[#050814]/65 dark:to-transparent pointer-events-none z-[1]"
+        className="absolute inset-y-0 left-0 w-full md:w-[60%] bg-gradient-to-r from-white/75 via-white/40 to-transparent dark:from-[#050814]/90 dark:via-[#050814]/65 dark:to-transparent pointer-events-none z-[1]"
       />
 
       {/* Hero Banner Content Container - Anchored in Upper-Left Corner */}
