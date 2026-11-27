@@ -953,6 +953,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Career Advancement Programs': {
       src: '/assets/career-advancement-bg.jpg',
       position: 'object-[50%_28%]'
+    },
+    'Community Service Training': {
+      src: '/assets/community-service-bg.jpg',
+      position: 'object-[50%_20%]'
     }
   };
 
