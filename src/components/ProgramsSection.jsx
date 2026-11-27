@@ -565,10 +565,6 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
   };
 
   const handleNext = () => triggerTurn((pageIdx + 1) % pages.length);
-  const handlePrev = (e) => {
-    e.stopPropagation();
-    triggerTurn((pageIdx - 1 + pages.length) % pages.length);
-  };
 
   const page = pages[pageIdx];
 
@@ -600,7 +596,7 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
           transform: turning ? 'rotateY(-22deg)' : 'rotateY(0deg)',
           opacity: turning ? 0.72 : 1
         }}
-        className="relative z-10 h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-indigo-200/90 dark:border-cyan-500/40 shadow-md hover:shadow-xl hover:border-indigo-400 dark:hover:border-cyan-400 transition-all duration-300 ease-out flex flex-col justify-between cursor-pointer overflow-hidden"
+        className="relative z-10 h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-indigo-200/90 dark:border-cyan-500/40 shadow-md hover:shadow-xl hover:border-indigo-400 dark:hover:border-cyan-400 transition-all duration-300 ease-out flex flex-col justify-start cursor-pointer overflow-hidden"
       >
         {/* Subtle Notebook Spine Accent on Left */}
         <div
@@ -655,35 +651,6 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
             )}
           </div>
         )}
-
-        {/* Bottom Copy Pagination Bar */}
-        <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold">
-          <button
-            type="button"
-            onClick={handlePrev}
-            className="text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-300 transition-colors cursor-pointer"
-          >
-            ← Prev
-          </button>
-
-          <div className="flex items-center gap-1.5">
-            {pages.map((_, idx) => (
-              <span
-                key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  idx === pageIdx
-                    ? 'w-4 bg-gradient-to-r from-[#2c60ea] to-[#783cec]'
-                    : 'w-1.5 bg-slate-300 dark:bg-slate-700'
-                }`}
-              />
-            ))}
-          </div>
-
-          <span className="text-indigo-600 dark:text-cyan-300 flex items-center gap-1">
-            <span>{pageIdx + 1}/{pages.length}</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
       </div>
     </div>
   );
