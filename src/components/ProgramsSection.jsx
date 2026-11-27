@@ -183,6 +183,69 @@ const corporateIconMap = {
   'Performance Optimization': PerformanceOptIcon
 };
 
+/* Custom Brand-Matched SVG Icons for Government Programs */
+function PublicSectorIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Classical government pediment & dome */}
+      <path d="M6 18L24 7l18 11H6z" fill="currentColor" fillOpacity="0.14" />
+      <path d="M24 4v3" />
+      {/* 4 Classical pillars */}
+      <path d="M11 18v17M19 18v17M29 18v17M37 18v17" />
+      {/* Base steps */}
+      <rect x="7" y="35" width="34" height="4" rx="1" fill="currentColor" fillOpacity="0.12" />
+      <path d="M4 42h40" />
+    </svg>
+  );
+}
+
+function PolicySupportIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Governance shield */}
+      <path d="M24 5l15 6.5v11c0 10.5-6.4 17.8-15 20.5-8.6-2.7-15-10-15-20.5v-11L24 5z" fill="currentColor" fillOpacity="0.12" />
+      {/* Verified checkmark */}
+      <path d="M17.5 24l4.5 4.5 9-9" />
+    </svg>
+  );
+}
+
+function SkillIndiaIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* National skill rosette / medal */}
+      <circle cx="24" cy="18" r="11" fill="currentColor" fillOpacity="0.14" />
+      <circle cx="24" cy="18" r="5.5" />
+      {/* Ribbon tails */}
+      <path d="M17 27.5L13.5 43l10.5-5.5L34.5 43 31 27.5" fill="currentColor" fillOpacity="0.08" />
+    </svg>
+  );
+}
+
+function CommunityDevIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Community figures */}
+      <circle cx="24" cy="13" r="4" fill="currentColor" fillOpacity="0.16" />
+      <circle cx="12" cy="17" r="3.2" fill="currentColor" fillOpacity="0.12" />
+      <circle cx="36" cy="17" r="3.2" fill="currentColor" fillOpacity="0.12" />
+      {/* Supportive arc / joined hands */}
+      <path d="M16 26c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5" />
+      <path d="M6.5 29c0-3 2.5-5 5.5-5 1.8 0 3.3.7 4.3 1.8" />
+      <path d="M41.5 29c0-3-2.5-5-5.5-5-1.8 0-3.3.7-4.3 1.8" />
+      {/* Caring hands cradle at bottom */}
+      <path d="M8 34c4 5.5 9.5 8 16 8s12-2.5 16-8" />
+    </svg>
+  );
+}
+
+const governmentIconMap = {
+  'Public Sector Training': PublicSectorIcon,
+  'Policy Implementation Support': PolicySupportIcon,
+  'Skill India Programs': SkillIndiaIcon,
+  'Community Development': CommunityDevIcon
+};
+
 function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore }) {
   const sectionRef = useRef(null);
   const [progress, setProgress] = useState(0);
@@ -544,8 +607,22 @@ export default function ProgramsSection({ onOpenProgramModal }) {
           <section
             key={program.id}
             id={program.id}
-            className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
+            className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200 overflow-hidden"
           >
+            {/* Dignified State Emblem Background Watermark for Government Programs */}
+            {program.id === 'government' && (
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0"
+              >
+                <img
+                  src="/assets/govt-emblem.png"
+                  alt=""
+                  className="h-[82%] max-h-[420px] w-auto object-contain opacity-[0.09] dark:opacity-[0.14] dark:invert"
+                />
+              </div>
+            )}
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 {/* Section Header */}
@@ -564,8 +641,13 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                 {/* 4 Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                   {program.items.map((item, itemIdx) => {
-                    const CustomAcademicIcon = program.id === 'academic' ? academicIconMap[item.title] : null;
-                    const ItemIcon = CustomAcademicIcon || iconMap[item.icon] || BookOpen;
+                    const CustomProgramIcon =
+                      program.id === 'academic'
+                        ? academicIconMap[item.title]
+                        : program.id === 'government'
+                          ? governmentIconMap[item.title]
+                          : null;
+                    const ItemIcon = CustomProgramIcon || iconMap[item.icon] || BookOpen;
                     const flipImage =
                       program.id === 'academic' ? academicFlipImages[item.title] : null;
                     const bgCard = backgroundPhotoCards[item.title];
@@ -645,12 +727,16 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                     return (
                       <div
                         key={itemIdx}
-                        className="group p-6 sm:p-7 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-between"
+                        className={`group p-6 sm:p-7 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-between ${
+                          program.id === 'government'
+                            ? 'bg-white/70 dark:bg-[#0c1226]/75 backdrop-blur-[2px]'
+                            : 'bg-white/80 dark:bg-[#0c1226]/85'
+                        }`}
                       >
                         <div>
                           {/* Icon Header */}
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 group-hover:scale-110 transition-transform mb-5 shadow-sm ${CustomAcademicIcon ? 'p-1.5' : ''}`}>
-                            <ItemIcon className={CustomAcademicIcon ? 'w-full h-full' : 'w-6 h-6'} />
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 group-hover:scale-110 transition-transform mb-5 shadow-sm ${CustomProgramIcon ? 'p-1.5' : ''}`}>
+                            <ItemIcon className={CustomProgramIcon ? 'w-full h-full' : 'w-6 h-6'} />
                           </div>
 
                           {/* Title */}
