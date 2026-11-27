@@ -1025,7 +1025,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'Hybrid Programs': {
       src: '/assets/hybrid-programs.mp4',
-      position: 'object-[50%_20%]',
+      position: 'object-[72%_20%]',
       isVideo: true
     }
   };
