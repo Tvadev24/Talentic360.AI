@@ -847,7 +847,7 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
           handleNext();
         }
       }}
-      className="relative [perspective:1400px] h-full pr-1.5 pb-1.5 select-none cursor-pointer group"
+      className="relative [perspective:1400px] h-[310px] pr-1.5 pb-1.5 select-none cursor-pointer group"
     >
       {/* Subtle Stacked Paper Edges on Right & Bottom (No Neon Glow) */}
       <div
@@ -859,8 +859,8 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
         className="absolute top-0.5 bottom-0.5 left-0.5 right-0.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
       />
 
-      {/* Underneath Sheet: Next Page waiting cleanly */}
-      <div className="relative h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-start overflow-hidden">
+      {/* Underneath Sheet: Next Page waiting cleanly (absolute so box height never changes) */}
+      <div className="absolute inset-0 right-1.5 bottom-1.5 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-start overflow-hidden">
         {renderPageContent(pages[nextIdx])}
       </div>
 
