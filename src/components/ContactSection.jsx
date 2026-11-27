@@ -98,7 +98,7 @@ export default function ContactSection() {
 
                 {/* Phone */}
                 <a 
-                  href="tel:+917083509072"
+                  href="tel:+919876543210"
                   className="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-400/60 transition-all group shadow-sm"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform shadow-md">

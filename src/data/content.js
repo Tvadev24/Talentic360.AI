@@ -344,22 +344,20 @@ export const siteData = {
 
   contactInfo: {
     email: "info@talentic360.ai",
-    phone: "+91 7083509072",
-    displayPhone: "+91 7083509072",
+    phone: "+91 9876543210",
+    displayPhone: "+91 9876543210",
     location: "India",
     address: "Pride Purple Square, Kalewadi Phata, Wakad, Pune 411057",
     inquiryOffice: "Office No. 303, Pride Purple Square, Kalewadi Phata, Wakad, Pune 411057",
     corporateOffice: "Office No. 314, Pride Purple Square, Kalewadi Phata, Wakad, Pune 411057",
     hours: [
-      { day: "Monday - Friday", time: "9:00 AM - 6:00 PM" },
-      { day: "Saturday", time: "10:00 AM - 4:00 PM" },
+      { day: "Monday - Saturday", time: "9:00 AM - 6:00 PM" },
       { day: "Sunday", time: "Closed" }
     ]
   },
 
   officeHours: {
     weekdays: "9:00 AM - 6:00 PM",
-    saturday: "10:00 AM - 4:00 PM",
     sunday: "Closed"
   },
 
