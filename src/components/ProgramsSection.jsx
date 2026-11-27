@@ -887,6 +887,32 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
   );
 }
 
+function HoverResetVideo({ src, className }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          el.pause();
+          el.currentTime = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video ref={videoRef} loop muted playsInline preload="auto" className={className}>
+      <source src={src} type="video/mp4" />
+    </video>
+  );
+}
+
 export default function ProgramsSection({ onOpenProgramModal }) {
   const academicIconMap = {
     'Higher Education Partnerships': HigherEdIcon,
@@ -1104,15 +1130,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                         >
                           {/* Clear, Unobstructed Background Photo or Hover-Play Video */}
                           {bgCard.isVideo ? (
-                            <video
-                              loop
-                              muted
-                              playsInline
-                              preload="auto"
+                            <HoverResetVideo
+                              src={bgCard.src}
                               className={`absolute inset-0 w-full h-full object-cover ${bgCard.position} group-hover:scale-105 transition-transform duration-700`}
-                            >
-                              <source src={bgCard.src} type="video/mp4" />
-                            </video>
+                            />
                           ) : (
                             <img
                               src={bgCard.src}
