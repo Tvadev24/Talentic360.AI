@@ -204,8 +204,8 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
     };
 
     const tick = () => {
-      current += (target - current) * 0.09;
-      if (Math.abs(target - current) < 0.001) {
+      current += (target - current) * 0.055;
+      if (Math.abs(target - current) < 0.0005) {
         current = target;
       }
       setProgress(current);
@@ -239,13 +239,13 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
     const scaled = clamped * count;
     const segment = Math.floor(scaled);
     const localT = scaled - segment;
-    const dwellFraction = 0.45; // 45% pause centered in lens, 55% smooth glide to next card
+    const dwellFraction = 0.38; // 38% calm dwell centered in lens, 62% liquid quintic glide
     if (localT <= dwellFraction) {
       return segment;
     }
     const u = (localT - dwellFraction) / (1 - dwellFraction);
-    const smoothU = u * u * (3 - 2 * u);
-    return segment + smoothU;
+    const smootherU = u * u * u * (u * (u * 6 - 15) + 10);
+    return segment + smootherU;
   };
 
   const stepProgress = getDwellStepProgress(progress);
@@ -258,7 +258,11 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
   const renderConveyorCard = (item, idx, magnified = false) => {
     const ItemIcon = corporateIconMap[item.title] || iconMap[item.icon] || BookOpen;
     const x = getWrappedX(idx);
-    const isWrappingEdge = x < WRAP_MIN + 70 || x > WRAP_MAX - 50;
+    const leftFade = Math.min(1, Math.max(0, (x - (WRAP_MIN + 20)) / 90));
+    const rightFade = Math.min(1, Math.max(0, (WRAP_MAX - 20 - x) / 70));
+    const edgeFade = leftFade * rightFade;
+    const focus = Math.max(0, 1 - Math.abs(x) / 170);
+    const cardScale = magnified ? 0.96 + focus * 0.05 : 1;
 
     return (
       <div
@@ -268,12 +272,12 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
           height: `${CARD_H}px`,
           left: `${x - CARD_W / 2}px`,
           top: '50%',
-          transform: 'translateY(-50%)',
-          opacity: isWrappingEdge ? 0 : magnified ? 1 : 0.78
+          transform: `translateY(-50%) scale(${cardScale})`,
+          opacity: edgeFade * (magnified ? 1 : 0.8)
         }}
-        className={`absolute overflow-hidden rounded-2xl border flex flex-col justify-start transition-opacity duration-200 ${
+        className={`absolute overflow-hidden rounded-2xl border flex flex-col justify-start will-change-transform ${
           magnified
-            ? 'bg-white dark:bg-[#0d1530] border-indigo-400/90 dark:border-cyan-400/80 shadow-xl'
+            ? 'bg-white dark:bg-[#0d1530] border-indigo-400/90 dark:border-cyan-400/80 shadow-[0_18px_40px_rgba(44,96,234,0.22)] dark:shadow-[0_18px_40px_rgba(34,211,238,0.16)]'
             : 'bg-white/80 dark:bg-[#0c1226]/80 border-slate-200/80 dark:border-slate-800/80'
         }`}
       >
@@ -288,13 +292,8 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
 
         <div className="p-5 flex-1 flex flex-col justify-between">
           <div>
-            <div className="flex items-start justify-between gap-2 mb-4">
-              <div className="w-11 h-11 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 shadow-sm">
-                <ItemIcon className="w-full h-full" />
-              </div>
-              <span className="text-[11px] font-mono font-bold text-indigo-500/80 dark:text-cyan-400/80 bg-indigo-50/80 dark:bg-slate-800/80 px-2 py-0.5 rounded-full border border-indigo-100 dark:border-slate-700/60">
-                0{idx + 1}
-              </span>
+            <div className="w-11 h-11 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-4 shadow-sm">
+              <ItemIcon className="w-full h-full" />
             </div>
 
             <h3 className="font-display font-bold text-[15.5px] leading-snug text-slate-900 dark:text-white mb-2">
@@ -404,13 +403,8 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
               >
                 <div className="h-1 w-full bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]" />
                 <div className="p-6">
-                  <div className="flex items-start justify-between gap-2 mb-5">
-                    <div className="w-12 h-12 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 shadow-sm">
-                      <ItemIcon className="w-full h-full" />
-                    </div>
-                    <span className="text-[11px] font-mono font-bold text-indigo-500/80 dark:text-cyan-400/80 bg-indigo-50/80 dark:bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-indigo-100 dark:border-slate-700/60">
-                      0{itemIdx + 1}
-                    </span>
+                  <div className="w-12 h-12 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
+                    <ItemIcon className="w-full h-full" />
                   </div>
                   <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
                     {item.title}
