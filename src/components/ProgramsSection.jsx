@@ -965,6 +965,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Youth Volunteering': {
       src: '/assets/youth-volunteering-bg.jpg',
       position: 'object-[50%_25%]'
+    },
+    'Sustainability Initiatives': {
+      src: '/assets/sustainability-initiatives-bg.jpg',
+      position: 'object-[55%_45%]'
     }
   };
 
