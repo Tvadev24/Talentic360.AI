@@ -303,36 +303,30 @@ html.light ::-webkit-scrollbar-thumb:hover {
    Ultra-crisp letter contour outline without any hazy background or video washout
    ========================================================================= */
 
-/* Main Hero Headline Outline (Thin, Razor-Sharp Contour) */
+/* Main Hero Headline Outline (Zero-Blur Razor-Sharp Contour) */
 .hero-headline-outline {
   color: #0f172a !important;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 0.45px rgba(255, 255, 255, 0.92);
-  text-shadow:
-    0 1px 2px rgba(255, 255, 255, 0.9),
-    0 1px 1px rgba(15, 23, 42, 0.18);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .dark .hero-headline-outline,
 html.dark .hero-headline-outline {
   color: #ffffff !important;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.75);
 }
 
-/* Hero Subtitle Text Outline (Thin, Crisp Contour) */
+/* Hero Subtitle Text Outline (Zero-Blur Crisp Typography) */
 .hero-subtitle-outline {
-  paint-order: stroke fill;
-  -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .dark .hero-subtitle-outline,
 html.dark .hero-subtitle-outline {
-  paint-order: stroke fill;
-  -webkit-text-stroke: 0.25px rgba(0, 0, 0, 0.85);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.65);
 }
 
 /* =========================================================================
