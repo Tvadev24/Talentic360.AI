@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Users, 
-  UserCheck, 
-  Target, 
-  TrendingUp, 
-  ArrowRight, 
-  CheckCircle2, 
+import {
+  Users,
+  UserCheck,
+  Target,
+  TrendingUp,
+  ArrowRight,
+  CheckCircle2,
   X,
   Briefcase,
   ShieldCheck,
@@ -200,23 +200,23 @@ export default function StaffingSection({ onKnowMore }) {
   };
 
   return (
-    <section 
-      id="staffing" 
+    <section
+      id="staffing"
       ref={sectionRef}
       className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[250vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
     >
       <div className="lg:sticky lg:top-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Enclosing Illuminated Section Box */}
         <div className="section-box section-box-purple p-6 sm:p-10 lg:p-12">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            
+
             {/* =========================================================================
                 LEFT SIDE: THE CONTENT (Title, Text, Pillars & Know More Button)
                ========================================================================= */}
             <div className="lg:col-span-7 xl:col-span-7 space-y-6 text-left">
-              
+
               {/* Main Heading: White Collar Staffing Solutions */}
               <div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white leading-tight">
@@ -275,15 +275,32 @@ export default function StaffingSection({ onKnowMore }) {
                 </div>
               </div>
 
-              {/* Button of 'Connect With Us' under the content */}
-              <div className="pt-2 flex sm:justify-start justify-center">
-                <button
-                  onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                  className="group px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
-                >
-                  <span>Connect With Us</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+              {/* For Businesses: Client Hiring Callout + 'Connect With Us' CTA */}
+              <div className="pt-2">
+                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-indigo-50/90 via-purple-50/70 to-white/90 dark:from-slate-900/90 dark:via-[#121936]/90 dark:to-slate-900/80 border border-indigo-200/80 dark:border-purple-500/35 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100/90 dark:bg-purple-500/20 border border-indigo-200/80 dark:border-purple-400/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-700 dark:text-purple-200">
+                        For Business
+                      </span>
+                    </div>
+                    <h4 className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">
+                      Find Your Next Candidate
+                    </h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                      Hire pre-vetted architects, tax auditors &amp; HR leaders ready to deliver from day one.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
+                    className="group shrink-0 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer"
+                  >
+                    <span>Connect With Us</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -337,24 +354,22 @@ export default function StaffingSection({ onKnowMore }) {
                           className="absolute -left-11 sm:-left-12 top-3.5 flex items-center gap-2 cursor-pointer group focus:outline-none"
                         >
                           <span
-                            className={`text-xs font-mono w-4 text-right transition-colors duration-300 ${
-                              isActive
-                                ? 'font-bold text-slate-900 dark:text-white'
-                                : isPassed
-                                  ? 'font-medium text-slate-600 dark:text-slate-300'
-                                  : 'font-normal text-slate-400 dark:text-slate-500'
-                            }`}
+                            className={`text-xs font-mono w-4 text-right transition-colors duration-300 ${isActive
+                              ? 'font-bold text-slate-900 dark:text-white'
+                              : isPassed
+                                ? 'font-medium text-slate-600 dark:text-slate-300'
+                                : 'font-normal text-slate-400 dark:text-slate-500'
+                              }`}
                           >
                             {topic.num}
                           </span>
                           <span
-                            className={`relative z-10 w-3.5 h-3.5 rounded-full transition-all duration-300 ${
-                              isActive
-                                ? 'bg-white dark:bg-[#0d142c] border-[3px] border-[#2c60ea] dark:border-cyan-300 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 scale-110'
-                                : isPassed
-                                  ? 'bg-[#2c60ea] dark:bg-purple-400 border-2 border-white dark:border-[#0d142c]'
-                                  : 'bg-white dark:bg-[#0d142c] border-2 border-slate-300 dark:border-slate-600 group-hover:border-slate-400'
-                            }`}
+                            className={`relative z-10 w-3.5 h-3.5 rounded-full transition-all duration-300 ${isActive
+                              ? 'bg-white dark:bg-[#0d142c] border-[3px] border-[#2c60ea] dark:border-cyan-300 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 scale-110'
+                              : isPassed
+                                ? 'bg-[#2c60ea] dark:bg-purple-400 border-2 border-white dark:border-[#0d142c]'
+                                : 'bg-white dark:bg-[#0d142c] border-2 border-slate-300 dark:border-slate-600 group-hover:border-slate-400'
+                              }`}
                           />
                         </button>
 
@@ -406,20 +421,18 @@ export default function StaffingSection({ onKnowMore }) {
                 <div className="relative mt-4 pt-1">
                   <span
                     aria-hidden="true"
-                    className={`absolute -left-[22.5px] sm:-left-[24.5px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full transition-all duration-300 ${
-                      rayProgress >= 90
-                        ? 'bg-[#ef4444] ring-4 ring-red-500/20 scale-110'
-                        : 'bg-slate-300 dark:bg-slate-700'
-                    }`}
+                    className={`absolute -left-[22.5px] sm:-left-[24.5px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full transition-all duration-300 ${rayProgress >= 90
+                      ? 'bg-[#ef4444] ring-4 ring-red-500/20 scale-110'
+                      : 'bg-slate-300 dark:bg-slate-700'
+                      }`}
                   />
                   <button
                     type="button"
                     onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                    className={`w-full group px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer ${
-                      rayProgress >= 90
-                        ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white shadow-md'
-                        : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-95 shadow-sm'
-                    }`}
+                    className={`w-full group px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer ${rayProgress >= 90
+                      ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white shadow-md'
+                      : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-95 shadow-sm'
+                      }`}
                   >
                     <span>Apply For Hiring</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -439,13 +452,13 @@ export default function StaffingSection({ onKnowMore }) {
          ========================================================================= */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          
+
           {/* Backdrop click to close */}
           <div className="absolute inset-0" onClick={handleCloseModal}></div>
 
           {/* Modal Container */}
           <div className="relative w-full max-w-3xl rounded-3xl bg-white dark:bg-[#090e24] border border-slate-200 dark:border-purple-500/40 shadow-2xl dark:shadow-[0_0_50px_rgba(120,60,236,0.3)] p-6 sm:p-8 overflow-hidden z-10 max-h-[90vh] overflow-y-auto">
-            
+
             {/* Top Brand Gradient Line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]"></div>
 
