@@ -505,7 +505,13 @@ const bookletCardsData = {
       type: 'prose',
       heading: 'Program Overview',
       paragraphs: [
-        'Designed for ambitious learners and working professionals, our postgraduate-level specialization programs offer an advanced learning experience in high-demand disciplines and emerging industry sectors.',
+        'Designed for ambitious learners and working professionals, our postgraduate-level specialization programs offer an advanced learning experience in high-demand disciplines and emerging industry sectors.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Beyond Traditional Education',
+      paragraphs: [
         'Go beyond traditional education with specialized knowledge, advanced concepts, practical insights, and industry-oriented learning. Develop the expertise to tackle complex challenges, adapt to evolving professional landscapes, and stand out in an increasingly competitive world.'
       ]
     },
@@ -567,7 +573,7 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
   const page = pages[pageIdx];
 
   return (
-    <div className="relative [perspective:1200px] min-h-[290px] pr-2 pb-1.5 select-none">
+    <div className="relative [perspective:1200px] h-full pr-2 pb-1.5 select-none">
       {/* Stacked Copy / Notebook Paper Edges on Right & Bottom */}
       <div
         aria-hidden="true"
@@ -591,8 +597,8 @@ function BookletFlipCard({ item, ItemIcon, pages }) {
         }}
         style={{
           transformOrigin: 'left center',
-          transform: turning ? 'rotateY(-28deg) scale(0.98)' : 'rotateY(0deg) scale(1)',
-          opacity: turning ? 0.65 : 1
+          transform: turning ? 'rotateY(-22deg)' : 'rotateY(0deg)',
+          opacity: turning ? 0.72 : 1
         }}
         className="relative z-10 h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-indigo-200/90 dark:border-cyan-500/40 shadow-md hover:shadow-xl hover:border-indigo-400 dark:hover:border-cyan-400 transition-all duration-300 ease-out flex flex-col justify-between cursor-pointer overflow-hidden"
       >
