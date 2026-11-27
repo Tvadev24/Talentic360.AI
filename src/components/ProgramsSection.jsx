@@ -314,27 +314,6 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
               />
             </div>
           </div>
-
-          {/* Clickable Vertical Pills Below Stage */}
-          <div className="mt-4 flex items-center justify-center gap-2.5 flex-wrap">
-            {program.items.map((item, idx) => {
-              const isCurrent = idx === activeIdx;
-              return (
-                <button
-                  key={item.title}
-                  type="button"
-                  onClick={() => handleJumpToCard(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer border ${
-                    isCurrent
-                      ? 'bg-gradient-to-r from-[#2c60ea] to-[#783cec] text-white border-transparent shadow-sm scale-105'
-                      : 'bg-white/75 dark:bg-slate-900/70 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
-                  }`}
-                >
-                  0{idx + 1} · {item.title}
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* Mobile/Tablet Fallback Grid */}
