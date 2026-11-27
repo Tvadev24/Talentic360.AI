@@ -159,9 +159,9 @@ export default function CircuitArchitectureBackground({ theme }) {
         bgGrad.addColorStop(0.5, '#091229');
         bgGrad.addColorStop(1, '#10142e');
       } else {
-        bgGrad.addColorStop(0, '#eef3f9');
-        bgGrad.addColorStop(0.48, '#dbe4ef');
-        bgGrad.addColorStop(1, '#e8e4ea');
+        bgGrad.addColorStop(0, '#ffffff');
+        bgGrad.addColorStop(0.5, '#f6f9fd');
+        bgGrad.addColorStop(1, '#fbf7f6');
       }
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, width, height);
@@ -301,3 +301,4 @@ export default function CircuitArchitectureBackground({ theme }) {
     />
   );
 }
+
