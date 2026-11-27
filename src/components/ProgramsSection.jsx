@@ -1010,7 +1010,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'Online Training Courses': {
       src: '/assets/online-training.mp4',
-      position: 'object-[50%_22%]',
+      position: 'object-[65%_22%]',
       isVideo: true
     }
   };
