@@ -14,6 +14,12 @@ export default function Hero({ onGetStarted }) {
          ========================================================================= */}
       <BackgroundVideo />
 
+      {/* Seamless Left-Side Directional Veil for Razor-Sharp Text Contrast Over Any Video Frame */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-y-0 left-0 w-full md:w-[72%] bg-gradient-to-r from-white/90 via-white/65 to-transparent dark:from-[#050814]/90 dark:via-[#050814]/65 dark:to-transparent pointer-events-none z-[1]"
+      />
+
       {/* Hero Banner Content Container - Anchored in Upper-Left Corner */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 sm:pt-28 md:pt-32 pb-8 flex-1 flex flex-col justify-start items-start">
         

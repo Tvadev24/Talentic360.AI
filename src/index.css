@@ -303,30 +303,30 @@ html.light ::-webkit-scrollbar-thumb:hover {
    Ultra-crisp letter contour outline without any hazy background or video washout
    ========================================================================= */
 
-/* Main Hero Headline Outline (Zero-Blur Razor-Sharp Contour) */
+/* Main Hero Headline (Pure Razor-Sharp Typography) */
 .hero-headline-outline {
   color: #0f172a !important;
   -webkit-text-stroke: 0;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  text-shadow: none;
 }
 
 .dark .hero-headline-outline,
 html.dark .hero-headline-outline {
   color: #ffffff !important;
   -webkit-text-stroke: 0;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.75);
+  text-shadow: none;
 }
 
-/* Hero Subtitle Text Outline (Zero-Blur Crisp Typography) */
+/* Hero Subtitle Text (Pure Razor-Sharp Typography) */
 .hero-subtitle-outline {
   -webkit-text-stroke: 0;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+  text-shadow: none;
 }
 
 .dark .hero-subtitle-outline,
 html.dark .hero-subtitle-outline {
   -webkit-text-stroke: 0;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.65);
+  text-shadow: none;
 }
 
 /* =========================================================================
