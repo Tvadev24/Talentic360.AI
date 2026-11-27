@@ -27,8 +27,6 @@ export default function StaffingPage({ onBackHome }) {
   const [view, setView] = useState('industry'); // 'industry' | 'function'
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedIndustry, setSelectedIndustry] = useState('');
-  const [selectedFunction, setSelectedFunction] = useState('');
   const [openCards, setOpenCards] = useState({});
   const [highlightedRole, setHighlightedRole] = useState(null); // { cardKey, role }
 
@@ -140,31 +138,9 @@ export default function StaffingPage({ onBackHome }) {
     }, 100);
   };
 
-  const handleIndustryChange = (e) => {
-    const val = e.target.value;
-    setSelectedIndustry(val);
-    if (val) {
-      setSelectedFunction('');
-      setSearchQuery('');
-      revealCard('industry', val);
-    }
-  };
-
-  const handleFunctionChange = (e) => {
-    const val = e.target.value;
-    setSelectedFunction(val);
-    if (val) {
-      setSelectedIndustry('');
-      setSearchQuery('');
-      revealCard('function', val);
-    }
-  };
-
   const handleSuggestionClick = (item) => {
     setSearchQuery(item.label);
     setShowSuggestions(false);
-    setSelectedIndustry(item.view === 'industry' ? item.cat : '');
-    setSelectedFunction(item.view === 'function' ? item.cat : '');
     revealCard(item.view, item.cat, item.role || null);
   };
 
@@ -264,9 +240,9 @@ export default function StaffingPage({ onBackHome }) {
          ========================================================================= */}
       <div className="sticky top-20 z-30 bg-white/90 dark:bg-[#050814]/90 backdrop-blur-xl border-y border-slate-200/80 dark:border-purple-500/25 shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] py-4 mb-8 sm:mb-12 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
-            {/* Search Box with Autocomplete Suggestions */}
-            <div ref={searchWrapRef} className="relative lg:col-span-6">
+          <div className="w-full">
+            {/* Full-Width Search Box with Autocomplete Suggestions */}
+            <div ref={searchWrapRef} className="relative w-full">
               <div className="relative flex items-center">
                 <Search className="w-4 h-4 text-slate-400 dark:text-cyan-400 absolute left-4 pointer-events-none" />
                 <input
@@ -333,38 +309,6 @@ export default function StaffingPage({ onBackHome }) {
                   )}
                 </div>
               )}
-            </div>
-
-            {/* By Industry Dropdown */}
-            <div className="lg:col-span-3">
-              <select
-                value={selectedIndustry}
-                onChange={handleIndustryChange}
-                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0c1228] border border-slate-300 dark:border-purple-500/40 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400 cursor-pointer transition-all"
-              >
-                <option value="">By Industry ▾</option>
-                {sortedIndustries.map((ind) => (
-                  <option key={ind} value={ind} className="bg-white dark:bg-[#0c1228] text-slate-900 dark:text-white">
-                    {ind}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* By Role / Function Dropdown */}
-            <div className="lg:col-span-3">
-              <select
-                value={selectedFunction}
-                onChange={handleFunctionChange}
-                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0c1228] border border-slate-300 dark:border-purple-500/40 text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400 cursor-pointer transition-all"
-              >
-                <option value="">By Role / Function ▾</option>
-                {sortedFunctions.map((fn) => (
-                  <option key={fn} value={fn} className="bg-white dark:bg-[#0c1228] text-slate-900 dark:text-white">
-                    {fn}
-                  </option>
-                ))}
-              </select>
             </div>
           </div>
 
