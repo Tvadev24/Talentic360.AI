@@ -969,6 +969,11 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Sustainability Initiatives': {
       src: '/assets/sustainability-initiatives-bg.jpg',
       position: 'object-[55%_45%]'
+    },
+    'Online Training Courses': {
+      src: '/assets/online-training.mp4',
+      position: 'object-[50%_22%]',
+      isVideo: true
     }
   };
 
@@ -1087,12 +1092,24 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           key={itemIdx}
                           className="group relative min-h-[340px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-end"
                         >
-                          {/* Clear, Unobstructed Background Photo */}
-                          <img
-                            src={bgCard.src}
-                            alt={item.title}
-                            className={`absolute inset-0 w-full h-full object-cover ${bgCard.position} group-hover:scale-105 transition-transform duration-700`}
-                          />
+                          {/* Clear, Unobstructed Background Photo or Video */}
+                          {bgCard.isVideo ? (
+                            <video
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className={`absolute inset-0 w-full h-full object-cover ${bgCard.position} group-hover:scale-105 transition-transform duration-700`}
+                            >
+                              <source src={bgCard.src} type="video/mp4" />
+                            </video>
+                          ) : (
+                            <img
+                              src={bgCard.src}
+                              alt={item.title}
+                              className={`absolute inset-0 w-full h-full object-cover ${bgCard.position} group-hover:scale-105 transition-transform duration-700`}
+                            />
+                          )}
 
                           {/* Bottom-only Gradient Scrim so upper photo stays crystal clear */}
                           <div
