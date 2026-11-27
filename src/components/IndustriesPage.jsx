@@ -142,7 +142,7 @@ export default function IndustriesPage({ onBackHome }) {
         <img
           src="/assets/industries-hero-bg.jpg"
           alt="Industries Hero"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-[50%_22%]"
         />
         {/* Balanced Dark Overlay so Photo & Centered Title Stay Crystal Clear */}
         <div
