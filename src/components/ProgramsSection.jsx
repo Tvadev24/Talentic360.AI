@@ -607,22 +607,8 @@ export default function ProgramsSection({ onOpenProgramModal }) {
           <section
             key={program.id}
             id={program.id}
-            className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200 overflow-hidden"
+            className="relative py-10 sm:py-14 bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
           >
-            {/* Dignified State Emblem Background Watermark for Government Programs */}
-            {program.id === 'government' && (
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0"
-              >
-                <img
-                  src="/assets/govt-emblem.png"
-                  alt=""
-                  className="h-[82%] max-h-[420px] w-auto object-contain opacity-[0.09] dark:opacity-[0.14] dark:invert"
-                />
-              </div>
-            )}
-
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 {/* Section Header */}
@@ -727,13 +713,22 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                     return (
                       <div
                         key={itemIdx}
-                        className={`group p-6 sm:p-7 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-between ${
-                          program.id === 'government'
-                            ? 'bg-white/70 dark:bg-[#0c1226]/75 backdrop-blur-[2px]'
-                            : 'bg-white/80 dark:bg-[#0c1226]/85'
-                        }`}
+                        className="group relative overflow-hidden p-6 sm:p-7 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-cyan-400/60 shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col justify-between"
                       >
-                        <div>
+                        {program.id === 'government' && (
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0"
+                          >
+                            <img
+                              src="/assets/govt-emblem.png"
+                              alt=""
+                              className="h-[78%] w-auto object-contain opacity-[0.09] dark:opacity-[0.14] dark:invert"
+                            />
+                          </div>
+                        )}
+
+                        <div className="relative z-10">
                           {/* Icon Header */}
                           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 group-hover:scale-110 transition-transform mb-5 shadow-sm ${CustomProgramIcon ? 'p-1.5' : ''}`}>
                             <ItemIcon className={CustomProgramIcon ? 'w-full h-full' : 'w-6 h-6'} />
@@ -750,7 +745,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           </p>
                         </div>
 
-                        <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold text-slate-400 dark:text-slate-500">
+                        <div className="relative z-10 pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold text-slate-400 dark:text-slate-500">
                           <span>Curriculum Module</span>
                           <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-all" />
                         </div>
