@@ -256,7 +256,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                           {/* Bottom-only Gradient Scrim so upper photo stays crystal clear */}
                           <div
                             aria-hidden="true"
-                            className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent"
+                            className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent"
                           />
 
                           {/* Bottom Title & Description anchored tight to bottom */}
