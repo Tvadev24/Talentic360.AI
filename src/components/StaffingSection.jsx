@@ -417,26 +417,43 @@ export default function StaffingSection({ onKnowMore }) {
                   })}
                 </div>
 
-                {/* Single Terminal Button at End of Ray: Apply For Hiring */}
+                {/* For Candidates: Editorial Career Callout at End of Ray + Apply For Hiring */}
                 <div className="relative mt-4 pt-1">
                   <span
                     aria-hidden="true"
-                    className={`absolute -left-[22.5px] sm:-left-[24.5px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full transition-all duration-300 ${rayProgress >= 90
+                    className={`absolute -left-[22.5px] sm:-left-[24.5px] top-8 w-3 h-3 rounded-full transition-all duration-300 ${rayProgress >= 90
                       ? 'bg-[#ef4444] ring-4 ring-red-500/20 scale-110'
                       : 'bg-slate-300 dark:bg-slate-700'
                       }`}
                   />
-                  <button
-                    type="button"
-                    onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
-                    className={`w-full group px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer ${rayProgress >= 90
-                      ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white shadow-md'
-                      : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-95 shadow-sm'
-                      }`}
-                  >
-                    <span>Apply For Hiring</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  <div className="p-4 sm:p-5 rounded-2xl bg-white/95 dark:bg-[#0b1126]/95 border border-slate-200/90 dark:border-slate-700/80 border-l-4 border-l-[#783cec] dark:border-l-cyan-400 shadow-md space-y-3">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2.5">
+                        <span className="h-[2.5px] w-7 rounded-full bg-gradient-to-r from-[#783cec] to-[#ef4444]" />
+                        <span className="text-xs sm:text-sm font-display font-black uppercase tracking-[0.2em] bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">
+                          For Candidates
+                        </span>
+                      </div>
+                      <h4 className="font-display font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight leading-tight">
+                        Find Your Next Job
+                      </h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Step into high-impact roles in Software Architecture, Tax Audit &amp; HR Leadership.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => (onKnowMore ? onKnowMore() : handleOpenModal())}
+                      className={`w-full group px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 cursor-pointer ${rayProgress >= 90
+                        ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] text-white shadow-md hover:shadow-xl hover:scale-[1.01]'
+                        : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-95 shadow-sm'
+                        }`}
+                    >
+                      <span>Apply For Hiring</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
