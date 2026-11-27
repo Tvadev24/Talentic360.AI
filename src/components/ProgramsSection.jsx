@@ -306,12 +306,6 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
                   className="absolute top-3 left-5 w-24 h-8 rounded-full bg-white/30 dark:bg-white/15 blur-md -rotate-12 pointer-events-none"
                 />
               </div>
-
-              {/* Magnifying Glass Handle */}
-              <div
-                aria-hidden="true"
-                className="absolute -bottom-8 -right-4 w-5 h-16 rounded-full bg-gradient-to-b from-indigo-500 via-purple-600 to-slate-900 dark:from-cyan-400 dark:via-indigo-500 dark:to-slate-900 -rotate-45 shadow-lg border border-white/30 pointer-events-none"
-              />
             </div>
           </div>
         </div>
