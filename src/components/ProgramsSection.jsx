@@ -548,6 +548,69 @@ const bookletCardsData = {
       ],
       quote: 'Transform Your Knowledge into Expertise. Turn Your Ambition into Achievement.'
     }
+  ],
+  'Research & Development': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Discover. Innovate. Research. Shape the Future.',
+      paragraphs: [
+        'Empowering learners and professionals to become pioneers of knowledge through research-driven education, scientific exploration, and technological innovation.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Research & Development',
+      paragraphs: [
+        'Our Research & Development programs are designed to develop critical thinking, analytical capabilities, and a deeper understanding of emerging technologies and evolving research landscapes.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Research Methodologies & Insights',
+      paragraphs: [
+        'Explore new possibilities, investigate complex challenges, and transform innovative ideas into meaningful solutions. Gain exposure to modern research methodologies, experimental approaches, data-driven insights, and interdisciplinary advancements.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Opportunities',
+      items: [
+        {
+          title: 'Research Methodologies',
+          text: 'Develop expertise in research design, data collection, analysis, and interpretation.'
+        },
+        {
+          title: 'Innovation & Discovery',
+          text: 'Explore creative approaches to problem-solving and new knowledge development.'
+        },
+        {
+          title: 'Emerging Technologies',
+          text: 'Understand advancements shaping science, technology, and modern industries.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Opportunities',
+      items: [
+        {
+          title: 'Analytical Excellence',
+          text: 'Strengthen critical thinking, scientific reasoning, and evidence-based decision-making.'
+        },
+        {
+          title: 'Practical Research Applications',
+          text: 'Connect theoretical knowledge with real-world challenges and research opportunities.'
+        },
+        {
+          title: 'Future-Oriented Learning',
+          text: 'Prepare to contribute to innovation, academic excellence, and technological progress.'
+        }
+      ],
+      quote: "Think Beyond Boundaries. Innovate with Purpose. Create Tomorrow's Possibilities."
+    }
   ]
 };
 
