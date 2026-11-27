@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   GraduationCap, 
   Wrench, 
@@ -115,6 +115,255 @@ function CertificationIcon({ className = 'w-full h-full' }) {
   );
 }
 
+function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore }) {
+  const sectionRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let target = 0;
+    let current = 0;
+    let rafId;
+
+    const updateTarget = () => {
+      const el = sectionRef.current;
+      if (!el || window.innerWidth < 1024) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const stickyTop = 80; // lg:top-20
+      const scrollable = Math.max(rect.height - vh, 1);
+      const raw = (stickyTop - rect.top) / scrollable;
+      target = Math.max(0, Math.min(1, raw));
+    };
+
+    const tick = () => {
+      current += (target - current) * 0.09;
+      if (Math.abs(target - current) < 0.001) {
+        current = target;
+      }
+      setProgress(current);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    updateTarget();
+    window.addEventListener('scroll', updateTarget, { passive: true });
+    window.addEventListener('resize', updateTarget, { passive: true });
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener('scroll', updateTarget);
+      window.removeEventListener('resize', updateTarget);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const CARD_W = 256;
+  const CARD_H = 264;
+  const STRIDE = 286;
+  const count = program.items.length;
+  const travel = (count - 1) * STRIDE;
+  const activeIdx = Math.min(count - 1, Math.round(progress * (count - 1)));
+
+  const handleJumpToCard = (idx) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const sectionTop = window.scrollY + rect.top;
+    const scrollable = Math.max(rect.height - window.innerHeight, 1);
+    const destination = sectionTop - 80 + scrollable * (idx / Math.max(count - 1, 1));
+    window.scrollTo({ top: destination, behavior: 'smooth' });
+  };
+
+  const renderConveyorCard = (item, idx, magnified = false) => {
+    const ItemIcon = iconMap[item.icon] || BookOpen;
+    return (
+      <div
+        key={`${magnified ? 'mag' : 'base'}-${idx}`}
+        style={{
+          width: `${CARD_W}px`,
+          height: `${CARD_H}px`,
+          left: `${-(idx * STRIDE) - CARD_W / 2}px`,
+          top: '50%',
+          transform: 'translateY(-50%)'
+        }}
+        className={`absolute p-5 rounded-2xl border flex flex-col justify-between transition-colors duration-300 ${
+          magnified
+            ? 'bg-white dark:bg-[#0d1530] border-indigo-400/90 dark:border-cyan-400/80 shadow-xl'
+            : 'bg-white/75 dark:bg-[#0c1226]/75 border-slate-200/80 dark:border-slate-800/80 opacity-75'
+        }`}
+      >
+        <div>
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-3.5 shadow-sm">
+            <ItemIcon className="w-5 h-5" />
+          </div>
+          <h3 className="font-display font-bold text-[15px] leading-snug text-slate-900 dark:text-white mb-2">
+            {item.title}
+          </h3>
+          <p className="text-[11.5px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4">
+            {item.description}
+          </p>
+        </div>
+
+        <div className="pt-2.5 mt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] font-semibold text-slate-400 dark:text-slate-500">
+          <span>Curriculum Module</span>
+          <ChevronRight className="w-3.5 h-3.5 text-indigo-500 dark:text-cyan-400" />
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <section
+      id={program.id}
+      ref={sectionRef}
+      className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[260vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
+    >
+      <div className="lg:sticky lg:top-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-8 lg:mb-10">
+          <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-slate-900 dark:text-white mb-3">
+            {program.prefix}
+            <span className={`bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
+              {program.suffix}
+            </span>
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+            {program.description}
+          </p>
+        </div>
+
+        {/* Desktop: Scroll-Pinned Right-Side Magnifying Glass Conveyor */}
+        <div className="hidden lg:block mb-8">
+          <div className="relative h-[370px] rounded-3xl border border-indigo-200/75 dark:border-purple-500/30 bg-white/45 dark:bg-[#080d1e]/65 backdrop-blur-md overflow-hidden shadow-lg">
+            {/* Subtle horizontal conveyor rail line */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-transparent via-indigo-300/60 dark:via-purple-500/40 to-transparent"
+            />
+
+            {/* Base Conveyor Strip (glides left -> right toward the magnifying glass) */}
+            <div
+              className="absolute inset-y-0"
+              style={{
+                left: 'calc(100% - 210px)',
+                transform: `translateX(${progress * travel}px)`
+              }}
+            >
+              {program.items.map((item, idx) => renderConveyorCard(item, idx, false))}
+            </div>
+
+            {/* Soft Left Edge Fade */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white/90 dark:from-[#070b19]/90 to-transparent pointer-events-none z-10"
+            />
+
+            {/* Right-Side Optical Magnifying Glass */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 z-20"
+              style={{ right: '45px', width: '330px', height: '330px' }}
+            >
+              {/* Circular Magnified Lens */}
+              <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-50/95 dark:bg-[#070b1a]/95 border-[5px] border-indigo-500/80 dark:border-cyan-400/80 ring-4 ring-indigo-500/15 dark:ring-cyan-400/15 shadow-[0_20px_60px_rgba(44,96,234,0.28),inset_0_0_28px_rgba(120,60,236,0.18)]">
+                {/* Synchronized Magnified (1.24x) Conveyor Layer */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    transform: 'scale(1.24)',
+                    transformOrigin: '165px center'
+                  }}
+                >
+                  <div
+                    className="absolute inset-y-0"
+                    style={{
+                      left: '165px',
+                      transform: `translateX(${progress * travel}px)`
+                    }}
+                  >
+                    {program.items.map((item, idx) => renderConveyorCard(item, idx, true))}
+                  </div>
+                </div>
+
+                {/* Specular Glass Reflection & Optical Sheen */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-white/35 via-transparent to-indigo-500/10 pointer-events-none"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute top-5 left-8 w-24 h-10 rounded-full bg-white/30 dark:bg-white/15 blur-md -rotate-25 pointer-events-none"
+                />
+              </div>
+
+              {/* Magnifying Glass Handle */}
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-8 -right-4 w-5 h-16 rounded-full bg-gradient-to-b from-indigo-500 via-purple-600 to-slate-900 dark:from-cyan-400 dark:via-indigo-500 dark:to-slate-900 -rotate-45 shadow-lg border border-white/30 pointer-events-none"
+              />
+            </div>
+          </div>
+
+          {/* Clickable Vertical Pills Below Stage */}
+          <div className="mt-4 flex items-center justify-center gap-2.5 flex-wrap">
+            {program.items.map((item, idx) => {
+              const isCurrent = idx === activeIdx;
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  onClick={() => handleJumpToCard(idx)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer border ${
+                    isCurrent
+                      ? 'bg-gradient-to-r from-[#2c60ea] to-[#783cec] text-white border-transparent shadow-sm scale-105'
+                      : 'bg-white/75 dark:bg-slate-900/70 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-indigo-400'
+                  }`}
+                >
+                  0{idx + 1} · {item.title}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile/Tablet Fallback Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 lg:hidden">
+          {program.items.map((item, itemIdx) => {
+            const ItemIcon = iconMap[item.icon] || BookOpen;
+            return (
+              <div
+                key={itemIdx}
+                className="p-6 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
+                    <ItemIcon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Centered Explore Button */}
+        <div className="text-center">
+          <button
+            onClick={onExplore}
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer"
+          >
+            <span>{program.buttonText}</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function ProgramsSection({ onOpenProgramModal }) {
   const academicIconMap = {
     'Higher Education Partnerships': HigherEdIcon,
@@ -209,6 +458,18 @@ export default function ProgramsSection({ onOpenProgramModal }) {
       {siteData.programs.map((program, programIdx) => {
         const isEven = programIdx % 2 === 0;
         const gradientClass = programGradients[program.id] || 'from-cyan-500 to-blue-600';
+
+        if (program.id === 'corporate') {
+          return (
+            <CorporateMagnifierSection
+              key={program.id}
+              program={program}
+              gradientClass={gradientClass}
+              iconMap={iconMap}
+              onExplore={() => handleProgramClick(program)}
+            />
+          );
+        }
 
         return (
           <section
