@@ -957,6 +957,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'Community Service Training': {
       src: '/assets/community-service-bg.jpg',
       position: 'object-[50%_20%]'
+    },
+    'NGO Partnerships': {
+      src: '/assets/ngo-partnerships-bg.jpg',
+      position: 'object-[50%_20%]'
     }
   };
 
