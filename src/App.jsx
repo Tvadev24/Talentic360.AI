@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // import CyberGeometricBackground from './components/CyberGeometricBackground';
-import HalftoneWaveBackground from './components/HalftoneWaveBackground';
+// import HalftoneWaveBackground from './components/HalftoneWaveBackground';
+import PlexusMeshBackground from './components/PlexusMeshBackground';
 import AboutSection from './components/AboutSection';
 import StaffingSection from './components/StaffingSection';
 import ProgramsSection from './components/ProgramsSection';
@@ -96,12 +97,13 @@ export default function App() {
     <div className="min-h-screen relative bg-transparent text-slate-800 dark:text-slate-100 flex flex-col font-sans selection:bg-purple-500 selection:text-white transition-colors duration-200">
       
       {/* =========================================================================
-          PREVIOUS 3D CYBER GEOMETRIC BACKGROUND (Kept commented for future use)
+          PREVIOUS BACKGROUNDS (Kept commented for future use)
          ========================================================================= */}
       {/* <CyberGeometricBackground theme={theme} /> */}
+      {/* <HalftoneWaveBackground theme={theme} /> */}
 
-      {/* Halftone Wave Background with clean plain center space */}
-      <HalftoneWaveBackground theme={theme} />
+      {/* Interactive Moving Low-Poly Plexus Mesh Background */}
+      <PlexusMeshBackground theme={theme} />
 
       {/* Transparent Sticky Header with Logo, Navigation Tabs & Theme Switcher */}
       <Navbar 
