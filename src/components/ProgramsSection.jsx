@@ -961,6 +961,10 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     'NGO Partnerships': {
       src: '/assets/ngo-partnerships-bg.jpg',
       position: 'object-[58%_20%]'
+    },
+    'Youth Volunteering': {
+      src: '/assets/youth-volunteering-bg.jpg',
+      position: 'object-[50%_25%]'
     }
   };
 
