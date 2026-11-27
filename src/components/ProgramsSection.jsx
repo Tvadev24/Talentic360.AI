@@ -496,6 +496,193 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
   );
 }
 
+const bookletCardsData = {
+  'Advanced Specializations': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Program Overview',
+      paragraphs: [
+        'Designed for ambitious learners and working professionals, our postgraduate-level specialization programs offer an advanced learning experience in high-demand disciplines and emerging industry sectors.',
+        'Go beyond traditional education with specialized knowledge, advanced concepts, practical insights, and industry-oriented learning. Develop the expertise to tackle complex challenges, adapt to evolving professional landscapes, and stand out in an increasingly competitive world.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'What Makes These Programs Valuable?',
+      items: [
+        {
+          title: 'Advanced Domain Expertise',
+          text: 'Gain in-depth knowledge and specialized skills in your chosen field.'
+        },
+        {
+          title: 'Industry-Relevant Learning',
+          text: 'Explore emerging trends, technologies, and evolving professional practices.'
+        },
+        {
+          title: 'Career Advancement',
+          text: 'Strengthen your professional profile and prepare for higher-level career opportunities.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'What Makes These Programs Valuable?',
+      items: [
+        {
+          title: 'Future-Ready Skills',
+          text: "Build the capabilities needed to navigate tomorrow's challenges."
+        },
+        {
+          title: 'Professional Excellence',
+          text: 'Develop analytical thinking, strategic understanding, and specialized competencies.'
+        }
+      ],
+      quote: 'Transform Your Knowledge into Expertise. Turn Your Ambition into Achievement.'
+    }
+  ]
+};
+
+function BookletFlipCard({ item, ItemIcon, pages }) {
+  const [pageIdx, setPageIdx] = useState(0);
+  const [turning, setTurning] = useState(false);
+
+  const triggerTurn = (nextIdx) => {
+    if (turning) return;
+    setTurning(true);
+    setTimeout(() => {
+      setPageIdx(nextIdx);
+      setTurning(false);
+    }, 240);
+  };
+
+  const handleNext = () => triggerTurn((pageIdx + 1) % pages.length);
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    triggerTurn((pageIdx - 1 + pages.length) % pages.length);
+  };
+
+  const page = pages[pageIdx];
+
+  return (
+    <div className="relative [perspective:1200px] min-h-[290px] pr-2 pb-1.5 select-none">
+      {/* Stacked Copy / Notebook Paper Edges on Right & Bottom */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1.5 bottom-0 left-2 right-0 rounded-2xl bg-slate-200/90 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/70"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute top-0.5 bottom-0.5 left-1 right-1 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80"
+      />
+
+      {/* Interactive Turning Page */}
+      <div
+        onClick={handleNext}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleNext();
+          }
+        }}
+        style={{
+          transformOrigin: 'left center',
+          transform: turning ? 'rotateY(-28deg) scale(0.98)' : 'rotateY(0deg) scale(1)',
+          opacity: turning ? 0.65 : 1
+        }}
+        className="relative z-10 h-full p-6 rounded-2xl bg-white dark:bg-[#0c1226] border border-indigo-200/90 dark:border-cyan-500/40 shadow-md hover:shadow-xl hover:border-indigo-400 dark:hover:border-cyan-400 transition-all duration-300 ease-out flex flex-col justify-between cursor-pointer overflow-hidden"
+      >
+        {/* Subtle Notebook Spine Accent on Left */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#2c60ea] via-[#783cec] to-[#ef4444]"
+        />
+
+        {page.type === 'cover' && (
+          <div>
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
+              <ItemIcon className="w-6 h-6" />
+            </div>
+            <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
+              {item.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        )}
+
+        {page.type === 'prose' && (
+          <div className="space-y-2.5 pl-1">
+            <h4 className="font-display font-bold text-sm text-indigo-600 dark:text-cyan-300">
+              {page.heading}
+            </h4>
+            {page.paragraphs.map((p, i) => (
+              <p key={i} className="text-[11.5px] sm:text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                {p}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {page.type === 'highlights' && (
+          <div className="space-y-2.5 pl-1">
+            <h4 className="font-display font-bold text-xs uppercase tracking-wider text-indigo-600 dark:text-cyan-300">
+              {page.heading}
+            </h4>
+            <div className="space-y-2">
+              {page.items.map((pt) => (
+                <div key={pt.title} className="text-[11.5px] leading-snug">
+                  <span className="font-bold text-slate-900 dark:text-white">{pt.title}: </span>
+                  <span className="text-slate-600 dark:text-slate-300">{pt.text}</span>
+                </div>
+              ))}
+            </div>
+            {page.quote && (
+              <p className="pt-2 border-t border-slate-200/80 dark:border-slate-800 text-[11.5px] font-display font-bold italic bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444] bg-clip-text text-transparent">
+                {page.quote}
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Bottom Copy Pagination Bar */}
+        <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold">
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="text-slate-400 hover:text-indigo-600 dark:hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            ← Prev
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {pages.map((_, idx) => (
+              <span
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === pageIdx
+                    ? 'w-4 bg-gradient-to-r from-[#2c60ea] to-[#783cec]'
+                    : 'w-1.5 bg-slate-300 dark:bg-slate-700'
+                }`}
+              />
+            ))}
+          </div>
+
+          <span className="text-indigo-600 dark:text-cyan-300 flex items-center gap-1">
+            <span>{pageIdx + 1}/{pages.length}</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ProgramsSection({ onOpenProgramModal }) {
   const academicIconMap = {
     'Higher Education Partnerships': HigherEdIcon,
@@ -661,6 +848,18 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                     const flipImage =
                       program.id === 'academic' ? academicFlipImages[item.title] : null;
                     const bgCard = backgroundPhotoCards[item.title];
+                    const bookletPages = bookletCardsData[item.title];
+
+                    if (bookletPages) {
+                      return (
+                        <BookletFlipCard
+                          key={itemIdx}
+                          item={item}
+                          ItemIcon={ItemIcon}
+                          pages={bookletPages}
+                        />
+                      );
+                    }
 
                     if (bgCard) {
                       return (
