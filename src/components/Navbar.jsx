@@ -19,7 +19,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage = 'home', onOpenStaffing, onNavigateHome }) {
+export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage = 'home', onOpenStaffing, onOpenIndustries, onNavigateHome }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState('English');
@@ -51,6 +51,11 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
       return;
     }
 
+    if (label === 'Industries' && onOpenIndustries) {
+      onOpenIndustries();
+      return;
+    }
+
     if (activePage !== 'home' && onNavigateHome) {
       const targetId = label === 'Contact us' ? 'contact' : href.replace('#', '');
       onNavigateHome(targetId);
@@ -73,6 +78,8 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
   useEffect(() => {
     if (activePage === 'staffing') {
       setActiveTab('Staffing');
+    } else if (activePage === 'industries') {
+      setActiveTab('Industries');
     }
 
     const handleScroll = () => {
@@ -80,6 +87,10 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
 
       if (activePage === 'staffing') {
         setActiveTab('Staffing');
+        return;
+      }
+      if (activePage === 'industries') {
+        setActiveTab('Industries');
         return;
       }
 
@@ -115,7 +126,7 @@ export default function Navbar({ onOpenContact, theme, onToggleTheme, activePage
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || activePage === 'staffing'
+        isScrolled || activePage === 'staffing' || activePage === 'industries'
           ? 'bg-white/90 dark:bg-[#04060d]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-purple-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.85)]'
           : 'bg-transparent border-b border-transparent shadow-none'
       }`}

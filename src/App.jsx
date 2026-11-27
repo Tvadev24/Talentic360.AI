@@ -14,6 +14,7 @@ import PartnersSection from './components/PartnersSection';
 import Footer from './components/Footer';
 import ProgramModal from './components/ProgramModal';
 import StaffingPage from './components/StaffingPage';
+import IndustriesPage from './components/IndustriesPage';
 
 export default function App() {
   const [selectedModalProgram, setSelectedModalProgram] = useState(null);
@@ -69,6 +70,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenIndustries = () => {
+    setActivePage('industries');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigateHome = (targetId) => {
     setActivePage('home');
     if (targetId && targetId !== 'hero') {
@@ -114,15 +120,20 @@ export default function App() {
         onToggleTheme={handleToggleTheme}
         activePage={activePage}
         onOpenStaffing={handleOpenStaffing}
+        onOpenIndustries={handleOpenIndustries}
         onNavigateHome={handleNavigateHome}
       />
 
-      {/* Main Content Sections or Dedicated Staffing Page */}
+      {/* Main Content Sections or Dedicated Staffing / Industries Pages */}
       <main className="flex-1">
         {activePage === 'staffing' ? (
           <StaffingPage 
             onBackHome={() => handleNavigateHome('hero')}
             onApplyCareer={() => handleNavigateHome('contact')}
+          />
+        ) : activePage === 'industries' ? (
+          <IndustriesPage
+            onBackHome={() => handleNavigateHome('hero')}
           />
         ) : (
           <>
@@ -164,6 +175,7 @@ export default function App() {
       <Footer 
         activePage={activePage}
         onOpenStaffing={handleOpenStaffing}
+        onOpenIndustries={handleOpenIndustries}
         onNavigateHome={handleNavigateHome}
       />
 

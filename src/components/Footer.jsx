@@ -41,13 +41,17 @@ const SnapchatIcon = () => (
   </svg>
 );
 
-export default function Footer({ activePage = 'home', onOpenStaffing, onNavigateHome }) {
+export default function Footer({ activePage = 'home', onOpenStaffing, onOpenIndustries, onNavigateHome }) {
   const [cookieDismissed, setCookieDismissed] = useState(false);
 
   const handleNavClick = (e, href, label) => {
     e.preventDefault();
     if (label === 'Staffing' && onOpenStaffing) {
       onOpenStaffing();
+      return;
+    }
+    if (label === 'Industries' && onOpenIndustries) {
+      onOpenIndustries();
       return;
     }
 
