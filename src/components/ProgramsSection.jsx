@@ -1020,7 +1020,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
     },
     'Self-Paced Learning': {
       src: '/assets/self-paced-learning.mp4',
-      position: 'object-[50%_20%]',
+      position: 'object-[50%_65%]',
       isVideo: true
     }
   };
