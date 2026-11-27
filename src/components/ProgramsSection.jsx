@@ -115,6 +115,74 @@ function CertificationIcon({ className = 'w-full h-full' }) {
   );
 }
 
+/* Custom Brand-Matched SVG Icons for Corporate Training */
+function EnterpriseTrainingIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Main corporate tower */}
+      <rect x="8" y="10" width="18" height="32" rx="2" fill="currentColor" fillOpacity="0.12" />
+      <path d="M13 17h3M13 23h3M13 29h3M19 17h2M19 23h2M19 29h2" />
+      <path d="M15 42v-6h4v6" />
+      {/* Connected enterprise wing */}
+      <path d="M26 20h12a2 2 0 0 1 2 2v20H26" fill="currentColor" fillOpacity="0.08" />
+      <path d="M31 26h4M31 32h4" />
+      {/* Network node above */}
+      <circle cx="33" cy="11" r="3.5" fill="currentColor" fillOpacity="0.18" />
+      <path d="M26 14l4-2M4 42h40" />
+    </svg>
+  );
+}
+
+function LeadershipDevIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Executive compass / strategic vision */}
+      <circle cx="24" cy="24" r="17" fill="currentColor" fillOpacity="0.1" />
+      <circle cx="24" cy="24" r="11.5" strokeDasharray="3 3" />
+      {/* Needle pointing northeast */}
+      <path d="M18 30l4-10 10-4-4 10-10 4z" fill="currentColor" fillOpacity="0.22" />
+      <circle cx="24" cy="24" r="2" fill="currentColor" />
+      {/* Cardinal ticks */}
+      <path d="M24 4v3M24 41v3M4 24h3M41 24h3" />
+    </svg>
+  );
+}
+
+function InnovationWorkshopsIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Radiant lightbulb with spark */}
+      <path d="M24 5v3M10.5 10.5l2.2 2.2M37.5 10.5l-2.2 2.2M6 23h3M39 23h3" />
+      <path d="M24 12a10.5 10.5 0 0 0-7 18.3c1.6 1.5 2.5 3.3 2.8 5.2h8.4c.3-1.9 1.2-3.7 2.8-5.2A10.5 10.5 0 0 0 24 12z" fill="currentColor" fillOpacity="0.14" />
+      {/* Inner spark / gear */}
+      <path d="M24 18v6M21 21h6" />
+      <path d="M20 39.5h8M21.5 43h5" />
+    </svg>
+  );
+}
+
+function PerformanceOptIcon({ className = 'w-full h-full' }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      {/* Ascending performance bars */}
+      <path d="M6 41h36" />
+      <rect x="9" y="29" width="6" height="12" rx="1.2" fill="currentColor" fillOpacity="0.12" />
+      <rect x="19" y="22" width="6" height="19" rx="1.2" fill="currentColor" fillOpacity="0.16" />
+      <rect x="29" y="14" width="6" height="27" rx="1.2" fill="currentColor" fillOpacity="0.22" />
+      {/* Upward growth trajectory */}
+      <path d="M9 21l10-6 7 3.5L39 8" />
+      <path d="M33 8h6v6" />
+    </svg>
+  );
+}
+
+const corporateIconMap = {
+  'Enterprise Training Solutions': EnterpriseTrainingIcon,
+  'Leadership Development': LeadershipDevIcon,
+  'Innovation Workshops': InnovationWorkshopsIcon,
+  'Performance Optimization': PerformanceOptIcon
+};
+
 function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore }) {
   const sectionRef = useRef(null);
   const [progress, setProgress] = useState(0);
@@ -188,7 +256,7 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
   };
 
   const renderConveyorCard = (item, idx, magnified = false) => {
-    const ItemIcon = iconMap[item.icon] || BookOpen;
+    const ItemIcon = corporateIconMap[item.title] || iconMap[item.icon] || BookOpen;
     const x = getWrappedX(idx);
     const isWrappingEdge = x < WRAP_MIN + 70 || x > WRAP_MAX - 50;
 
@@ -203,27 +271,39 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
           transform: 'translateY(-50%)',
           opacity: isWrappingEdge ? 0 : magnified ? 1 : 0.78
         }}
-        className={`absolute p-5 rounded-2xl border flex flex-col justify-between transition-opacity duration-200 ${
+        className={`absolute overflow-hidden rounded-2xl border flex flex-col justify-start transition-opacity duration-200 ${
           magnified
             ? 'bg-white dark:bg-[#0d1530] border-indigo-400/90 dark:border-cyan-400/80 shadow-xl'
-            : 'bg-white/75 dark:bg-[#0c1226]/75 border-slate-200/80 dark:border-slate-800/80'
+            : 'bg-white/80 dark:bg-[#0c1226]/80 border-slate-200/80 dark:border-slate-800/80'
         }`}
       >
-        <div>
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-3.5 shadow-sm">
-            <ItemIcon className="w-5 h-5" />
-          </div>
-          <h3 className="font-display font-bold text-[15px] leading-snug text-slate-900 dark:text-white mb-2">
-            {item.title}
-          </h3>
-          <p className="text-[11.5px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4">
-            {item.description}
-          </p>
-        </div>
+        {/* Top Brand Accent Bar */}
+        <div
+          className={`h-1 w-full shrink-0 ${
+            magnified
+              ? 'bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]'
+              : 'bg-gradient-to-r from-indigo-300/70 to-purple-300/70 dark:from-slate-700 dark:to-slate-700'
+          }`}
+        />
 
-        <div className="pt-2.5 mt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] font-semibold text-slate-400 dark:text-slate-500">
-          <span>Curriculum Module</span>
-          <ChevronRight className="w-3.5 h-3.5 text-indigo-500 dark:text-cyan-400" />
+        <div className="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div className="flex items-start justify-between gap-2 mb-4">
+              <div className="w-11 h-11 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 shadow-sm">
+                <ItemIcon className="w-full h-full" />
+              </div>
+              <span className="text-[11px] font-mono font-bold text-indigo-500/80 dark:text-cyan-400/80 bg-indigo-50/80 dark:bg-slate-800/80 px-2 py-0.5 rounded-full border border-indigo-100 dark:border-slate-700/60">
+                0{idx + 1}
+              </span>
+            </div>
+
+            <h3 className="font-display font-bold text-[15.5px] leading-snug text-slate-900 dark:text-white mb-2">
+              {item.title}
+            </h3>
+            <p className="text-[11.5px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -316,15 +396,21 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
         {/* Mobile/Tablet Fallback Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 lg:hidden">
           {program.items.map((item, itemIdx) => {
-            const ItemIcon = iconMap[item.icon] || BookOpen;
+            const ItemIcon = corporateIconMap[item.title] || iconMap[item.icon] || BookOpen;
             return (
               <div
                 key={itemIdx}
-                className="p-6 rounded-2xl bg-white/80 dark:bg-[#0c1226]/85 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between"
+                className="overflow-hidden rounded-2xl bg-white/85 dark:bg-[#0c1226]/90 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-start"
               >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 mb-5 shadow-sm">
-                    <ItemIcon className="w-6 h-6" />
+                <div className="h-1 w-full bg-gradient-to-r from-[#2c60ea] via-[#783cec] to-[#ef4444]" />
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-2 mb-5">
+                    <div className="w-12 h-12 p-1.5 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-indigo-600 dark:text-cyan-400 shadow-sm">
+                      <ItemIcon className="w-full h-full" />
+                    </div>
+                    <span className="text-[11px] font-mono font-bold text-indigo-500/80 dark:text-cyan-400/80 bg-indigo-50/80 dark:bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-indigo-100 dark:border-slate-700/60">
+                      0{itemIdx + 1}
+                    </span>
                   </div>
                   <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mb-2.5">
                     {item.title}
