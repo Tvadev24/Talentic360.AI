@@ -671,6 +671,68 @@ const bookletCardsData = {
         }
       ]
     }
+  ],
+  'Executive Education': [
+    {
+      type: 'cover'
+    },
+    {
+      type: 'prose',
+      heading: 'Lead with Vision. Think Strategically. Shape Tomorrow.',
+      paragraphs: [
+        'Designed for senior professionals, business leaders, executives, and decision-makers, our Executive Education programs deliver high-impact learning experiences that strengthen leadership capabilities and strategic expertise.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Strategic Leadership & Management',
+      paragraphs: [
+        'In an increasingly complex and competitive business environment, continuous learning is essential for effective leadership. Our programs focus on advanced management principles, organizational strategy, business innovation, and executive decision-making to help experienced professionals stay ahead of evolving industry demands.'
+      ]
+    },
+    {
+      type: 'prose',
+      heading: 'Drive Sustainable Growth',
+      paragraphs: [
+        'Gain valuable insights, broaden your strategic perspective, and develop the capabilities to lead organizations, navigate uncertainty, and drive sustainable growth.'
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Areas',
+      items: [
+        {
+          title: 'Executive Leadership',
+          text: 'Enhance leadership effectiveness, inspire teams, and build a culture of excellence.'
+        },
+        {
+          title: 'Strategic Decision-Making',
+          text: 'Develop the ability to evaluate complex situations and make informed business decisions.'
+        },
+        {
+          title: 'Business & Organizational Strategy',
+          text: 'Understand strategic planning, organizational development, and sustainable business growth.'
+        }
+      ]
+    },
+    {
+      type: 'highlights',
+      heading: 'Key Learning Areas',
+      items: [
+        {
+          title: 'Innovation & Transformation',
+          text: 'Explore emerging business trends, digital transformation, and innovative management practices.'
+        },
+        {
+          title: 'Corporate Governance',
+          text: 'Strengthen your understanding of organizational responsibility, ethics, and effective governance.'
+        },
+        {
+          title: 'Executive Performance',
+          text: 'Improve communication, negotiation, problem-solving, and high-level management capabilities.'
+        }
+      ]
+    }
   ]
 };
 
