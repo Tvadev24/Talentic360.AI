@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // import CyberGeometricBackground from './components/CyberGeometricBackground';
 // import HalftoneWaveBackground from './components/HalftoneWaveBackground';
-import PlexusMeshBackground from './components/PlexusMeshBackground';
+// import PlexusMeshBackground from './components/PlexusMeshBackground';
+import GeometricCircuitBackground from './components/GeometricCircuitBackground';
 import AboutSection from './components/AboutSection';
 import StaffingSection from './components/StaffingSection';
 import ProgramsSection from './components/ProgramsSection';
@@ -101,9 +102,10 @@ export default function App() {
          ========================================================================= */}
       {/* <CyberGeometricBackground theme={theme} /> */}
       {/* <HalftoneWaveBackground theme={theme} /> */}
+      {/* <PlexusMeshBackground theme={theme} /> */}
 
-      {/* Interactive Moving Low-Poly Plexus Mesh Background */}
-      <PlexusMeshBackground theme={theme} />
+      {/* Interactive 45° Architectural Geometric Circuit Background */}
+      <GeometricCircuitBackground theme={theme} />
 
       {/* Transparent Sticky Header with Logo, Navigation Tabs & Theme Switcher */}
       <Navbar 
