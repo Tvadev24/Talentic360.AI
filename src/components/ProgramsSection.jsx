@@ -164,24 +164,27 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
   const WRAP_MAX = 310;
   const WRAP_MIN = WRAP_MAX - LOOP;
 
-  const getWrappedX = (idx) => {
-    const raw = -(idx * STRIDE) + progress * LOOP;
-    return ((((raw - WRAP_MIN) % LOOP) + LOOP) % LOOP) + WRAP_MIN;
+  // Pause each card briefly centered inside the square magnifying glass before gliding to the next
+  const getDwellStepProgress = (p) => {
+    const clamped = Math.max(0, Math.min(1, p));
+    if (clamped >= 1) return count;
+    const scaled = clamped * count;
+    const segment = Math.floor(scaled);
+    const localT = scaled - segment;
+    const dwellFraction = 0.45; // 45% pause centered in lens, 55% smooth glide to next card
+    if (localT <= dwellFraction) {
+      return segment;
+    }
+    const u = (localT - dwellFraction) / (1 - dwellFraction);
+    const smoothU = u * u * (3 - 2 * u);
+    return segment + smoothU;
   };
 
-  // Active card is the one closest to lens center (x = 0)
-  const activeIdx = program.items.reduce((bestIdx, _, idx) => {
-    return Math.abs(getWrappedX(idx)) < Math.abs(getWrappedX(bestIdx)) ? idx : bestIdx;
-  }, 0);
+  const stepProgress = getDwellStepProgress(progress);
 
-  const handleJumpToCard = (idx) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const sectionTop = window.scrollY + rect.top;
-    const scrollable = Math.max(rect.height - window.innerHeight, 1);
-    const destination = sectionTop - 80 + scrollable * (idx / count);
-    window.scrollTo({ top: destination, behavior: 'smooth' });
+  const getWrappedX = (idx) => {
+    const raw = -(idx * STRIDE) + stepProgress * STRIDE;
+    return ((((raw - WRAP_MIN) % LOOP) + LOOP) % LOOP) + WRAP_MIN;
   };
 
   const renderConveyorCard = (item, idx, magnified = false) => {
@@ -230,7 +233,7 @@ function CorporateMagnifierSection({ program, gradientClass, iconMap, onExplore 
     <section
       id={program.id}
       ref={sectionRef}
-      className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[260vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
+      className="relative py-10 sm:py-14 lg:py-16 lg:min-h-[280vh] bg-transparent border-b border-indigo-200/80 dark:border-purple-500/30 transition-colors duration-200"
     >
       <div className="lg:sticky lg:top-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
