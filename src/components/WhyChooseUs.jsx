@@ -349,6 +349,24 @@ export default function WhyChooseUs({ onGetStarted }) {
               );
             })}
           </div>
+
+          {/* Kinetic Traveling Wave Banner: "Count is on...." */}
+          <div className="mt-10 flex justify-center">
+            <div
+              aria-label="Count is on...."
+              className="inline-flex items-center gap-[2px] sm:gap-[3px] px-4 py-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 shadow-sm backdrop-blur-md"
+            >
+              {'Count is on....'.split('').map((char, i) => (
+                <span
+                  key={i}
+                  style={{ animationDelay: `${i * 95}ms` }}
+                  className="count-wave-tile inline-flex items-center justify-center w-6 h-10 sm:w-8 sm:h-12 rounded-[5px] bg-gradient-to-b from-[#2c60ea] via-[#4f52e8] to-[#783cec] dark:from-[#2c60ea] dark:via-[#6344ec] dark:to-[#0ea5e9] font-display font-black text-lg sm:text-2xl text-white select-none"
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>

@@ -426,3 +426,30 @@ html.dark .hero-subtitle-outline {
 .marquee-paused {
   animation-play-state: paused !important;
 }
+
+/* =========================================================================
+   KINETIC WAVE BANNER ("Count is on....") UNDER METRICS
+   ========================================================================= */
+@keyframes countWaveTile {
+  0%, 100% {
+    transform: scaleY(0.84) scaleX(0.96);
+    opacity: 0.48;
+    filter: brightness(0.92);
+  }
+  25% {
+    transform: scaleY(1.24) scaleX(1.06);
+    opacity: 1;
+    filter: brightness(1.15);
+    box-shadow: 0 8px 24px rgba(44, 96, 234, 0.35);
+  }
+  50% {
+    transform: scaleY(0.92) scaleX(0.98);
+    opacity: 0.65;
+    filter: brightness(0.98);
+  }
+}
+
+.count-wave-tile {
+  animation: countWaveTile 2.6s ease-in-out infinite;
+  transform-origin: center center;
+}
