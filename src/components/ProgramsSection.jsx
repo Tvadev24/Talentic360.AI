@@ -647,7 +647,7 @@ export default function ProgramsSection({ onOpenProgramModal }) {
                 {/* 4 Cards Grid */}
                 <div
                   className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 ${
-                    program.id === 'government' ? 'mt-4 sm:mt-6' : ''
+                    program.id === 'government' ? 'mt-10 sm:mt-14' : ''
                   }`}
                 >
                   {program.items.map((item, itemIdx) => {
