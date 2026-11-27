@@ -160,7 +160,7 @@ export default function IndustriesPage({ onBackHome }) {
           className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-[#783cec]/20 blur-3xl animate-pulse pointer-events-none"
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-36">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40 lg:py-48">
           <button
             type="button"
             onClick={onBackHome}
